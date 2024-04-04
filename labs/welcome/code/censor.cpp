@@ -10,14 +10,25 @@ int main(int argc, char * argv[])
         cout<<"USAGE: censor [length]"<<endl;
         exit(1);
     }
+
     string text;
     vector<string>words;
     cin>>text;
     while(text != "/n")
     {
         words.push_back(text);
+        cin>>text;
     }
-    cout<<words.size()<<endl;
+    unsigned int len = atoi(argv[1]);
+    for(unsigned int i = 0; i< words.size(); i++)
+    {
+        if((words.at(i)).size() != len)
+        {
+            cout<<words.at(i)<<" ";
+        }
+    }
+    cout<<endl;
+
     
 
 }
