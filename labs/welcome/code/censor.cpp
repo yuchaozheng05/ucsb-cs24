@@ -13,11 +13,11 @@ int main(int argc, char * argv[])
 
     string text;
     vector<string>words;
-    cin>>text;
-    while(text != "\0")
+    //cin>>text;
+    while(cin >> text)
     {
         words.push_back(text);
-        cin>>text;
+        //cin>>text;
     }
     unsigned int len = atoi(argv[1]);
     for(unsigned int i = 0; i< words.size(); i++)
