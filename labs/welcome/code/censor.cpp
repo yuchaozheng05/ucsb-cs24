@@ -11,7 +11,6 @@ int main(int argc, char * argv[])
         exit(1);
     }
     string text;
-    int number = atoi(argv[1]);
     vector<string>words;
     cin>>text;
     while(text != "/n")
