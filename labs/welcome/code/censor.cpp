@@ -27,7 +27,6 @@ int main(int argc, char * argv[])
             cout<<words.at(i)<<" ";
         }
     }
-    cout<<endl;
 
     
 
