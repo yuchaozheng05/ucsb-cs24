@@ -14,24 +14,21 @@ int main(int argc, char * argv[])
     string text;
     vector<string>words;
     //cin>>text;
+    unsigned int len = atoi(argv[1]);
     while(cin >> text)
     {
-        words.push_back(text);
+        if(text.size() != len)
+        {
+            words.push_back(text);
+        }
         //cin>>text;
     }
-    unsigned int len = atoi(argv[1]);
     for(unsigned int i = 0; i< words.size()-1; i++)
     {
-        if((words.at(i)).size() != len)
-        {
-            cout<<words.at(i)<<" ";
-        }
+        cout<<words.at(i)<<" ";
     }
     int s = words.size();
-    if(((words.at(s-1)).size() != len))
-    {
-        cout<<words.at(s-1);
-    }
+    cout<<words.at(s-1);
     cout<<endl;
 
 }
