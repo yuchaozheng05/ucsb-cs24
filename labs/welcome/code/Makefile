@@ -1,7 +1,7 @@
 CXX = g++
 #CXX = clang++
 
-# CXXFLAGS = -Wall -Wno-uninitialized
+CXXFLAGS = -Wall -Wno-uninitialized
 
 BINARIES= censor
 
@@ -13,7 +13,7 @@ tests: ${BINARIES}
 	./censor
 
 censor: censor.o ${COMMON_OBJECT_FILES}
-	$(CXX) $^ -o $@
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
 
 clean:
 	/bin/rm -f ${BINARIES} *.o
