@@ -1,6 +1,5 @@
 CXX = g++
 #CXX = clang++
-
 CXXFLAGS = -Wall -Wno-uninitialized
 
 BINARIES= censor
