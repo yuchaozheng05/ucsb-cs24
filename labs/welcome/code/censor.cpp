@@ -31,5 +31,6 @@ int main(int argc, char * argv[])
     {
         cout<<words.at(words.size()-1);
     }
+    cout<<endl;
 
 }
