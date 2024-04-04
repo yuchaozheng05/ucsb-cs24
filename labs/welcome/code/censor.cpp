@@ -14,7 +14,7 @@ int main(int argc, char * argv[])
     string text;
     vector<string>words;
     cin>>text;
-    while(text != "/n")
+    while(text != "\0")
     {
         words.push_back(text);
         cin>>text;
