@@ -27,9 +27,10 @@ int main(int argc, char * argv[])
             cout<<words.at(i)<<" ";
         }
     }
-    if(((words.at(words.size()-1)).size() != len))
+    int s = words.size();
+    if(((words.at(s-1)).size() != len))
     {
-        cout<<words.at(words.size()-1);
+        cout<<words.at(s-1);
     }
     cout<<endl;
 
