@@ -20,14 +20,16 @@ int main(int argc, char * argv[])
         //cin>>text;
     }
     unsigned int len = atoi(argv[1]);
-    for(unsigned int i = 0; i< words.size(); i++)
+    for(unsigned int i = 0; i< words.size()-1; i++)
     {
         if((words.at(i)).size() != len)
         {
             cout<<words.at(i)<<" ";
         }
     }
-
-    
+    if(((words.at(words.size()-1)).size() != len))
+    {
+        cout<<words.at(words.size()-1);
+    }
 
 }
