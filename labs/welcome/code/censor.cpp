@@ -7,7 +7,7 @@ int main(int argc, char * argv[])
 {
     if(argc != 2)
     {
-        cout<<"USAGE: censor"<<argc<<endl;
+        cout<<"USAGE: censor [length]"<<endl;
         exit(1);
     }
     string text;
