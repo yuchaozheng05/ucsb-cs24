@@ -16,53 +16,80 @@ size_t FibVec::fibnumber(size_t num){
     return fibnumber(num-1)+fibnumber(num-2);
 }
 void FibVec::resize(size_t new_fn){
-  
+  int*new_array = new int(new_fn);
+  for(size_t i=0; i<array_count; i++)
+  {
+    new_array[i] = array_[i];
+  }
+  delete []array_;
+  array_ = new_array;
+  array_fnum = new_fn;
 }
 FibVec::FibVec()
 {
-    v = new int[1];
-    fn=1;
-    currentsize=0;
+    array_ = new int[1];
+    array_fnum=1;
+    array_count=0;
 }
 FibVec::~FibVec()
 {
-    delete[]v;
+    delete[]array_;
 }
 size_t FibVec::capacity()const{
-    return fn;
+    return array_fnum;
 }
 size_t FibVec::count()const{
-    return currentsize; 
+    return array_count; 
 }
 void FibVec::insert(int value, size_t index){
-    if(index>currentsize)
+    if(index>array_count)
     {
         throw std::out_of_range("out of range");
     }
-    
+    if(array_count == array_fnum)
+    {
+        resize(fibnumber(array_fnum));
+    }
+    for(size_t i = array_count; i>index; i--)
+    {
+        array_[i]=array_[i-1];
+    }
+    array_[index]=value;
+    array_count +=1;
 }
 int FibVec::lookup(size_t index)const{
-   if(index>currentsize)
+   if(index>=array_count)
     {
         throw std::out_of_range("out of range");
     } 
+    return array_[index];
 }
 int FibVec::pop(){
-    if(currentsize==0)
+    if(array_count==0)
     {
         throw std::underflow_error("vector is empty");
     }
+    int last_value = array_[array_count-1];
+    resize(fibnumber(array_fnum-1));
+    array_count -=1;
+    return last_value;
 }
 void FibVec::push(int value){
-    insert(value, currentsize);
+    insert(value, array_count);
 }
 int FibVec::remove(size_t index){
-   if(index>currentsize)
+   if(index>=array_count)
     {
         throw std::out_of_range("out of range");
     } 
-    remove(index);
-    return lookup(index); 
+    int ind_value = array_[index];
+    for(size_t i=0; i<array_count; i++){
+        if(i == index){
+            array_[i]=array_[i+1];
+        }
+    }
+    pop();
+    return ind_value;
 }
 
 
