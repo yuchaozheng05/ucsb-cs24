@@ -54,6 +54,7 @@ void FibVec::insert(int value, size_t index){
         array_[i]=array_[i-1];
     }
     array_[index]=value;
+    array_fnum++;
     array_count++;
 
 }
