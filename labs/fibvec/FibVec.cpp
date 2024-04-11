@@ -28,7 +28,7 @@ void FibVec::resize(size_t new_fn){
 FibVec::FibVec()
 {
     array_ = new int[1];
-    array_fnum=1;
+    array_fnum=2;
     array_count=0;
 }
 FibVec::~FibVec()
@@ -46,6 +46,7 @@ void FibVec::insert(int value, size_t index){
     {
         throw std::out_of_range("out of range");
     }
+
     resize(fibnumber(array_fnum+1));
     for(size_t i = array_count; i>index; i--)
     {
@@ -53,8 +54,6 @@ void FibVec::insert(int value, size_t index){
     }
     array_[index]=value;
     array_count++;
-    array_fnum = fibnumber(array_count-3);
-    
 }
 int FibVec::lookup(size_t index)const{
    if(index>=array_count)
