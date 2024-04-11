@@ -15,6 +15,9 @@ size_t FibVec::fibnumber(size_t num){
     }
     return fibnumber(num-1)+fibnumber(num-2);
 }
+void FibVec::resize(size_t new_fn){
+  
+}
 FibVec::FibVec()
 {
     v = new int[1];
@@ -36,6 +39,7 @@ void FibVec::insert(int value, size_t index){
     {
         throw std::out_of_range("out of range");
     }
+    
 }
 int FibVec::lookup(size_t index)const{
    if(index>currentsize)
