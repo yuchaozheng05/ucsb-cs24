@@ -6,9 +6,10 @@
 
 class FibVec {
   // Member Variables
-  int *v;
-  size_t fn;
-  size_t currentsize;
+  int *array_;
+  size_t array_fnum;
+  size_t array_count;
+  void resize(size_t new_fn);
 
   // Helper Functions
   size_t fibnumber(size_t num);
@@ -16,6 +17,8 @@ class FibVec {
 
 public:
   // Constructor and Destructor
+  FibVec();
+  ~FibVec();
   size_t capacity()const;
   size_t count()const;
   void insert(int value, size_t index);
