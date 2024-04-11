@@ -16,7 +16,7 @@ size_t FibVec::fibnumber(size_t num){
     return fibnumber(num-1)+fibnumber(num-2);
 }
 void FibVec::resize(size_t new_fn){
-  int*new_array = new int(new_fn);
+  int*new_array = new int[new_fn];
   for(size_t i=0; i<array_count; i++)
   {
     new_array[i] = array_[i];
