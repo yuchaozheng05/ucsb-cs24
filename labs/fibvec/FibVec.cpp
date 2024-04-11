@@ -46,15 +46,12 @@ void FibVec::insert(int value, size_t index){
     {
         throw std::out_of_range("out of range");
     }
-    if (array_count == array_fnum){
-       resize(fibnumber(array_fnum+1));
-    }
+    resize(fibnumber(array_fnum+1));
     for(size_t i = array_count; i>index; i--)
     {
         array_[i]=array_[i-1];
     }
     array_[index]=value;
-    array_fnum += fibnumber(array_fnum+1);
     array_count++;
 
 }
