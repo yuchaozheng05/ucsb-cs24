@@ -55,7 +55,7 @@ void FibVec::insert(int value, size_t index){
         array_[i]=array_[i-1];
     }
     array_[index]=value;
-    array_count++;
+
 }
 int FibVec::lookup(size_t index)const{
    if(index>=array_count)
