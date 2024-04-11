@@ -2,7 +2,6 @@
 
 // This provides exception types:
 #include <stdexcept>
-#include<iostream>
 
 
 // FibVec Function Implementation
@@ -54,9 +53,7 @@ void FibVec::insert(int value, size_t index){
     }
     array_[index]=value;
     array_count++;
-    array_fnum = fibnumber(array_count);
-    std::cout<<array_count;
-    std::cout<<array_fnum;
+    array_fnum = fibnumber(array_count-3);
     
 }
 int FibVec::lookup(size_t index)const{
