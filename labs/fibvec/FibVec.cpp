@@ -31,9 +31,6 @@ size_t FibVec::next_fibnumber(size_t num){
     }
     return c;
 }
-size_t FibVec::prev_fibnumber(size_t num){
-    return 0;
-}
 void FibVec::resize(size_t new_fn){
   int*new_array = new int[new_fn];
   for(size_t i=0; i<array_count; i++)
@@ -95,7 +92,10 @@ int FibVec::pop(){
     if(array_count<fib_num){
         resize(array_count-1);
     }
-   
+    std::cout<<"cout is "<<array_count<<".";
+    std::cout<<"fnum is "<<array_fnum<<". ";
+    std::cout<<"pop value is"<<pop_value;
+    std::cout<<" \n";
     return pop_value;
 }
 void FibVec::push(int value){
