@@ -81,19 +81,42 @@ int FibVec::lookup(size_t index)const{
     } 
     return array_[index];
 }
+size_t FibVec::prev_fibnumber(size_t num){
+    if(num<=0)
+    {
+        return 0;
+    }
+    if(num==1)
+    {
+        return 1;
+    }
+    size_t a=0;
+    size_t b=1;
+    size_t c;
+    for(size_t i=2; i<num; i++){
+        c=a+b;
+        a=b;
+        b=c;
+    }
+    return a;
+}
 int FibVec::pop(){
     if(array_count==0)
     {
         throw std::underflow_error("vector is empty");
     }
-    array_count--;
-    int pop_value = array_[array_count];
-    size_t new_fibnum = next_fibnumber(array_fnum-3);
-    if(array_count <= new_fibnum)
-    {
-        size_t new_fib = next_fibnumber(array_fnum-2);
-        resize(new_fib);
+    int pop_value = array_[array_count-1];
+    if(array_count<prev_fibnumber(array_count-2)){
+        resize(prev_fibnumber(array_count-1));
     }
+    int* newarray = new int[array_count-1];
+    for(size_t i=0; i<array_count-1; i++)
+    {
+        newarray[i]=array_[i];
+    }
+    delete []array_;
+    array_ = newarray;
+    array_count--;
     return pop_value;
 }
 void FibVec::push(int value){
