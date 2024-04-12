@@ -87,8 +87,10 @@ int FibVec::pop(){
         throw std::underflow_error("vector is empty");
     }
     int last_value = array_[array_count-1];
+    size_t capacity = array_fnum;
     resize(next_fibnumber(array_fnum-1));
     array_count -=1;
+    array_fnum = capacity;
     return last_value;
 }
 void FibVec::push(int value){
