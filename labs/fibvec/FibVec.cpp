@@ -81,25 +81,7 @@ int FibVec::lookup(size_t index)const{
     } 
     return array_[index];
 }
-size_t FibVec::prev_fibnumber(size_t num){
-    if(num<=0)
-    {
-        return 0;
-    }
-    if(num==1)
-    {
-        return 1;
-    }
-    size_t a=0;
-    size_t b=1;
-    size_t c;
-    for(size_t i=2; i<num; i++){
-        c=a+b;
-        a=b;
-        b=c;
-    }
-    return a;
-}
+
 size_t FibVec::fibnumber_index(size_t num){
     if (num <= 1){
         return num;
