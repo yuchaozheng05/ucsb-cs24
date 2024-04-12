@@ -31,6 +31,9 @@ size_t FibVec::next_fibnumber(size_t num){
     }
     return c;
 }
+size_t FibVec::prev_fibnumber(size_t num){
+    return 0;
+}
 void FibVec::resize(size_t new_fn){
   int*new_array = new int[new_fn];
   for(size_t i=0; i<array_count; i++)
@@ -86,12 +89,14 @@ int FibVec::pop(){
     {
         throw std::underflow_error("vector is empty");
     }
-    int last_value = array_[array_count-1];
-    size_t capacity = array_fnum;
-    resize(next_fibnumber(array_fnum-1));
-    array_count -=1;
-    array_fnum = capacity;
-    return last_value;
+    array_count--;
+    int pop_value = array_[array_count];
+    size_t fib_num = fibnumber(array_count);
+    if(array_count<fib_num){
+        resize(array_count-1);
+    }
+   
+    return pop_value;
 }
 void FibVec::push(int value){
     insert(value, array_count);
