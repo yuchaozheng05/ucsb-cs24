@@ -111,11 +111,7 @@ size_t FibVec::fibnumber_index(size_t num){
         curr = next;
         index++;
     }
-
-    if (curr == num)
-        return index;
-    else
-        return -1;
+    return index;
 
 }
 int FibVec::pop(){
@@ -126,9 +122,14 @@ int FibVec::pop(){
     int pop_value = array_[array_count-1];
     array_count--;
     size_t index = fibnumber_index(array_fnum);
+    if(index==1)
+    {
+        index +=1;
+    }
     if(array_count<fibnumber(index-2)){
         resize(fibnumber(index-1));
     }
+    
     return pop_value;
 }
 void FibVec::push(int value){
