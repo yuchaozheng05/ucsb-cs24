@@ -141,12 +141,18 @@ int FibVec::remove(size_t index){
         throw std::out_of_range("out of range");
     } 
     int ind_value = array_[index];
-    for(size_t i=0; i<array_count; i++){
-        if(i == index){
-            array_[i]=array_[i+1];
-        }
+    for(size_t i=index; i<array_count-1; i++){
+        array_[i]=array_[i+1];
     }
-    pop();
+    array_count--;
+    size_t num = fibnumber_index(array_fnum);
+    if(num==1)
+    {
+        num +=1;
+    }
+    if(array_count<fibnumber(num-2)){
+        resize(fibnumber(num-1));
+    }
     return ind_value;
 }
 
