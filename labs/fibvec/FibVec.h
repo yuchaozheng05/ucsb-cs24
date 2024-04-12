@@ -14,7 +14,6 @@ class FibVec {
   // Helper Functions
   size_t fibnumber(size_t num);
   size_t next_fibnumber(size_t num);
-  size_t prev_fibnumber(size_t num);
   size_t fibnumber_index(size_t num);
 
 public:
