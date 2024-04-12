@@ -88,9 +88,11 @@ int FibVec::pop(){
     }
     array_count--;
     int pop_value = array_[array_count];
-    size_t fib_num = fibnumber(array_count);
-    if(array_count<fib_num){
-        resize(array_count-1);
+    size_t new_fibnum = next_fibnumber(array_fnum-3);
+    if(array_count <= new_fibnum)
+    {
+        size_t new_fib = next_fibnumber(array_fnum-2);
+        resize(new_fib);
     }
     return pop_value;
 }
