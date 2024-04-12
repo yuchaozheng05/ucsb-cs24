@@ -99,17 +99,7 @@ int FibVec::pop(){
     {
         throw std::underflow_error("vector is empty");
     }
-    int pop_value = array_[array_count-1];
-    array_count--;
-    size_t index = fibnumber_index(array_fnum);
-    if(index==1)
-    {
-        index +=1;
-    }
-    if(array_count<fibnumber(index-2)){
-        resize(fibnumber(index-1));
-    }
-    
+    int pop_value = remove(array_count-1);
     return pop_value;
 }
 void FibVec::push(int value){
