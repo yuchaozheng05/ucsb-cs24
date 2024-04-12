@@ -92,10 +92,6 @@ int FibVec::pop(){
     if(array_count<fib_num){
         resize(array_count-1);
     }
-    std::cout<<"cout is "<<array_count<<".";
-    std::cout<<"fnum is "<<array_fnum<<". ";
-    std::cout<<"pop value is"<<pop_value;
-    std::cout<<" \n";
     return pop_value;
 }
 void FibVec::push(int value){
