@@ -20,7 +20,7 @@ void Board::maketurn(Move& move){
     {
         throw InvalidMove("invalid row or col");
     }
-    board[row][col] == currentplayer;
+    board[row][col] = currentplayer;
     movecount++;
 }
 bool Board::isDraw(){
