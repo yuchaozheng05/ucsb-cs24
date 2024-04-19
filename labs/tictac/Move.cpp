@@ -8,9 +8,7 @@
 
 Move::Move(const std::string &input){
     std::istringstream text(input);
-    std::string movenumber;
-    text>>movenumber;
-    number = std::stoi(movenumber);
+    text>>number;
     if(number<1 || number >9)
     {
         throw ParseError("Wrong number");
