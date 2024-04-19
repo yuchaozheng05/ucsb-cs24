@@ -8,36 +8,23 @@
 
 Move::Move(const std::string &input){
     std::istringstream text(input);
-    int number_;
-    text>>number_;
-    number = number_ -'0';
+    text>>number;
     if(number<1 || number >9)
     {
         throw ParseError("Wrong number");
     }
     text>>std::ws;
-    if(!isspace(input[1]))
-    {
-        throw ParseError("Wrong input");
-    }
-    char player_;
-    text>>player_;
-    player = player_;
-    if(player != 'X' || player !='x' || player !='o' || player !='O')
+    player = toupper(player);
+    if(player != 'X' && player !='O')
     {
         throw ParseError("Invalid Player");
     }
     text>>std::ws;
-    if(!isspace(input[3]))
-    {
-        throw ParseError("Wrong input");
-    }
     char row_;
     char col_;
     text>>row_>>col_;
     row = toupper(row_) -'A';
     column = col_ -'1';
-    player = toupper(player);
     if(!isalpha(row_) || !isdigit(col_))
     {
         throw ParseError("Invalid row or column");
