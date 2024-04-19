@@ -8,15 +8,18 @@
 
 Move::Move(const std::string &input){
     std::istringstream text(input);
-    text>>number;
+    std::string movenumber;
+    text>>movenumber;
+    number = std::stoi(movenumber);
     if(number<1 || number >9)
     {
         throw ParseError("Wrong number");
     }
     text>>std::ws;
-    text>>player;
-    player = toupper(player);
-    if(player != 'X' && player !='O')
+    char playerletter;
+    text>>playerletter;
+    player = playerletter;
+    if(player != 'X' || player !='O' || player != 'x' || player !='o')
     {
         throw ParseError("Invalid Player");
     }
@@ -24,25 +27,28 @@ Move::Move(const std::string &input){
     char row_;
     char col_;
     text>>row_>>col_;
-    row = toupper(row_) -'A';
+    row_ = toupper(row_);
+    row = row_ -'A';
     column = col_ -'1';
-    if(!isalpha(row_) || !isdigit(col_))
+    if(!isalpha(row_) || !isdigit(column))
     {
         throw ParseError("Invalid row or column");
     }
-    if(row==0 || row!=1 || row!=2 || column!=0 || column !=1 || column !=2 )
+    if(row_!='A' || row_!='B' || row_!='C' || column!=0 || column !=1 || column !=2 )
     {
         throw ParseError("Invalid row or colunm");
     }
     char nextchar;
-    if(text>>std::ws>>nextchar && nextchar!='#')
-    {
-        throw ParseError("Invalid comment");
+    if(text>>std::ws>>nextchar){
+        if(nextchar!='#')
+        {
+            throw ParseError("Invalid comment");
+        }
     }
 }
 std::string Move::to_string()const{
     std::ostringstream text;
-    text<<number<<" "<<toupper(player)<<" "<<char('A'+row)<<char('1'+column);
+    text<<number<<" "<<toupper(player)<<" "<<row+'A'<<column+1;
     return text.str();
 
 }
