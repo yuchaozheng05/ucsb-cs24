@@ -34,8 +34,7 @@ Move::Move(const std::string &input){
         throw ParseError("Invalid row or colunm");
     }
     char nextchar;
-    text>>std::ws>>nextchar;
-    if(nextchar!='#')
+    if(text>>std::ws>>nextchar && nextchar!='#')
     {
         throw ParseError("Invalid comment");
     }
