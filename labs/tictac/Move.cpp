@@ -25,17 +25,16 @@ Move::Move(const std::string &input){
     char row_;
     char col_;
     text>>row_>>col_;
-    row_ = toupper(row_);
-    row = row_ -'A';
     column = col_ -'1';
     if(!isalpha(row_) || !isdigit(column))
     {
         throw ParseError("Invalid row or column");
     }
-    if(row_!='A' || row_!='B' || row_!='C' || column!=0 || column !=1 || column !=2 )
+    if(row_!='A' || row_!='B' || row_!='C' || row_!='a' || row_!='b' || row_!='c' || column!=0 || column !=1 || column !=2 )
     {
         throw ParseError("Invalid row or colunm");
     }
+    row = toupper(row_)-'A';
     char nextchar;
     if(text>>std::ws>>nextchar){
         if(nextchar!='#')
