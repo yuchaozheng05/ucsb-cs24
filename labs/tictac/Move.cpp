@@ -14,6 +14,7 @@ Move::Move(const std::string &input){
         throw ParseError("Wrong number");
     }
     text>>std::ws;
+    text>>player;
     player = toupper(player);
     if(player != 'X' && player !='O')
     {
@@ -29,7 +30,7 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Invalid row or column");
     }
-    if(row!=0 || row!=1 || row!=2 || column!=0 || column !=1 || column !=2 )
+    if(row==0 || row!=1 || row!=2 || column!=0 || column !=1 || column !=2 )
     {
         throw ParseError("Invalid row or colunm");
     }
