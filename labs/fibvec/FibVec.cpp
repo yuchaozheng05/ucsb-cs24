@@ -20,16 +20,10 @@ size_t FibVec::next_fibnumber(size_t num){
     {
         return num;
     }
-    size_t a =1;
-    size_t b =1;
-    size_t c =2;
-    while(c<=num)
-    {
-        a=b;
-        b=c;
-        c=a+b;
-    }
-    return c;
+    size_t fib_num;
+    size_t index = fibnumber_index(num);
+    fib_num = fibnumber(index);
+    return fib_num;
 }
 void FibVec::resize(size_t new_fn){
   int*new_array = new int[new_fn];
@@ -72,7 +66,10 @@ void FibVec::insert(int value, size_t index){
     }
     array_[index]=value;
     array_count++;
+    std::cout<<array_fnum<<" . ";
+    std::cout<<"\n";
 }
+
 
 int FibVec::lookup(size_t index)const{
    if(index>=array_count)
