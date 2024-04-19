@@ -9,7 +9,7 @@
 Move::Move(const std::string &input){
     std::istringstream text(input);
     text>>number>>player;
-    if(text.fail()||number<1 || number >9)
+    if(number<1 || number >7)
     {
         throw ParseError("Wrong number");
     }
@@ -17,7 +17,7 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Wrong input");
     }
-    if(text.fail()||player != 'X' || player !='x' || player !='o' || player !='O')
+    if(player != 'X' || player !='x' || player !='o' || player !='O')
     {
         throw ParseError("Invalid Player");
     }
@@ -31,7 +31,7 @@ Move::Move(const std::string &input){
     row = toupper(row_) -'A';
     column = col_ -'1';
     player = toupper(player);
-    if(text.fail()||!isalpha(row_) || !isdigit(col_))
+    if(!isalpha(row_) || !isdigit(col_))
     {
         throw ParseError("Invalid row or column");
     }
