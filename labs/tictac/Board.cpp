@@ -8,37 +8,48 @@ Board::Board() {
     // Initialize the grid
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            grid[i][j] = ' ';
+            board[i][j] = ' ';
         }
     }
     moveCount = 0;
-    currentPlayer = ' '; // No player starts the game initially
+    currentPlayer = ' '; 
 }
 
-// Private member function to check if a move results in a win
-bool Board::isWinningMove(int row, int col, char player) const {
-    // Check row
-    if (grid[row][0] == player && grid[row][1] == player && grid[row][2] == player)
+bool Board::isWin(char player) const {
+    for(int i=0; i<3;i++)
+    {
+        if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
+        {
+            return true;
+        }
+        if(board[0][i]==player && board[1][i]==player && board[2][i]==player)
+        {
+            return true;
+        }
+    }
+    if(board[0][0]==player && board[1][1]==player && board[2][2]==player)
+    {
         return true;
-    // Check column
-    if (grid[0][col] == player && grid[1][col] == player && grid[2][col] == player)
+    }
+    if(board[2][0]==player && board[1][1]==player && board[0][2]==player)
+    {
         return true;
-    // Check diagonals
-    if ((grid[0][0] == player && grid[1][1] == player && grid[2][2] == player) ||
-        (grid[0][2] == player && grid[1][1] == player && grid[2][0] == player))
-        return true;
+    }
+   
     return false;
 }
 
-// Private member function to check if the game is a draw
 bool Board::isDraw() const {
-    return moveCount == 9;
+    if(moveCount == 9)
+    {
+        return true;
+    }
+    return false;
 }
 
-// Public member function to make a move on the board
 void Board::makeMove(int number, char player, int row, int column) {
-    if (grid[row][column] != ' ') {
-        throw InvalidMove("Square already occupied.");
+    if (board[row][column] != ' ') {
+        throw InvalidMove("Square already taken.");
     }
 
     if (number != moveCount + 1) {
@@ -53,10 +64,10 @@ void Board::makeMove(int number, char player, int row, int column) {
         throw InvalidMove("Players must alternate.");
     }
 
-    grid[row][column] = player;
+    board[row][column] = player;
     moveCount++;
 
-    if (isWinningMove(row, column, player)) {
+    if (isWin(player)) {
         std::cout << "Game over: " << player << " wins." << std::endl;
         exit(0);
     }
@@ -66,14 +77,21 @@ void Board::makeMove(int number, char player, int row, int column) {
         exit(0);
     }
 
-    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+    if(currentPlayer == 'X')
+    {
+        currentPlayer ='O';
+    }
+    else{
+        currentPlayer ='X';
+    }
 }
 
 // Public member function to print the current state of the game
 void Board::printResult() const {
     if (moveCount == 0) {
         std::cout << "Game in progress: New game." << std::endl;
-    } else {
+    } 
+    else {
         std::cout << "Game in progress: " << currentPlayer << "'s turn." << std::endl;
     }
 }
