@@ -13,6 +13,10 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Wrong number");
     }
+    if(isspace(input[0]))
+    {
+        throw ParseError("extra space");
+    }
     if(!isspace(input[1])){
         throw ParseError("Wrong input");
     }
@@ -20,6 +24,10 @@ Move::Move(const std::string &input){
     text>>std::ws>>playerletter;
     player = playerletter;
     player = toupper(player);
+    if(isspace(input[2]))
+    {
+        throw ParseError("extra space");
+    }
     if(player != 'X' && player != 'O')
     {
         throw ParseError("Invalid Player");
@@ -31,6 +39,10 @@ Move::Move(const std::string &input){
     char col_;
     text>>std::ws>>row_>>col_;
     column = col_ -'1';
+    if(isspace(input[4]))
+    {
+        throw ParseError("extra space");
+    }
     if(!isalpha(row_) && !isdigit(column))
     {
         throw ParseError("Invalid row or column");
@@ -61,10 +73,6 @@ Move::Move(const std::string &input){
                 throw ParseError("extra space on comment");
             }
         }
-    }
-    if(isspace(input[4]))
-    {
-        throw ParseError("extra space on row");
     }
 }
 std::string Move::to_string()const{
