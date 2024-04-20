@@ -23,8 +23,6 @@ struct Move {
   std::string to_string() const;
 };
 
-std::ostream& operator<<(std::ostream& stream, const Move& move);
-
 #endif
 
 
