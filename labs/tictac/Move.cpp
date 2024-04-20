@@ -62,6 +62,10 @@ Move::Move(const std::string &input){
             }
         }
     }
+    if(isspace(input[4]))
+    {
+        throw ParseError("extra space on row");
+    }
 }
 std::string Move::to_string()const{
     std::ostringstream text;
