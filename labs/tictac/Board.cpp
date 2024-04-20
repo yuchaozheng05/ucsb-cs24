@@ -12,17 +12,7 @@ Board::Board(){
         }
     }
 }
-void Board::maketurn(Move& move){
-    int row = move.row;
-    int col = move.column;
-    currentplayer = move.player;
-    if(row!=0 || row !=1 || row!=2 || col!=0 || col!=1 || col!=2)
-    {
-        throw InvalidMove("invalid row or col");
-    }
-    board[row][col] = currentplayer;
-    movecount++;
-}
+
 bool Board::isDraw(){
     if(movecount==9)
     {

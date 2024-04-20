@@ -8,19 +8,21 @@
 
 Move::Move(const std::string &input){
     std::istringstream text(input);
-    text>>number;
+    std::string number_;
+    text>>number_;
+    number = std::stoi(number_);
     if(number<1 || number >9)
     {
         throw ParseError("Wrong number");
     }
-    text>>std::ws;
     if(!isspace(input[1])){
         throw ParseError("Wrong input");
     }
     char playerletter;
-    text>>playerletter;
+    text>>std::ws>>playerletter;
     player = playerletter;
-    if(player != 'X' || player !='O' || player != 'x' || player !='o')
+    player = toupper(player);
+    if(player != 'X' && player != 'O')
     {
         throw ParseError("Invalid Player");
     }
@@ -32,13 +34,15 @@ Move::Move(const std::string &input){
     char col_;
     text>>row_>>col_;
     column = col_ -'1';
-    if(!isalpha(row_) || !isdigit(column))
+    if(!isalpha(row_) && !isdigit(column))
     {
         throw ParseError("Invalid row or column");
     }
-    if(row_!='A' || row_!='B' || row_!='C' || row_!='a' || row_!='b' || row_!='c' || column!=0 || column !=1 || column !=2 )
+    row = row_ - 'A';
+    row = toupper(row);
+    if((row !=0 && row !=1 && row!=2) && (column!=1 && column !=0 && column !=2) )
     {
-        throw ParseError("Invalid row or colunm");
+        throw ParseError("Invalid row or colunm letter");
     }
     row = toupper(row_)-'A';
     char nextchar;
@@ -57,7 +61,7 @@ Move::Move(const std::string &input){
 }
 std::string Move::to_string()const{
     std::ostringstream text;
-    text<<number<<" "<<toupper(player)<<" "<<char(row+'A')<<column+1;
+    text<<number<<" "<<player<<" "<<char(row+'A')<<column+1;
     return text.str();
 
 }
