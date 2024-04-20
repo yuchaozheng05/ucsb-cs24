@@ -54,6 +54,13 @@ Move::Move(const std::string &input){
             }
         }
     }
+    if(comment.empty())
+    {
+        if(isspace(input[6]))
+        {
+            throw ParseError("Invalid space");
+        }
+    }
 }
 std::string Move::to_string()const{
     std::ostringstream text;
