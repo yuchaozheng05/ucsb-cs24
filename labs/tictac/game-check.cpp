@@ -3,47 +3,23 @@
 #include "Move.h"
 #include <iostream>
 
-int main(int argc, char** argv) {
-    bool verbose = false;
-    if(argc ==2 && std::string(argv[1])== "-v"){
-        verbose = true;
-    }
-    if(verbose){
-        std::cout<<"> ";
-    }
-    Board board;
+int main() {
+    Board board; // Initialize the game board
     std::string line;
-    while (std::getline(std::cin,line))
-    {
-        try{
+
+    while (std::getline(std::cin, line)) {
+        try {
             Move move(line);
-            board.maketurn(move.number, move.row, move.column, move.player);
-            return 0;
-        }
-        catch(const ParseError& e)
-        {
-            if(verbose)
-            {
-                std::cout << "Parse error: "<<e.what()<<'\n';
-            }
-            else{
-                std::cout<<"Parse error.\n";
-            }
-            return 1;    
-        }
-        catch(const InvalidMove& e)
-        {
-            if(verbose)
-            {
-               std::cout << "Invalid move: "<<e.what()<<'\n'; 
-            }
-            else{
-                std::cout<<"Invalid move.\n";
-            }
+            board.makeMove(move.number, move.player, move.row, move.column);
+            board.printResult();
+        } catch (const ParseError& e) {
+            std::cerr << "Parse error: " << e.what() << std::endl;
+            return 1;
+        } catch (const InvalidMove& e) {
+            std::cerr << "Invalid move: " << e.what() << std::endl;
             return 2;
         }
     }
-    std::cout << board.printresult()<<'\n';
-    return 0;
 
+    return 0;
 }
