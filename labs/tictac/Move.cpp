@@ -17,14 +17,13 @@ Move::Move(const std::string &input){
         throw ParseError("Wrong input");
     }
     char playerletter;
-    text>>std::ws>>playerletter;
+    text>>playerletter;
     player = playerletter;
     player = toupper(player);
     if(player != 'X' && player != 'O')
     {
         throw ParseError("Invalid Player");
     }
-    text>>std::ws;
     if(!isspace(input[3])){
         throw ParseError("wrong input");
     }
