@@ -74,6 +74,10 @@ Move::Move(const std::string &input){
     text>>std::ws;
     if(text>>comment) 
     {
+        if(input[walker]!='#')
+        {
+            throw ParseError("Wrong input on comment");
+        }
         if(comment == '#')
         {
             if(lastPos == walker)
