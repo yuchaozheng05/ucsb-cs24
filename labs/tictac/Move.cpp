@@ -49,7 +49,7 @@ Move::Move(const std::string &input){
         }
         if(nextchar == '#')
         {
-            if(input[6] != ' ')
+            if(!isspace(input[6]))
             {
                 throw ParseError("Invalid comment");
             }
