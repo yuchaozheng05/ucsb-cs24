@@ -42,17 +42,21 @@ Move::Move(const std::string &input){
         throw ParseError("Invalid row or colunm letter");
     }
     char nextchar;
-    if(text>>std::ws>>nextchar){
+    if(text>>nextchar){
         if(nextchar!='#')
         {
             throw ParseError("Invalid comment");
         }
         if(nextchar=='#')
         {
+            text>>std::ws>>nextchar;
             if(!isspace(input[6])){
-                throw ParseError("Invalid comment");
+                throw ParseError("Invalid comment space");
             }
         }
+    }
+    if(!isspace(input[8])){
+        throw ParseError("Invalid space");
     }
 }
 std::string Move::to_string()const{
