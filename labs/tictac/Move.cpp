@@ -90,6 +90,12 @@ Move::Move(const std::string &input){
             throw ParseError("Wrong comment");
         }
     }
+    else{
+        if(isspace(input[walker]))
+        {
+            throw ParseError("extra space at end");
+        }
+    }
 }
 
 std::string Move::to_string()const{
