@@ -5,10 +5,11 @@
 #include <istream>
 
 // Space for implementing Move functions.    
+
 Move::Move(const std::string &input){
     std::istringstream text(input);
     text>>number;
-    if(text.fail() || number<1 || number >9)
+    if(number<1 || number >9)
     {
         throw ParseError("Wrong number");
     }
@@ -19,18 +20,24 @@ Move::Move(const std::string &input){
     text>>std::ws>>playerletter;
     player = playerletter;
     player = toupper(player);
-    if(text.fail() || (player != 'X' && player != 'O'))
+    if(player != 'X' && player != 'O')
     {
         throw ParseError("Invalid Player");
     }
     if(!isspace(input[3])){
         throw ParseError("wrong input");
     }
-    char row_;
-    char col_;
-    text>>std::ws>>row_>>col_;
+    std::string rowcol;
+    text>>std::ws>>rowcol;
+    char row_, col_;
+    row_ = rowcol[0];
+    col_ = rowcol[1];
     column = col_ -'1';
-    if(text.fail() || (!isalpha(row_) && !isdigit(column)))
+    if(rowcol.size()!=2)
+    {
+        throw ParseError("wrong rowcol");
+    }
+    if(!isalpha(row_) && !isdigit(column))
     {
         throw ParseError("Invalid row or column");
     }
@@ -44,7 +51,8 @@ Move::Move(const std::string &input){
         throw ParseError("Invalid space");
     }
     char comment;
-    if(text>>std::ws>>comment) 
+    text>>std::ws;
+    if(text>>comment) 
     {
         if(comment != '#'){
             throw ParseError("Invalid comment");
