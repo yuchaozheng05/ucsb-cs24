@@ -47,6 +47,13 @@ Move::Move(const std::string &input){
         if(nextchar != '#'){
             throw ParseError("Invalid comment");
         }
+        if(nextchar == '#')
+        {
+            if(input[6] != ' ')
+            {
+                throw ParseError("Invalid comment");
+            }
+        }
     }
 }
 std::string Move::to_string()const{
