@@ -8,9 +8,7 @@
 
 Move::Move(const std::string &input){
     std::istringstream text(input);
-    std::string number_;
-    text>>number_;
-    number = std::stoi(number_);
+    text>>number;
     if(number<1 || number >9)
     {
         throw ParseError("Wrong number");
@@ -38,13 +36,11 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Invalid row or column");
     }
-    row = row_ - 'A';
-    row = toupper(row);
-    if((row !=0 && row !=1 && row!=2) && (column!=1 && column !=0 && column !=2) )
+    row = toupper(row_) - 'A';
+    if((row !=0 && row !=1 && row!=2) || (column!=1 && column !=0 && column !=2) )
     {
         throw ParseError("Invalid row or colunm letter");
     }
-    row = toupper(row_)-'A';
     char nextchar;
     if(text>>std::ws>>nextchar){
         if(nextchar!='#')
