@@ -4,32 +4,31 @@
 #include <sstream>
 #include <istream>
 
-// Space for implementing Move functions.
-
+// Space for implementing Move functions.    
 Move::Move(const std::string &input){
-    char number_, player_, row_, col_;
-    number_=input[0];
-    number = number_ -'0';
-    if(number < 1 || number >9)
+    std::istringstream text(input);
+    text>>number;
+    if(number<1 || number >9)
     {
-        throw ParseError("Invalid movenumber");
+        throw ParseError("Wrong number");
     }
-    if(!isspace(input[1]))
-    {
-        throw ParseError("extra space before player");
+    if(!isspace(input[1])){
+        throw ParseError("Wrong input");
     }
-    player_ = input[2];
-    player = toupper(player_);
+    char playerletter;
+    text>>std::ws>>playerletter;
+    player = playerletter;
+    player = toupper(player);
     if(player != 'X' && player != 'O')
     {
-        throw ParseError("Invalid player");
+        throw ParseError("Invalid Player");
     }
-    if(!isspace(input[3]))
-    {
-        throw ParseError("extra space before row");
+    if(!isspace(input[3])){
+        throw ParseError("wrong input");
     }
-    row_ = input[4];
-    col_=input[5];
+    char row_;
+    char col_;
+    text>>std::ws>>row_>>col_;
     column = col_ -'1';
     if(!isalpha(row_) && !isdigit(column))
     {
@@ -40,17 +39,26 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Invalid row or colunm letter");
     }
-    if(input.size()>7)
+    if(isspace(input[5]))
     {
-        if(!isspace(input[6]))
-        {
-            throw ParseError("Invalid space before comment");
-        }
-        char comment;
-        comment = input[7];
-        if(comment != '#')
-        {
+        throw ParseError("Extra space");
+    }
+    std::string comment;
+    if(text>>std::ws>>comment) 
+    {
+        if(comment[0] != '#'){
             throw ParseError("Invalid comment");
+        }
+        if(comment[0] == '#')
+        {
+            if(!isspace(input[6]))
+            {
+                throw ParseError("Invalid comment space");
+            }
+            if(isspace(input[7]))
+            {
+                throw ParseError("extra space on comment");
+            }
         }
     }
 }
