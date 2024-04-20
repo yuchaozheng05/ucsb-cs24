@@ -5,14 +5,12 @@
 // Space for implementing Board functions.
 
 Board::Board() {
-    // Initialize the grid
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             board[i][j] = ' ';
         }
     }
     moveCount = 0;
-    currentPlayer = ' '; 
 }
 
 bool Board::isWin(char player) const {
@@ -56,26 +54,12 @@ void Board::makeMove(int number, char player, int row, int column) {
         throw InvalidMove("Invalid move number.");
     }
 
-    if (player != 'X' && player != 'O') {
-        throw InvalidMove("Invalid player.");
-    }
-
     if (moveCount != 0 && player == currentPlayer) {
         throw InvalidMove("Players must alternate.");
     }
 
     board[row][column] = player;
     moveCount++;
-
-    if (isWin(player)) {
-        std::cout << "Game over: " << player << " wins." << std::endl;
-        exit(0);
-    }
-
-    if (isDraw()) {
-        std::cout << "Game over: Draw." << std::endl;
-        exit(0);
-    }
 
     if(currentPlayer == 'X')
     {
@@ -91,7 +75,26 @@ void Board::printResult() const {
     if (moveCount == 0) {
         std::cout << "Game in progress: New game." << std::endl;
     } 
+    if (isWin('X')) {
+        std::cout << "Game over: X wins." << std::endl;
+        exit(0);
+    }
+    if (isWin('O')) {
+        std::cout << "Game over: O wins." << std::endl;
+        exit(0);
+    }
+
+    if (isDraw()) {
+        std::cout << "Game over: Draw." << std::endl;
+        exit(0);
+    }
     else {
-        std::cout << "Game in progress: " << currentPlayer << "'s turn." << std::endl;
+       if(currentPlayer == 'X')
+       {
+        std::cout << "Game in progress: O 's turn." << std::endl;
+        }
+        else{
+            std::cout << "Game in progress: X 's turn." << std::endl;
+        }
     }
 }
