@@ -27,16 +27,9 @@ Move::Move(const std::string &input){
     if(!isspace(input[3])){
         throw ParseError("wrong input");
     }
-    std::string rowcol;
-    text>>std::ws>>rowcol;
     char row_, col_;
-    row_ = rowcol[0];
-    col_ = rowcol[1];
+    text>>std::ws>>row_>>col_;
     column = col_ -'1';
-    if(rowcol.size()!=2)
-    {
-        throw ParseError("wrong rowcol");
-    }
     if(!isalpha(row_) && !isdigit(column))
     {
         throw ParseError("Invalid row or column");
@@ -67,6 +60,13 @@ Move::Move(const std::string &input){
             {
                 throw ParseError("extra space on comment");
             }
+        }
+    }
+    if(input.size()>6)
+    {
+        if(!isspace(input[6]))
+        {
+            throw ParseError("extra space");
         }
     }
 }
