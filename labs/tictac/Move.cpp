@@ -12,6 +12,10 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Wrong number");
     }
+    if(isspace(input[0]))
+    {
+        throw ParseError("Invalid space");
+    }
     if(!isspace(input[1])){
         throw ParseError("Wrong input");
     }
@@ -38,6 +42,10 @@ Move::Move(const std::string &input){
     if((row !=0 && row !=1 && row!=2) || (column!=1 && column !=0 && column !=2) )
     {
         throw ParseError("Invalid row or colunm letter");
+    }
+    if(isspace(input[5]))
+    {
+        throw ParseError("Invalid space");
     }
     char comment;
     if(text>>std::ws>>comment) 
