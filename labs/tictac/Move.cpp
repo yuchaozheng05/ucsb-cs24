@@ -39,6 +39,10 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Invalid row or colunm letter");
     }
+    if(isspace(input[4]))
+    {
+        throw ParseError("Extra space");
+    }
     if(isspace(input[5]))
     {
         throw ParseError("Extra space");
