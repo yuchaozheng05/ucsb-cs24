@@ -39,10 +39,6 @@ Move::Move(const std::string &input){
     {
         throw ParseError("Invalid row or colunm letter");
     }
-    if(isspace(input[5]))
-    {
-        throw ParseError("Extra space");
-    }
     char comment;
     if(text>>std::ws>>comment) 
     {
@@ -60,13 +56,6 @@ Move::Move(const std::string &input){
                 throw ParseError("extra space on comment");
             }
             comment = '#';
-        }
-    }
-    if(input.size()>7)
-    {
-        if(input[7] == ' ')
-        {
-            throw ParseError("Invalid while space at end");
         }
     }
 }
