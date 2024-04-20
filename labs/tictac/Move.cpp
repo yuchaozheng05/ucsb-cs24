@@ -53,6 +53,10 @@ Move::Move(const std::string &input){
             {
                 throw ParseError("Invalid comment");
             }
+            if(!isspace(input[8]))
+            {
+                throw ParseError("Invalid comment");
+            }
         }
     }
 }
