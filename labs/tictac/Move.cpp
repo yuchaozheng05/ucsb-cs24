@@ -42,10 +42,6 @@ Move::Move(const std::string &input){
         throw ParseError("extra space");
     }
     column = col_ -'1';
-    if(isspace(input[4]))
-    {
-        throw ParseError("extra space");
-    }
     if(!isalpha(row_) && !isdigit(column))
     {
         throw ParseError("Invalid row or column");
