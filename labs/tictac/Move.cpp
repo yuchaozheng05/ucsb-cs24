@@ -22,8 +22,8 @@ Move::Move(const std::string &input){
     }
     walker += 1;
     // consider case if multiple white spaces exist
-    if(walker < input.length() && isspace(input[walker])){
-        throw ParseError("Wrong input, multiple space");
+    while(walker < input.length() && isspace(input[walker])){
+        walker+=1;
     }
     char playerletter;
     text>>std::ws>>playerletter;
@@ -38,8 +38,8 @@ Move::Move(const std::string &input){
         throw ParseError("wrong input");
     }
     walker += 1;
-    if (walker < input.length() && isspace(input[walker])){
-        throw ParseError("Wrong input, multiple spaces");
+    while (walker < input.length() && isspace(input[walker])){
+        walker +=1;
     }
     std::string rowcol;
     text>>std::ws>>rowcol;
@@ -65,7 +65,7 @@ Move::Move(const std::string &input){
     unsigned lastPos = walker;
 
     // Optionally, whitespace, count if any 
-    if (walker < input.length() && isspace(input[walker]))
+    while (walker < input.length() && isspace(input[walker]))
     {
         walker += 1;
     }
@@ -88,12 +88,6 @@ Move::Move(const std::string &input){
         }
         else{
             throw ParseError("Wrong comment");
-        }
-    }
-    else{
-        if(isspace(input[walker]))
-        {
-            throw ParseError("extra space at end");
         }
     }
 }
