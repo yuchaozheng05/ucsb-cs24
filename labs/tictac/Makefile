@@ -3,8 +3,7 @@ CXX      = g++
 
 .PHONY: all clean
 
-all: move-check 
-all: game-check
+all: move-check game-check
 
 
 move-check: Move.o move-check.o
@@ -12,7 +11,7 @@ move-check: Move.o move-check.o
 
 move-check.o: move-check.cpp Move.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
-
+	
 Move.o: Move.cpp Move.h 
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
@@ -26,4 +25,4 @@ Board.o: Board.cpp Board.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f  move-check Move game-check Board
+	rm -f  move-check Move Board game-check
