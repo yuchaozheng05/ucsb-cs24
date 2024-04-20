@@ -16,13 +16,13 @@ Move.o: Move.cpp Move.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 game-check: game-check.o Board.o Move.o 
-	$(CXX) $(CXXFLAGS) -o game-check game-check.o Board.o Move.o 
-	
+	$(CXX) $(CXXFLAGS) -o $@ $+
+
 game-check.o: game-check.cpp
-	$(CXX) $(CXXFLAGS) -c game-check.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 Board.o: Board.cpp Board.h
-	$(CXX) $(CXXFLAGS) -c Board.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	rm -f  move-check Move Board game-check 
