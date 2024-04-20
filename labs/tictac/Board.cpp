@@ -1,5 +1,6 @@
 #include "Errors.h"
 #include "Board.h"
+#include <iostream>
 
 // Space for implementing Board functions.
 
@@ -15,9 +16,10 @@ Board::Board(){
     }
 }
 void Board::maketurn(int row, int col, char player){
-    if(row!=0 || row !=1 || row!=2 || col!=0 || col!=1 || col!=2)
+    std::cout<<row<<' '<<col;
+    if((row!=0 && row !=1 && row!=2)|| (col!=0 && col!=1 && col!=2))
     {
-        throw InvalidMove("invalid row or col");
+        throw InvalidMove("invalid row or col sb");
     }
     board[row][col] = currentplayer;
     movecount++;
