@@ -15,14 +15,18 @@ Board::Board(){
         }
     }
 }
-void Board::maketurn(int row, int col, char player){
+void Board::maketurn(int number, int row, int col, char player){
     std::cout<<row<<' '<<col;
-    if((row!=0 || row !=1 || row!=2)|| (col!=0 || col!=1 || col!=2))
+    if((row!=0 && row !=1 && row!=2)|| (col!=0 && col!=1 && col!=2))
     {
         throw InvalidMove("invalid row or col sb");
     }
     board[row][col] = player;
     movecount++;
+    if(number != movecount)
+    {
+        throw InvalidMove("wrong move number");
+    }
 }
 bool Board::isDraw()const{
     if(movecount==9)

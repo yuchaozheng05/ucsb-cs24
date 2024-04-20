@@ -1,3 +1,4 @@
+#include "Move.cpp"
 #include "Board.h"
 #include "Errors.h"
 #include "Move.h"
@@ -17,7 +18,7 @@ int main(int argc, char** argv) {
     {
         try{
             Move move(line);
-            board.maketurn(move.row, move.column, move.player);
+            board.maketurn(move.number, move.row, move.column, move.player);
             return 0;
         }
         catch(const ParseError& e)

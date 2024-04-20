@@ -17,8 +17,7 @@ class Board{
       bool whowin(char player);
       bool isDraw() const;
       std::string printresult();
-      void maketurn(int row, int col, char player);
-
+      void maketurn(int number, int row, int col, char player);
 
 };
 #endif
