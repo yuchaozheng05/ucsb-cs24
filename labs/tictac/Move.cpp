@@ -81,10 +81,6 @@ Move::Move(const std::string &input){
             }
         }
     }
-    if(isspace(input[7]))
-    {
-        throw ParseError("extra space");
-    }
 }
 std::string Move::to_string()const{
     std::ostringstream text;
