@@ -3,14 +3,6 @@
 #include <iostream>
 
 // Space for implementing Board functions.
-
-
-#include "Errors.h"
-#include "Board.h"
-
-// Space for implementing Board functions.
-
-
 Board::Board(){
     movecount=0;
     for(int i=0; i<3; i++)
