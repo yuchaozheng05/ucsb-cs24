@@ -22,23 +22,19 @@ void Board::makeTurn(Move& move){
         throw InvalidMove("Square already taken.");
     }
 
-    if (number != movecount + 1) {
+    if (number != movecount+1) {
         throw InvalidMove("Invalid move number.");
     }
-
-    if (movecount != 0 && player == currentPlayer) {
-        throw InvalidMove("player repeat");
+    if(movecount>0)
+    {
+        if(player==currentPlayer)
+        {
+            throw InvalidMove("Player repeat");
+        }
     }
-
+    currentPlayer = player;
     board[row][column] = player;
     movecount++;
-    if(currentPlayer == 'X')
-    {
-        currentPlayer ='O';
-    }
-    else{
-        currentPlayer ='X';
-    }
 
 }
 bool Board::isDraw()const{
