@@ -17,6 +17,8 @@ int main(int argc, char** argv) {
   Board board;
   std::string line;
   while (std::getline(std::cin,line))
+  {
+    if(!line.empty())
     {
         try{
             Move move(line);
@@ -43,6 +45,10 @@ int main(int argc, char** argv) {
               }
             return 2;
         }
+    }
+    else{
+      std::cout << board.printresult() << '\n';
+    }
     }
     std::cout << board.printresult() << '\n';
     return 0;
