@@ -59,7 +59,6 @@ int main(int argc, char** argv) {
         }
         if(board.isGameOver())
         {
-          std::cout<<'\n';
           std::cout << board.printresult() << '\n';
           return 0;
         }
