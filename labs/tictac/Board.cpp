@@ -27,12 +27,19 @@ void Board::makeTurn(Move& move){
     }
     if(movecount>0)
     {
-        if(player==currentPlayer)
+        if(player!=currentPlayer)
         {
             throw InvalidMove("Player repeat");
         }
     }
     currentPlayer = player;
+    if(currentPlayer == 'X')
+    {
+        currentPlayer ='O';
+    }
+    else{
+        currentPlayer ='X';
+    }
     board[row][column] = player;
     movecount++;
 
@@ -75,6 +82,7 @@ std::string Board::printresult()const{
     if(movecount == 0)
     {
         return "Game in progress: New game.";
+        exit(0);
     }
     else if(whoWins('X'))
     {
@@ -93,9 +101,11 @@ std::string Board::printresult()const{
     }
     else if(currentPlayer =='X'){
         return "Game in progess: O's turn.";
+        exit(0);
     }
     else{
         return "Game in progess: X's turn.";
+        exit(0);
     }
 
 
