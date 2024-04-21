@@ -75,9 +75,6 @@ bool Board::whoWins(char player)const{
    
     return false;
 }
-bool Board::Gameover() const {
-    return whoWins('X') || whoWins('O') || isDraw();
-}
 std::string Board::printresult()const{ 
     if(movecount == 0)
     {
