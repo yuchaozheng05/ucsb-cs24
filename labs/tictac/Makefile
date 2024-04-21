@@ -18,7 +18,7 @@ Move.o: Move.cpp Move.h
 game-check: game-check.o Board.o Move.o 
 	$(CXX) $(CXXFLAGS) -o $@ $+
 
-game-check.o: game-check.cpp
+game-check.o: game-check.cpp Board.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 Board.o: Board.cpp Board.h

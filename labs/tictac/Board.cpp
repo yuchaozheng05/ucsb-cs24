@@ -3,37 +3,17 @@
 #include <iostream>
 
 // Space for implementing Board functions.
-Board::Board(){
-    movecount=0;
-    for(int i=0; i<3; i++)
-    {
-        for(int j=0; j<3; j++)
-        {
-            board[i][j]=' ';
+
+Board::Board() {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            board[i][j] = ' ';
         }
     }
+    moveCount = 0;
 }
-void Board::maketurn(Move& move){
-    int row = move.row;
-    int col = move.column;
-    currentplayer = move.player;
-    if(row!=0 || row !=1 || row!=2 || col!=0 || col!=1 || col!=2)
-    {
-        throw InvalidMove("invalid row or col");
-    }
-    board[row][col] = currentplayer;
-    movecount++;
-}
-bool Board::isDraw(){
-    if(movecount==9)
-    {
-        draw=true;
-        return true;
-    }
-    draw =false;
-    return false;
-}
-bool Board::whowin(char player){
+
+bool Board::isWin(char player) const {
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
@@ -56,28 +36,67 @@ bool Board::whowin(char player){
    
     return false;
 }
-std::string Board::printresult(){
-    if(movecount == 0)
+
+bool Board::isDraw() const {
+    if(moveCount == 9)
     {
-        return "Game in progress: New game.";
+        return true;
     }
-    else if(whowin('X'))
-    {
-        return "Game over: X wins.";
-    }
-    else if(whowin('O'))
-    {
-        return "Game over: O wins.";
-    }
-    else if(draw)
-    {
-        return "Game over: Draw.";
-    }
-    else if(currentplayer =='X'){
-        return "Game in progess: O's turn.";
-    }
-    else{
-        return "Game in progess: X's turn.";
+    return false;
+}
+
+void Board::makeMove(int number, char player, int row, int column) {
+    if (board[row][column] != ' ') {
+        throw InvalidMove("Square already taken.");
     }
 
+    if (number != moveCount + 1) {
+        throw InvalidMove("Invalid move number.");
+    }
+
+    if (moveCount != 0 && player == currentPlayer) {
+        throw InvalidMove("player repeat");
+    }
+
+    board[row][column] = player;
+    moveCount++;
+
+    if(currentPlayer == 'X')
+    {
+        currentPlayer ='O';
+    }
+    else{
+        currentPlayer ='X';
+    }
+}
+
+void Board::printResult() const {
+    if (moveCount == 0) {
+        std::cout << "Game in progress: New game.\n";
+        exit(0);
+    } 
+    if (isWin('X')) {
+        std::cout << "Game over: X wins.\n";
+        exit(0);
+    }
+    if (isWin('O')) {
+        std::cout << "Game over: O wins.\n";
+        exit(0);
+    }
+
+    if (isDraw()) {
+        std::cout << "Game over: Draw.\n";
+        exit(0);
+    }
+    else {
+       if(currentPlayer == 'X')
+       {
+        std::cout << "Game in progress: O's turn.\n";
+        exit(0);
+        }
+        else{
+            std::cout << "Game in progress: X's turn.\n";
+            exit(0);
+        }
+    }
 }

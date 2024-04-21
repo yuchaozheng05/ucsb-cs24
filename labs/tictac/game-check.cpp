@@ -4,26 +4,22 @@
 #include <iostream>
 
 int main() {
-    Board board;
+    Board board; 
     std::string line;
-    while (std::getline(std::cin,line))
-    {
-        try{
+
+    while (std::getline(std::cin, line)) {
+        try {
             Move move(line);
-            board.maketurn(move);
-        }
-        catch(const ParseError& e)
-        {
-            std::cout<<"Parse error.\n";
-            return 1;    
-        }
-        catch(const InvalidMove& e)
-        {
-            std::cout<<"Invalid move.\n";
+            board.makeMove(move.number, move.player, move.row, move.column);
+            board.printResult();
+        } catch (const ParseError& e) {
+            std::cout << "Parse error: \n" ;
+            return 1;
+        } catch (const InvalidMove& e) {
+            std::cerr << "Invalid move: \n";
             return 2;
         }
     }
-    std::cout << board.printresult()<<'\n';
-    return 0;
 
+    return 0;
 }
