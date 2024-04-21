@@ -29,7 +29,6 @@ int main(int argc, char** argv) {
          if(count<=9)
         {
            std::cout << board.printresult() << '\n';
-           return 0;
         }
       }
         try{
@@ -60,17 +59,14 @@ int main(int argc, char** argv) {
         if(board.whoWins('X'))
         {
           std::cout << board.printresult() << '\n';
-          exit(0);
         }
         if(board.whoWins('O'))
         {
           std::cout << board.printresult() << '\n';
-          exit(0);
         }
         if(count==9)
         {
           std::cout << board.printresult() << '\n';
-          exit(0);
       
         }
     }
