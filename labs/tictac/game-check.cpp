@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
             else{
               std::cout<<"Parse error.\n";
             }
+            exit(1);
             return 1;    
         }
         catch(const InvalidMove& e)
@@ -57,6 +58,7 @@ int main(int argc, char** argv) {
               else{
                 std::cout<<"Invalid move.\n";
               }
+            exit(2);
             return 2;
         }
       }
