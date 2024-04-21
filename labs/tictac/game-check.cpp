@@ -37,8 +37,7 @@ int main(int argc, char** argv) {
             Move move(line);
             board.makeTurn(move);
             count +=1;
-            return 0;
-  
+          
         }
         catch(const ParseError& e)
         {
