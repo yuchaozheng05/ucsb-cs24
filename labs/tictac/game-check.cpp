@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
   }
   Board board;
   std::string line;
-    while (std::getline(std::cin,line))
+  while (std::getline(std::cin,line))
     {
         try{
             Move move(line);
@@ -26,17 +26,21 @@ int main(int argc, char** argv) {
         catch(const ParseError& e)
         {
             if(verbose) {
-      std::cout << "Parse error: " << e.what() << '\n';
-    }
-            std::cout<<"Parse error.\n";
+              std::cout << "Parse error: " << e.what() << '\n';
+            }
+            else{
+              std::cout<<"Parse error.\n";
+            }
             return 1;    
         }
         catch(const InvalidMove& e)
         {
             if(verbose) {
-      std::cout << "InvalidMove: " << e.what() << '\n';
-    }
-            std::cout<<"Invalid move.\n";
+              std::cout << "InvalidMove: " << e.what() << '\n';
+              }
+              else{
+                std::cout<<"Invalid move.\n";
+              }
             return 2;
         }
     }
