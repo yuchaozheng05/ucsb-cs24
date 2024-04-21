@@ -12,6 +12,7 @@ int main() {
         try{
             Move move(line);
             board.makeTurn(move);
+            return 0;
         }
         catch(const ParseError& e)
         {
