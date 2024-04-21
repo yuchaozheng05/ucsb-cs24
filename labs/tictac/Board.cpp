@@ -52,7 +52,7 @@ char Board::getSquare(int row, int col)const
 {
     return board[row][col];
 }
-bool Board::whoWins(char player){
+bool Board::whoWins(char player)const{
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
@@ -75,28 +75,17 @@ bool Board::whoWins(char player){
    
     return false;
 }
-std::string Board::printresult(){
-    if(movecount == 0)
-    {
-        return "Game in progress: New game.";
-    }
-    else if(whoWins('X'))
-    {
+std::string Board::printresult()const{
+   if (whoWins('X')) {
         return "Game over: X wins.";
-    }
-    else if(whoWins('O'))
-    {
-        return "Game over: O wins.";
-    }
-    else if(isDraw())
-    {
+    } else if (whoWins('0')) {
+        return "Game over: 0 wins.";
+    } else if (isDraw()) {
         return "Game over: Draw.";
-    }
-    else if(currentPlayer =='X'){
-        return "Game in progess: X's turn.";
-    }
-    else{
-        return "Game in progess: O's turn.";
+    } else if (movecount == 0) {
+        return "Game in progress: New game.";
+    } else {
+        return "Game in progress: " + std::string(1, currentPlayer) + "'s turn.";
     }
 
 }
