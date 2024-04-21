@@ -23,7 +23,7 @@ int main() {
             return 2;
         }
     }
-    std::cout << board.printresult();
+    std::cout << board.printresult()<<'\n';
     return 0;
 
 }
