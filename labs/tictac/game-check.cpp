@@ -16,40 +16,45 @@ int main(int argc, char** argv) {
   }
   Board board;
   std::string line;
+  int count =0;
   while (std::getline(std::cin,line))
   {
-    if(!line.empty())
+    if(line.empty())
     {
-        try{
-            Move move(line);
-            board.makeTurn(move);
-  
-        }
-        catch(const ParseError& e)
-        {
-            if(verbose) {
-              std::cout << "Parse error: " << e.what() << '\n';
-            }
-            else{
-              std::cout<<"Parse error.\n";
-            }
-            return 1;    
-        }
-        catch(const InvalidMove& e)
-        {
-            if(verbose) {
-              std::cout << "InvalidMove: " << e.what() << '\n';
-              }
-              else{
-                std::cout<<"Invalid move.\n";
-              }
-            return 2;
-        }
-    }
-    else{
       std::cout << board.printresult() << '\n';
+      exit(1);
     }
+    try{
+        Move move(line);
+        board.makeTurn(move);
     }
+    catch(const ParseError& e)
+     {
+        if(verbose) {
+          std::cout << "Parse error: " << e.what() << '\n';
+        }
+        else{
+          std::cout<<"Parse error.\n";
+        }
+        return 1;    
+    }
+    catch(const InvalidMove& e)
+    {
+       if(verbose) {
+         std::cout << "InvalidMove: " << e.what() << '\n';
+          }
+       else{
+          std::cout<<"Invalid move.\n";
+          }
+       return 2;
+    }
+    count +=1;
+    if(count ==9)
+    {
+      std::cout << board.printresult() << '\n';
+      exit(1);
+    }
+  }
     std::cout << board.printresult() << '\n';
     return 0;
 
