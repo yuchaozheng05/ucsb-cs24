@@ -16,7 +16,7 @@ void Board::maketurn(Move& move){
     int number = move.number;
     int row = move.row;
     int column = move.column;
-    char player = move.player;
+    currentPlayer = move.player;
     if (board[row][column] != ' ') {
         throw InvalidMove("Square already taken.");
     }
@@ -24,13 +24,12 @@ void Board::maketurn(Move& move){
     if (number != movecount + 1) {
         throw InvalidMove("Invalid move number.");
     }
-
-    if (movecount != 0 && player == currentPlayer) {
+    if (movecount != 0 && prevPlayer == currentPlayer) {
         throw InvalidMove("player repeat");
     }
 
-    board[row][column] = player;
-    movecount++;
+    board[row][column] = currentPlayer;
+    prevPlayer = currentPlayer;
     if(currentPlayer == 'X')
     {
         currentPlayer ='O';
@@ -38,20 +37,23 @@ void Board::maketurn(Move& move){
     else{
         currentPlayer ='X';
     }
+    movecount++;
 
 }
-bool Board::isDraw()const{
+bool Board::isDraw(){
     if(movecount==9)
     {
+        draw=true;
         return true;
     }
+    draw=false;
     return false;
 }
 char Board::getsquare(int row, int col)const
 {
     return board[row][col];
 }
-bool Board::whowin(char player)const{
+bool Board::whowin(char player){
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
@@ -74,21 +76,6 @@ bool Board::whowin(char player)const{
    
     return false;
 }
-bool Board::finishgame()const{
-    if(whowin('X'))
-    {
-        return true;
-    }
-    if(whowin('O'))
-    {
-        return true;
-    }
-    if(isDraw())
-    {
-        return true;
-    }
-    return false;
-}
 std::string Board::printresult(){
     if(movecount == 0)
     {
@@ -102,7 +89,7 @@ std::string Board::printresult(){
     {
         return "Game over: O wins.";
     }
-    else if(isDraw())
+    else if(draw)
     {
         return "Game over: Draw.";
     }

@@ -22,10 +22,6 @@ int main() {
             std::cout<<"Invalid move.\n";
             return 2;
         }
-        if(board.finishgame())
-        {
-            break;
-        }
     }
     std::cout << board.printresult()<<'\n';
     return 0;
