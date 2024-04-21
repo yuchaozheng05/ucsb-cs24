@@ -93,10 +93,10 @@ std::string Board::printresult(){
         return "Game over: Draw.";
     }
     else if(currentPlayer =='X'){
-        return "Game in progess: O's turn.";
+        return "Game in progess: X's turn.";
     }
     else{
-        return "Game in progess: X's turn.";
+        return "Game in progess: O's turn.";
     }
 
 }
