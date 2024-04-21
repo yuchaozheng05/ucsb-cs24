@@ -63,6 +63,10 @@ bool Board::isDraw()const{
     }
     return false;
 }
+char Board::getsquare(int row, int col)const
+{
+    return board[row][col];
+}
 bool Board::whowin(char player)const{
     for(int i=0; i<3;i++)
     {
