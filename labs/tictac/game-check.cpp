@@ -23,15 +23,16 @@ int main(int argc, char** argv) {
       {
         if(count == 0)
         {
-          std::cout<<"Game in progress: New game.\n";
-          return 0;
+          std::cout << board.printresult() << '\n';
+          break;
         }
         if(count<=9)
         {
            std::cout << board.printresult() << '\n';
-           return 0;
+           break;
         }
       }
+      else{
         try{
             Move move(line);
             board.makeTurn(move);
@@ -58,8 +59,23 @@ int main(int argc, char** argv) {
               }
             return 2;
         }
+      }
+      if(board.whoWins('X'))
+      {
+        std::cout << board.printresult() << '\n';
+        break;
+      }
+      if(board.whoWins('O'))
+      {
+        std::cout << board.printresult() << '\n';
+        break;
+      }
+      if(count ==9)
+      {
+        std::cout << board.printresult() << '\n';
+        break;
+      }
     }
-    std::cout << board.printresult() << '\n';
     return 0;
 
 }

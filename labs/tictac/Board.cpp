@@ -32,6 +32,7 @@ void Board::makeTurn(Move& move){
         }
     }
     currentPlayer = player;
+    movecount++;
     if(currentPlayer == 'X')
     {
         currentPlayer ='O';
@@ -40,7 +41,7 @@ void Board::makeTurn(Move& move){
         currentPlayer ='X';
     }
     board[row][column] = player;
-    movecount++;
+
 
 }
 bool Board::isDraw()const{

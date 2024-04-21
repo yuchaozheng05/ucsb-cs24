@@ -12,7 +12,6 @@ class Board{
       int movecount;
       char currentPlayer;
       bool isDraw()const;
-      bool whoWins(char player)const;
 
 
     public:
@@ -20,6 +19,7 @@ class Board{
       char getSquare(int row, int col)const;
       std::string printresult()const;
       void makeTurn(Move& move);
+      bool whoWins(char player)const;
 
 };
 #endif
