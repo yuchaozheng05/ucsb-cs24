@@ -40,7 +40,7 @@ void Board::maketurn(Move& move){
     }
 
 }
-bool Board::isDraw()const{
+bool Board::isDraw(){
     if(movecount==9)
     {
         return true;
@@ -51,7 +51,7 @@ char Board::getsquare(int row, int col)const
 {
     return board[row][col];
 }
-bool Board::whowin(char player)const{
+bool Board::whowin(char player){
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
