@@ -20,7 +20,7 @@ class Board{
       bool isDraw()const;
       char getsquare(int row, int col)const;
       std::string printresult();
-      void maketurn(Move& move);
+      void maketurn(int number, int row, int col, char player);
 
 
 };

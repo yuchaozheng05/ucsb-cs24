@@ -12,11 +12,7 @@ Board::Board(){
         }
     }
 }
-void Board::maketurn(Move& move){
-    int number = move.number;
-    int row = move.row;
-    int column = move.column;
-    char player = move.player;
+void Board::maketurn(int number, int row, int column, char player){
     if (board[row][column] != ' ') {
         throw InvalidMove("Square already taken.");
     }
@@ -24,12 +20,15 @@ void Board::maketurn(Move& move){
     if (number != movecount + 1) {
         throw InvalidMove("Invalid move number.");
     }
+    if (player != 'X' && player != 'O') {
+        throw InvalidMove("Invalid player.");
+    }
+
     if (movecount != 0 && player == currentPlayer) {
-        throw InvalidMove("player repeat");
+        throw InvalidMove("Players not alternate.");
     }
 
     board[row][column] = currentPlayer;
-    player = currentPlayer;
     if(currentPlayer == 'X')
     {
         currentPlayer ='O';

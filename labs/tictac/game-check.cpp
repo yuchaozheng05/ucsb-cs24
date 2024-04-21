@@ -10,7 +10,7 @@ int main() {
     {
         try{
             Move move(line);
-            board.maketurn(move);
+            board.maketurn(move.number, move.row, move.column, move.player);
         }
         catch(const ParseError& e)
         {
