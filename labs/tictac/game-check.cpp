@@ -7,7 +7,8 @@
 int main() {
     Board board;
     std::string line;
-    while (std::getline(std::cin,line))
+    std::getline(std::cin,line);
+    while (!line.empty())
     {
         try{
             Move move(line);
@@ -23,6 +24,7 @@ int main() {
             std::cout<<"Invalid move.\n";
             return 2;
         }
+        std::getline(std::cin,line);
     }
     std::cout << board.printresult()<<'\n';
     return 0;
