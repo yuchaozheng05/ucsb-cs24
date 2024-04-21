@@ -20,7 +20,6 @@ class Board{
       char getSquare(int row, int col)const;
       std::string printresult()const;
       void makeTurn(Move& move);
-      bool isGameOver() const;
-    
+
 };
 #endif

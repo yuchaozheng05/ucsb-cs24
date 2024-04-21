@@ -26,16 +26,17 @@ int main(int argc, char** argv) {
           std::cout<<"Game in progress: New game.\n";
           return 0;
         }
-         if(count<9 && !board.isGameOver())
+        if(count<=9)
         {
            std::cout << board.printresult() << '\n';
-
+           return 0;
         }
       }
         try{
             Move move(line);
             board.makeTurn(move);
             count +=1;
+  
         }
         catch(const ParseError& e)
         {
@@ -57,14 +58,8 @@ int main(int argc, char** argv) {
               }
             return 2;
         }
-        if(board.isGameOver())
-        {
-          std::cout << board.printresult() << '\n';
-          return 0;
-        }
-       
     }
-
+    std::cout << board.printresult() << '\n';
     return 0;
 
 }
