@@ -12,13 +12,13 @@ class Board{
       int movecount;
       char currentPlayer;
       bool isDraw()const;
-      bool whoWins(char player);
+      bool whoWins(char player)const;
 
 
     public:
       Board();
       char getSquare(int row, int col)const;
-      std::string printresult();
+      std::string printresult()const;
       void makeTurn(Move& move);
 
 
