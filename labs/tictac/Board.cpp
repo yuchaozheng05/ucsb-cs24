@@ -71,33 +71,31 @@ void Board::makeMove(int number, char player, int row, int column) {
 }
 
 // Public member function to print the current state of the game
-void Board::printResult() const {
+std::string Board::printResult() const {
     if (moveCount == 0) {
-        std::cout << "Game in progress: New game.";
+        return "Game in progress: New game.";
         exit(0);
     } 
     if (isWin('X')) {
-        std::cout << "Game over: X wins.";
+        return "Game over: X wins.";
         exit(0);
     }
     if (isWin('O')) {
-        std::cout << "Game over: O wins.";
+        return "Game over: O wins.";
         exit(0);
     }
 
     if (isDraw()) {
-        std::cout << "Game over: Draw.";
+        return "Game over: Draw.";
         exit(0);
     }
     else {
        if(currentPlayer == 'X')
        {
-        std::cout << "Game in progress: O's turn.";
-        exit(0);
+        return "Game in progress: O's turn.";
         }
         else{
-            std::cout << "Game in progress: X's turn.";
-            exit(0);
+            return "Game in progress: X's turn.";
         }
     }
 }
