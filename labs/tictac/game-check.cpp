@@ -10,13 +10,15 @@ int main() {
     while (std::getline(std::cin, line)) {
         try {
             Move move(line);
-            board.makeMove(move.number, move.player, move.row, move.column);
+            board.makeMove(move);
             std::cout<<board.printResult()<<'\n';
-        } catch (const ParseError& e) {
-            std::cerr << "Parse error: " << e.what();
+        } 
+        catch (const ParseError& e) {
+            std::cout<<"Parse error: " <<e.what()<<'\n';
             return 1;
-        } catch (const InvalidMove& e) {
-            std::cerr << "Invalid move: " << e.what();
+        } 
+        catch (const InvalidMove& e) {
+            std::cout << "Invalid move: " << e.what()<<'\n';
             return 2;
         }
     }

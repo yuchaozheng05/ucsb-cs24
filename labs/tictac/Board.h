@@ -16,7 +16,7 @@ private:
 
 public:
     Board();
-    void makeMove(int number, char player, int row, int column);
+    void makeMove(const Move &move);
     std::string printResult() const;
 };
 #endif

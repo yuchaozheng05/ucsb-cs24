@@ -45,7 +45,11 @@ bool Board::isDraw() const {
     return false;
 }
 
-void Board::makeMove(int number, char player, int row, int column) {
+void Board::makeMove(const Move &move) {
+    int row = move.row;
+    int column = move.column;
+    int number = move.number;
+    char player= move.player;
     if (board[row][column] != ' ') {
         throw InvalidMove("Square already taken.");
     }
@@ -74,28 +78,26 @@ void Board::makeMove(int number, char player, int row, int column) {
 std::string Board::printResult() const {
     if (moveCount == 0) {
         return "Game in progress: New game.";
-        exit(0);
     } 
-    if (isWin('X')) {
+    else if (isWin('X')) {
         return "Game over: X wins.";
         exit(0);
     }
-    if (isWin('O')) {
+    else if (isWin('O')) {
         return "Game over: O wins.";
         exit(0);
     }
 
-    if (isDraw()) {
+    else if (isDraw()) {
         return "Game over: Draw.";
         exit(0);
     }
-    else {
-       if(currentPlayer == 'X')
-       {
+    else if(currentPlayer == 'X')
+    {
         return "Game in progress: O's turn.";
-        }
-        else{
-            return "Game in progress: X's turn.";
-        }
     }
+    else{
+        return "Game in progress: X's turn.";
+    }
+    
 }
