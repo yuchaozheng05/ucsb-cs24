@@ -16,8 +16,8 @@ class Board{
 
     public:
       Board();
-      bool whowin(char player)const;
-      bool isDraw()const;
+      bool whowin(char player);
+      bool isDraw();
       char getsquare(int row, int col)const;
       std::string printresult();
       void maketurn(Move& move);
