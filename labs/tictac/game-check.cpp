@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
         std::cout << board.printresult() << '\n';
         break;
       }
-      if(count ==9)
+      if(count == 9)
       {
         std::cout << board.printresult() << '\n';
         break;
