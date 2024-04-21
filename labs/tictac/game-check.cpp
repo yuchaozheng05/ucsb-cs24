@@ -6,16 +6,11 @@
 int main() {
     Board board;
     std::string line;
-    bool gameOver = false;
     while (std::getline(std::cin,line))
     {
         try{
             Move move(line);
             board.makeTurn(move);
-            if (board.printresult().find("Game over") != std::string::npos) {
-                gameOver = true;
-                break;
-            }
         }
         catch(const ParseError& e)
         {
@@ -28,9 +23,7 @@ int main() {
             return 2;
         }
     }
-    if (!gameOver) {
-        std::cout << board.printresult() << '\n';
-    }
+    std::cout << board.printresult() << '\n';
     return 0;
 
 }
