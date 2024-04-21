@@ -6,17 +6,21 @@
 // I recommended writing a Board class to manage your game state.
 // Here's some space for the class definition; member functions go in Board.cpp.
 
-class Board {
-private:
-    char board[3][3]; 
-    int moveCount;   
-    char currentPlayer; 
-    bool isWin(char player) const;
-    bool isDraw() const;
+class Board{
+    private:
+      char board[3][3];
+      int movecount;
+      char currentplayer;
+      bool draw;
 
-public:
-    Board();
-    void makeMove(const Move &move);
-    std::string printResult() const;
+
+    public:
+      Board();
+      bool whowin(char player);
+      bool isDraw();
+      std::string printresult();
+      void maketurn(Move& move);
+
+
 };
 #endif
