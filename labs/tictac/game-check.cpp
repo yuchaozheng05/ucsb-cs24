@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
           std::cout<<"Game in progress: New game.\n";
           return 0;
         }
-        if(count<=9)
+        if(count!=0)
         {
            std::cout << board.printresult() << '\n';
            return 0;
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
             return 2;
         }
     }
-    std::cout << board.printresult() << '\n';
+
     return 0;
 
 }
