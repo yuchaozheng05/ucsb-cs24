@@ -76,6 +76,6 @@ int main(int argc, char** argv) {
         break;
       }
     }
-    return 2;
+    return 0;
 
 }
