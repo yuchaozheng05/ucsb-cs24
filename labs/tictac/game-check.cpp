@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
           std::cout<<"Game in progress: New game.\n";
           return 0;
         }
-        if(count!=0)
+         if(count<=9)
         {
            std::cout << board.printresult() << '\n';
            return 0;
@@ -36,7 +36,6 @@ int main(int argc, char** argv) {
             Move move(line);
             board.makeTurn(move);
             count +=1;
-  
         }
         catch(const ParseError& e)
         {
@@ -57,6 +56,22 @@ int main(int argc, char** argv) {
                 std::cout<<"Invalid move.\n";
               }
             return 2;
+        }
+        if(board.whoWins('X'))
+        {
+          std::cout << board.printresult() << '\n';
+          exit(0);
+        }
+        if(board.whoWins('O'))
+        {
+          std::cout << board.printresult() << '\n';
+          exit(0);
+        }
+        if(count==9)
+        {
+          std::cout << board.printresult() << '\n';
+          exit(0);
+      
         }
     }
 
