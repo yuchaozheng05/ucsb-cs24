@@ -75,6 +75,9 @@ bool Board::whoWins(char player)const{
    
     return false;
 }
+bool Board::Gameover() const {
+    return whoWins('X') || whoWins('O') || isDraw();
+}
 std::string Board::printresult()const{ 
     if(movecount == 0)
     {
@@ -83,14 +86,17 @@ std::string Board::printresult()const{
     else if(whoWins('X'))
     {
         return "Game over: X wins.";
+        exit(1);
     }
     else if(whoWins('O'))
     {
         return "Game over: O wins.";
+        exit(1);
     }
     else if(isDraw())
     {
         return "Game over: Draw.";
+        exit(1);
     }
     else if(currentPlayer =='X'){
         return "Game in progess: X's turn.";

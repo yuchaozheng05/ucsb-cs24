@@ -23,6 +23,10 @@ int main() {
             std::cout<<"Invalid move.\n";
             return 2;
         }
+        if (board.Gameover()) {
+            break;
+        }
+
     }
     std::cout << board.printresult() << '\n';
     return 0;
