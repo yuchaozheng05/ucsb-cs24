@@ -1,4 +1,3 @@
-
 #include "Board.h"
 #include "Errors.h"
 #include "Move.h"
@@ -7,12 +6,16 @@
 int main() {
     Board board;
     std::string line;
-    std::getline(std::cin,line);
-    while (!line.empty())
+    bool gameOver = false;
+    while (std::getline(std::cin,line))
     {
         try{
             Move move(line);
-            board.maketurn(move);
+            board.makeTurn(move);
+            if (board.printresult().find("Game over") != std::string::npos) {
+                gameOver = true;
+                break;
+            }
         }
         catch(const ParseError& e)
         {
@@ -24,9 +27,10 @@ int main() {
             std::cout<<"Invalid move.\n";
             return 2;
         }
-        std::getline(std::cin,line);
     }
-    std::cout << board.printresult()<<'\n';
+    if (!gameOver) {
+        std::cout << board.printresult() << '\n';
+    }
     return 0;
 
 }

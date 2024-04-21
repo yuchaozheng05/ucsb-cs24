@@ -13,7 +13,7 @@ Board::Board(){
         }
     }
 }
-void Board::maketurn(Move& move){
+void Board::makeTurn(Move& move){
     int number = move.number;
     int row = move.row;
     int column = move.column;
@@ -41,18 +41,18 @@ void Board::maketurn(Move& move){
     }
 
 }
-bool Board::isDraw(){
+bool Board::isDraw()const{
     if(movecount==9)
     {
         return true;
     }
     return false;
 }
-char Board::getsquare(int row, int col)const
+char Board::getSquare(int row, int col)const
 {
     return board[row][col];
 }
-bool Board::whowin(char player){
+bool Board::whoWins(char player){
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
@@ -80,11 +80,11 @@ std::string Board::printresult(){
     {
         return "Game in progress: New game.";
     }
-    else if(whowin('X'))
+    else if(whoWins('X'))
     {
         return "Game over: X wins.";
     }
-    else if(whowin('O'))
+    else if(whoWins('O'))
     {
         return "Game over: O wins.";
     }
