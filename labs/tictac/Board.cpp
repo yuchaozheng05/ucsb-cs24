@@ -83,17 +83,17 @@ std::string Board::printresult()const{
     else if(whoWins('X'))
     {
         return "Game over: X wins.";
-        exit(1);
+        exit(0);
     }
     else if(whoWins('O'))
     {
         return "Game over: O wins.";
-        exit(1);
+        exit(0);
     }
     else if(isDraw())
     {
         return "Game over: Draw.";
-        exit(1);
+        exit(0);
     }
     else if(currentPlayer =='X'){
         return "Game in progess: O's turn.";
