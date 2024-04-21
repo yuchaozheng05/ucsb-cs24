@@ -1,4 +1,3 @@
-
 #include "Errors.h"
 #include "Board.h"
 #include <iostream>
@@ -25,15 +24,13 @@ void Board::makeTurn(Move& move){
     if (number != movecount+1) {
         throw InvalidMove("Invalid move number.");
     }
-    if(movecount!=0)
+    if(movecount>0)
     {
         if(player!=currentPlayer)
         {
             throw InvalidMove("Player repeat");
         }
     }
-    board[row][column] = player;
-    movecount++;
     currentPlayer = player;
     if(currentPlayer == 'X')
     {
@@ -42,6 +39,8 @@ void Board::makeTurn(Move& move){
     else{
         currentPlayer ='X';
     }
+    board[row][column] = player;
+    movecount++;
 
 }
 bool Board::isDraw()const{
@@ -82,6 +81,7 @@ std::string Board::printresult()const{
     if(movecount == 0)
     {
         return "Game in progress: New game.";
+        exit(0);
     }
     else if(whoWins('X'))
     {
@@ -99,10 +99,12 @@ std::string Board::printresult()const{
         exit(0);
     }
     else if(currentPlayer =='X'){
-        return "Game in progess: X's turn.";
+        return "Game in progess: O's turn.";
+        exit(0);
     }
     else{
-        return "Game in progess: O's turn.";
+        return "Game in progess: X's turn.";
+        exit(0);
     }
 
 
