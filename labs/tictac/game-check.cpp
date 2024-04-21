@@ -11,7 +11,6 @@ int main() {
         try{
             Move move(line);
             board.maketurn(move);
-            std::cout << board.printresult()<<'\n';
         }
         catch(const ParseError& e)
         {
@@ -24,6 +23,7 @@ int main() {
             return 2;
         }
     }
+    std::cout << board.printresult();
     return 0;
 
 }

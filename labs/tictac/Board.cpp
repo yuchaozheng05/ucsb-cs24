@@ -89,13 +89,13 @@ bool Board::whowin(char player)const{
 std::string Board::printresult(){
     if(movecount == 0)
     {
-        return "Game in progress: New game.";
+        return "Game in progress: New game.\n";
     }
     else if(currentPlayer =='X'){
-        return "Game in progess: O's turn.";
+        return "Game in progess: O's turn.\n";
     }
     else{
-        return "Game in progess: X's turn.";
+        return "Game in progess: X's turn.\n";
     }
 
 }
