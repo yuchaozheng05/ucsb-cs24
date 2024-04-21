@@ -26,9 +26,10 @@ int main(int argc, char** argv) {
           std::cout<<"Game in progress: New game.\n";
           return 0;
         }
-         if(count<=9)
+         if(count<9 && !board.isGameOver())
         {
            std::cout << board.printresult() << '\n';
+           return 0;
         }
       }
         try{
@@ -56,19 +57,12 @@ int main(int argc, char** argv) {
               }
             return 2;
         }
-        if(board.whoWins('X'))
+        if(board.isGameOver())
         {
           std::cout << board.printresult() << '\n';
+          return 0;
         }
-        if(board.whoWins('O'))
-        {
-          std::cout << board.printresult() << '\n';
-        }
-        if(count==9)
-        {
-          std::cout << board.printresult() << '\n';
-      
-        }
+       
     }
 
     return 0;
