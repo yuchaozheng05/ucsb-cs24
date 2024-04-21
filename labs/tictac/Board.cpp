@@ -78,8 +78,8 @@ bool Board::whoWins(char player)const{
 std::string Board::printresult()const{
    if (whoWins('X')) {
         return "Game over: X wins.";
-    } else if (whoWins('0')) {
-        return "Game over: 0 wins.";
+    } else if (whoWins('O')) {
+        return "Game over: O wins.";
     } else if (isDraw()) {
         return "Game over: Draw.";
     } else if (movecount == 0) {
