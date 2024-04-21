@@ -12,16 +12,14 @@ int main() {
             Move move(line);
             board.makeTurn(move);
         }
-        catch(const ParseError& e)
-        {
-            std::cout<<"Parse error.\n";
-            return 1;    
-        }
-        catch(const InvalidMove& e)
-        {
-            std::cout<<"Invalid move.\n";
-            return 2;
-        }
+        catch(const ParseError& e) {
+             std::cout << "Parse error: " << e.what() << '\n';
+             return 1;
+             }
+catch(const InvalidMove& e) {
+    std::cout << "Invalid move: " << e.what() << '\n';
+    return 2;
+}
     }
     std::cout << board.printresult() << '\n';
     return 0;
