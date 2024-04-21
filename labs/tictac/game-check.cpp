@@ -15,12 +15,12 @@ int main() {
         }
         catch(const ParseError& e)
         {
-            std::cout<<"Parse error. "<<e.what()<<'\n';
+            std::cout<<"Parse error.\n";
             return 1;    
         }
         catch(const InvalidMove& e)
         {
-            std::cout<<"Invalid move. "<<e.what()<<'\n';
+            std::cout<<"Invalid move.\n";
             return 2;
         }
     }
