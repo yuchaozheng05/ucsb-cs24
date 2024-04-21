@@ -1,3 +1,4 @@
+
 #include "Errors.h"
 #include "Board.h"
 #include <iostream>
@@ -12,7 +13,11 @@ Board::Board(){
         }
     }
 }
-void Board::maketurn(int number, int row, int column, char player){
+void Board::maketurn(Move& move){
+    int number = move.number;
+    int row = move.row;
+    int column = move.column;
+    char player = move.player;
     if (board[row][column] != ' ') {
         throw InvalidMove("Square already taken.");
     }
@@ -20,15 +25,13 @@ void Board::maketurn(int number, int row, int column, char player){
     if (number != movecount + 1) {
         throw InvalidMove("Invalid move number.");
     }
-    if (player != 'X' && player != 'O') {
-        throw InvalidMove("Invalid player.");
-    }
 
     if (movecount != 0 && player == currentPlayer) {
-        throw InvalidMove("Players not alternate.");
+        throw InvalidMove("player repeat");
     }
 
-    board[row][column] = currentPlayer;
+    board[row][column] = player;
+    movecount++;
     if(currentPlayer == 'X')
     {
         currentPlayer ='O';
@@ -36,10 +39,9 @@ void Board::maketurn(int number, int row, int column, char player){
     else{
         currentPlayer ='X';
     }
-    movecount++;
 
 }
-bool Board::isDraw()const{
+bool Board::isDraw(){
     if(movecount==9)
     {
         return true;

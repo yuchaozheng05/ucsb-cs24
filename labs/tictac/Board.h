@@ -1,5 +1,3 @@
-
-
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -13,14 +11,15 @@ class Board{
       char board[3][3];
       int movecount;
       char currentPlayer;
-      
+
+
     public:
       Board();
       bool whowin(char player);
-      bool isDraw()const;
+      bool isDraw();
       char getsquare(int row, int col)const;
       std::string printresult();
-      void maketurn(int number, int row, int col, char player);
+      void maketurn(Move& move);
 
 
 };
