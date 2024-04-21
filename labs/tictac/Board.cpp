@@ -32,7 +32,21 @@ void Board::maketurn(Move& move){
 
     board[row][column] = player;
     movecount++;
-
+    if(whowin('X'))
+    {
+        std::cout<< "Game over: X wins.\n";
+        exit(1);
+    }
+   if(whowin('O'))
+    {
+        std::cout<< "Game over: O wins.\n";
+        exit(1);
+    }
+    if(isDraw())
+    {
+        std::cout<< "Game over: Draw.\n";
+        exit(1);
+    }
     if(currentPlayer == 'X')
     {
         currentPlayer ='O';
@@ -76,18 +90,6 @@ std::string Board::printresult(){
     if(movecount == 0)
     {
         return "Game in progress: New game.";
-    }
-    else if(whowin('X'))
-    {
-        return "Game over: X wins.";
-    }
-    else if(whowin('O'))
-    {
-        return "Game over: O wins.";
-    }
-    else if(isDraw())
-    {
-        return "Game over: Draw.";
     }
     else if(currentPlayer =='X'){
         return "Game in progess: O's turn.";
