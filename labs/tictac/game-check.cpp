@@ -13,10 +13,10 @@ int main() {
             board.makeMove(move.number, move.player, move.row, move.column);
             board.printResult();
         } catch (const ParseError& e) {
-            std::cout << "Parse error: \n" ;
+            std::cout << "Parse error: "<<e.what()<<'\n' ;
             return 1;
         } catch (const InvalidMove& e) {
-            std::cerr << "Invalid move: \n";
+            std::cout << "Invalid move: "<<e.what()<<'\n';
             return 2;
         }
     }

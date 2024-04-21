@@ -11,12 +11,12 @@ private:
     char board[3][3]; 
     int moveCount;   
     char currentPlayer; 
-    bool isWin(char player) const;
-    bool isDraw() const;
 
 public:
     Board();
     void makeMove(int number, char player, int row, int column);
-    void printResult() const;
+    bool isWin(char player);
+    bool isDraw();
+    std::string printResult();
 };
 #endif
