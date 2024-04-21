@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
          if(count<9 && !board.isGameOver())
         {
            std::cout << board.printresult() << '\n';
-           return 0;
+
         }
       }
         try{
