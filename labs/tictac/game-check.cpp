@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     if(line.empty())
     {
       std::cout << board.printresult() << '\n';
-      exit(1);
+      exit(0);
     }
     try{
         Move move(line);
@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
         }
         else{
           std::cout<<"Parse error.\n";
+          exit(1);
         }
         return 1;    
     }
@@ -45,6 +46,7 @@ int main(int argc, char** argv) {
           }
        else{
           std::cout<<"Invalid move.\n";
+          exit(2);
           }
        return 2;
     }
@@ -52,7 +54,7 @@ int main(int argc, char** argv) {
     if(count ==9)
     {
       std::cout << board.printresult() << '\n';
-      exit(1);
+      exit(0);
     }
   }
     std::cout << board.printresult() << '\n';
