@@ -1,4 +1,3 @@
-
 #include "Board.h"
 #include "Errors.h"
 #include "Move.h"
@@ -18,45 +17,47 @@ int main(int argc, char** argv) {
   std::string line;
   int count =0;
   while (std::getline(std::cin,line))
-  {
-    if(line.empty())
     {
-      std::cout << board.printresult() << '\n';
-      exit(0);
-    }
-    try{
-        Move move(line);
-        board.makeTurn(move);
-    }
-    catch(const ParseError& e)
-     {
-        if(verbose) {
-          std::cout << "Parse error: " << e.what() << '\n';
+      if(line.empty())
+      {
+        if(count == 0)
+        {
+          std::cout<<"Game in progress: New game.\n";
+          return 0;
         }
-        else{
-          std::cout<<"Parse error.\n";
-          exit(1);
+        if(count<=9)
+        {
+           std::cout << board.printresult() << '\n';
+           return 0;
         }
-        return 1;    
+      }
+        try{
+            Move move(line);
+            board.makeTurn(move);
+            count +=1;
+  
+        }
+        catch(const ParseError& e)
+        {
+            if(verbose) {
+              std::cout << "Parse error: " << e.what() << '\n';
+            }
+            else{
+              std::cout<<"Parse error.\n";
+            }
+            return 1;    
+        }
+        catch(const InvalidMove& e)
+        {
+            if(verbose) {
+              std::cout << "InvalidMove: " << e.what() << '\n';
+              }
+              else{
+                std::cout<<"Invalid move.\n";
+              }
+            return 2;
+        }
     }
-    catch(const InvalidMove& e)
-    {
-       if(verbose) {
-         std::cout << "InvalidMove: " << e.what() << '\n';
-          }
-       else{
-          std::cout<<"Invalid move.\n";
-          exit(2);
-          }
-       return 2;
-    }
-    count +=1;
-    if(count ==9)
-    {
-      std::cout << board.printresult() << '\n';
-      exit(0);
-    }
-  }
     std::cout << board.printresult() << '\n';
     return 0;
 
