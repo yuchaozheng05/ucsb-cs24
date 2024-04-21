@@ -15,8 +15,8 @@ private:
 public:
     Board();
     void makeMove(int number, char player, int row, int column);
-    bool isWin(char player);
-    bool isDraw();
-    std::string printResult();
+    bool isWin(char player)const;
+    bool isDraw()const;
+    void printResult()const;
 };
 #endif

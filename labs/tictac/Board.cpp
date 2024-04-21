@@ -13,7 +13,7 @@ Board::Board() {
     moveCount = 0;
 }
 
-bool Board::isWin(char player) {
+bool Board::isWin(char player) const{
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
@@ -37,7 +37,7 @@ bool Board::isWin(char player) {
     return false;
 }
 
-bool Board::isDraw() {
+bool Board::isDraw()const {
     if(moveCount == 9)
     {
         return true;
@@ -70,28 +70,32 @@ void Board::makeMove(int number, char player, int row, int column) {
     }
 }
 
+void Board::printResult() const {
+    if (moveCount == 0) {
+        std::cout << "Game in progress: New game.";
+    } 
+    if (isWin('X')) {
+        std::cout << "Game over: X wins.";
+        exit(0);
+    }
+    if (isWin('O')) {
+        std::cout << "Game over: O wins.";
+        exit(0);
+    }
 
-std::string Board::printResult(){
-    if(moveCount == 0)
-    {
-        return "Game in progress: New game.";
+    if (isDraw()) {
+        std::cout << "Game over: Draw.";
+        exit(0);
     }
-    else if(isWin('X'))
-    {
-        return "Game over: X wins.";
-    }
-    else if(isWin('O'))
-    {
-        return "Game over: O wins.";
-    }
-    else if(isDraw())
-    {
-        return "Game over: Draw.";
-    }
-    else if(currentPlayer =='X'){
-        return "Game in progess: O's turn.";
-    }
-    else{
-        return "Game in progess: X's turn.";
+    else {
+       if(currentPlayer == 'X')
+       {
+        std::cout << "Game in progress: O's turn.\n";
+      
+        }
+        else{
+            std::cout << "Game in progress: X's turn.\n";
+           
+        }
     }
 }

@@ -25,4 +25,4 @@ Board.o: Board.cpp Board.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f  move-check Move Board game-check 
+	rm -f  move-check.o Move.o Board.o game-check.o move-check game-check
