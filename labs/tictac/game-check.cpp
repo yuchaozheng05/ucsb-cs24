@@ -41,13 +41,6 @@ int main(int argc, char** argv) {
             }
             return 2;
         }
-        if(board.isGameover())
-        {
-          if(!line.empty())
-          {
-            return 2;
-          }
-        }
     }
     std::cout << board.printresult()<<'\n';
     return 0;
