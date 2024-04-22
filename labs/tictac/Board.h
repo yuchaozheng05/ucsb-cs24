@@ -12,6 +12,7 @@ class Board{
       int movecount;
       char currentPlayer;
       bool gameover=false;
+      bool isnewgame;
 
 
     public:
