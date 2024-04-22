@@ -12,7 +12,7 @@ Board::Board(){
         }
     }
 }
-void Board::makeTurn(Move& move){
+void Board::maketurn(Move& move){
     int number = move.number;
     int row = move.row;
     int column = move.column;
@@ -21,17 +21,15 @@ void Board::makeTurn(Move& move){
         throw InvalidMove("Square already taken.");
     }
 
-    if (number != movecount+1) {
+    if (number != movecount + 1) {
         throw InvalidMove("Invalid move number.");
     }
-    if(movecount>0)
-    {
-        if(player!=currentPlayer)
-        {
-            throw InvalidMove("Player repeat");
-        }
+
+    if (movecount != 0 && player == currentPlayer) {
+        throw InvalidMove("player repeat");
     }
-    currentPlayer = player;
+
+    board[row][column] = player;
     movecount++;
     if(currentPlayer == 'X')
     {
@@ -40,22 +38,20 @@ void Board::makeTurn(Move& move){
     else{
         currentPlayer ='X';
     }
-    board[row][column] = player;
-
 
 }
-bool Board::isDraw()const{
+bool Board::isDraw(){
     if(movecount==9)
     {
         return true;
     }
     return false;
 }
-char Board::getSquare(int row, int col)const
+char Board::getsquare(int row, int col)const
 {
     return board[row][col];
 }
-bool Board::whoWins(char player)const{
+bool Board::whowin(char player){
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)
@@ -78,35 +74,28 @@ bool Board::whoWins(char player)const{
    
     return false;
 }
-std::string Board::printresult()const{ 
+std::string Board::printresult(){
     if(movecount == 0)
     {
         return "Game in progress: New game.";
-        exit(0);
     }
-    else if(whoWins('X'))
+    else if(whowin('X'))
     {
         return "Game over: X wins.";
-        exit(0);
     }
-    else if(whoWins('O'))
+    else if(whowin('O'))
     {
         return "Game over: O wins.";
-        exit(0);
     }
     else if(isDraw())
     {
         return "Game over: Draw.";
-        exit(0);
     }
     else if(currentPlayer =='X'){
-        return "Game in progess: X's turn.";
-        exit(0);
+        return "Game in progess: O's turn.";
     }
     else{
-        return "Game in progess: O's turn.";
-        exit(0);
+        return "Game in progess: X's turn.";
     }
-
 
 }
