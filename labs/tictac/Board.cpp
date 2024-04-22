@@ -25,11 +25,17 @@ void Board::maketurn(Move& move){
         throw InvalidMove("Invalid move number.");
     }
 
-    if (movecount != 0 && player == currentPlayer) {
+    if (movecount != 0 && player != currentPlayer) {
         throw InvalidMove("player repeat");
     }
-
-    board[row][column] = player;
+    if(movecount>0)
+    {
+        if(player!=currentPlayer)
+        {
+            throw InvalidMove("Player repeat");
+        }
+    }
+    currentPlayer = player;
     movecount++;
     if(currentPlayer == 'X')
     {
@@ -38,6 +44,7 @@ void Board::maketurn(Move& move){
     else{
         currentPlayer ='X';
     }
+    board[row][column] = player;
 
 }
 bool Board::isDraw(){
