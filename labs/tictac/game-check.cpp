@@ -18,7 +18,6 @@ int main(int argc, char** argv) {
         try{
             Move move(line);
             board.maketurn(move);
-            return 0;
         }
         catch(const ParseError& e)
         {
