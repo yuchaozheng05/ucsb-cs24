@@ -13,11 +13,13 @@ int main(int argc, char** argv) {
     }
     Board board;
     std::string line;
+    int count =0;
     while (std::getline(std::cin,line))
     {
         try{
             Move move(line);
             board.maketurn(move);
+            count +=1;
         }
         catch(const ParseError& e)
         {
@@ -41,6 +43,10 @@ int main(int argc, char** argv) {
             }
             return 2;
         }
+    }
+    if(count ==0)
+    {
+       std::cout << board.printresult()<<'\n';
     }
     std::cout << board.printresult()<<'\n';
     return 0;
