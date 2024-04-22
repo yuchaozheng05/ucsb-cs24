@@ -16,7 +16,6 @@ int main(int argc, char** argv) {
     int count =0;
     if (!std::getline(std::cin, line) && count ==0) {
       std::cout << "Game in progress: New game.\n";
-      exit(0);
       return 0; 
 }
     while (std::getline(std::cin,line))
