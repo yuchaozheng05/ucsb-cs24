@@ -17,7 +17,7 @@ void Board::maketurn(Move& move){
     int row = move.row;
     int column = move.column;
     char player = move.player;
-    if((row!=0 && row !=1 && row!=2) || (column!=0 && column!=1 && column!=2))
+    if((row!=0 || row !=1 || row!=2) || (column!=0 || column!=1 || column!=2))
     {
         throw InvalidMove("invalid row or col");
     }
