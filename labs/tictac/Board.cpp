@@ -55,7 +55,7 @@ void Board::maketurn(Move& move){
     board[row][column] = player;
 
 }
-bool Board::isDraw(){
+bool Board::isDraw()const{
     if(movecount==9)
     {
         return true;
@@ -66,7 +66,10 @@ char Board::getsquare(int row, int col)const
 {
     return board[row][col];
 }
-bool Board::whowin(char player){
+bool Board::isGameover()const{
+    return whowin('X') || whowin('O') || isDraw();
+}
+bool Board::whowin(char player)const{
     for(int i=0; i<3;i++)
     {
         if(board[i][0]==player && board[i][1]==player && board[i][2]==player)

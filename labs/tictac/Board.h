@@ -15,11 +15,12 @@ class Board{
 
     public:
       Board();
-      bool whowin(char player);
-      bool isDraw();
+      bool whowin(char player)const;
+      bool isDraw()const;
       char getsquare(int row, int col)const;
       std::string printresult();
       void maketurn(Move& move);
+      bool isGameover()const;
 
 
 };
