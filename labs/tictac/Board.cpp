@@ -105,12 +105,20 @@ bool Board::whowin(char player)const{
 std::string Board::printresult(){
     if (isnewgame) {
         return "Game in progress: New game.";  
-    } else if (whowin('X')) {
+        exit(0);
+    } 
+    else if (whowin('X')) {
         return "Game over: X wins.";  
+    }
+    else if(whowin('O'))
+    {
         return "Game over: O wins.";  
-    } else if (isDraw()) {
+    } 
+    else if (isDraw()) {
         return "Game over: Draw.";  
-    } else {
+        exit(0);
+    } 
+    else {
         return "Game in progress: " + std::string(currentPlayer == 'X' ? "X's turn." : "O's turn.");  
     }
 }
