@@ -11,6 +11,7 @@ Board::Board(){
             board[i][j]=' ';
         }
     }
+    isnewgame=true;
 }
 void Board::maketurn(Move& move){
     if(gameover)
@@ -49,6 +50,7 @@ void Board::maketurn(Move& move){
     }
     currentPlayer = player;
     movecount++;
+    isnewgame=false;
     if(currentPlayer == 'X')
     {
         currentPlayer ='O';
@@ -101,7 +103,7 @@ bool Board::whowin(char player)const{
     return false;
 }
 std::string Board::printresult(){
-    if(movecount == 0)
+    if(isnewgame)
     {
         return "Game in progress: New game.";
         exit(0);
