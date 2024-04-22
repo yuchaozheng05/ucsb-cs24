@@ -16,6 +16,11 @@ int main(int argc, char** argv) {
     int count =0;
     while (std::getline(std::cin,line))
     {
+        if(line.empty())
+        {
+          std::cout << board.printresult()<<'\n';
+          return 0;
+        }
         try{
             Move move(line);
             board.maketurn(move);
