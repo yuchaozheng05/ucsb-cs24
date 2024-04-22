@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
         if(line.empty())
         {
           std::cout << board.printresult()<<'\n';
-          return 0;
+          
         }
         try{
             Move move(line);
