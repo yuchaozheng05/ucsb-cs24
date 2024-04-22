@@ -85,24 +85,30 @@ std::string Board::printresult(){
     if(movecount == 0)
     {
         return "Game in progress: New game.";
+        exit(0);
     }
     else if(whowin('X'))
     {
         return "Game over: X wins.";
+        exit(0);
     }
     else if(whowin('O'))
     {
         return "Game over: O wins.";
+        exit(0);
     }
     else if(isDraw())
     {
         return "Game over: Draw.";
+        exit(0);
     }
     else if(currentPlayer =='X'){
         return "Game in progess: O's turn.";
+        exit(0);
     }
     else{
         return "Game in progess: X's turn.";
+        exit(0);
     }
 
 }
