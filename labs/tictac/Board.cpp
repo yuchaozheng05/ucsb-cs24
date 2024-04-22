@@ -60,6 +60,7 @@ void Board::maketurn(Move& move){
     if(whowin(player))
     {
         gameover=true;
+        std::cout<<"Game over: "<<player<<" wins.\n";
     }
 
 }
@@ -104,16 +105,6 @@ std::string Board::printresult(){
     if(movecount == 0)
     {
         return "Game in progress: New game.";
-        exit(0);
-    }
-    else if(whowin('X'))
-    {
-        return "Game over: X wins.";
-        exit(0);
-    }
-    else if(whowin('O'))
-    {
-        return "Game over: O wins.";
         exit(0);
     }
     else if(isDraw())
