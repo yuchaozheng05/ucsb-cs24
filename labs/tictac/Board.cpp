@@ -13,6 +13,10 @@ Board::Board(){
     }
 }
 void Board::maketurn(Move& move){
+    if(gameover)
+    {
+        throw InvalidMove("game is over");
+    }
     int number = move.number;
     int row = move.row;
     int column = move.column;
@@ -53,6 +57,10 @@ void Board::maketurn(Move& move){
         currentPlayer ='X';
     }
     board[row][column] = player;
+    if(whowin(player))
+    {
+        gameover=true;
+    }
 
 }
 bool Board::isDraw()const{
