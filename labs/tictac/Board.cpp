@@ -122,11 +122,11 @@ std::string Board::printresult(){
         exit(0);
     }
     else if(currentPlayer =='X'){
-        return "Game in progess: X's turn.";
+        return "Game in progess: O's turn.";
         exit(0);
     }
     else{
-        return "Game in progess: O's turn.";
+        return "Game in progess: X's turn.";
         exit(0);
     }
 
