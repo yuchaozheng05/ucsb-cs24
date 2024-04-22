@@ -48,7 +48,6 @@ int main(int argc, char** argv) {
     {
        std::cout << board.printresult()<<'\n';
     }
-    std::cout << board.printresult()<<'\n';
     return 0;
 
 }
