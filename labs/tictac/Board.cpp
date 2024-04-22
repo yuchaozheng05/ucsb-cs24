@@ -109,10 +109,12 @@ std::string Board::printresult(){
     } 
     else if (whowin('X')) {
         return "Game over: X wins.";  
+        exit(0);
     }
     else if(whowin('O'))
     {
         return "Game over: O wins.";  
+        exit(0);
     } 
     else if (isDraw()) {
         return "Game over: Draw.";  
