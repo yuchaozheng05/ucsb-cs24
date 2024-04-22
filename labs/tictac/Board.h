@@ -11,6 +11,7 @@ class Board{
       char board[3][3];
       int movecount;
       char currentPlayer;
+      bool gameover;
 
 
     public:
