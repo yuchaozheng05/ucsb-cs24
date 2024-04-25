@@ -193,16 +193,16 @@ std::string Tree::lookup(Node* node, size_t index, size_t& currentindex)const
 }
 void Tree::printhelp(Node* node)const
 {
-    if(node == nullptr)
-    {
-        std::cout<<"-";
-        exit(0);
-    }
-    
+    return;
 }
 void Tree::print()const
 {
-    printhelp(root);
+    Node* temp = root;
+    if(temp == nullptr)
+    {
+        std::cout<<"-";
+    }
+    std::cout<<std::endl;
 }
 void Tree::remove(size_t index)
 {
