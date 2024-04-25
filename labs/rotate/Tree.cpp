@@ -128,7 +128,7 @@ int Tree::inbalanced(Node* node)
 Node* Tree::reblanced(Node* node)
 {
     int balance = inbalanced(node);
-    if (balance > 1) {
+    if (balance >0) {
         int balance_ = inbalanced(node->right);
         if (balance_ < 0) 
         {
@@ -136,7 +136,7 @@ Node* Tree::reblanced(Node* node)
         }
         return Left(node);
     }
-    if (balance < -1) {
+    if (balance < 0) {
         int balance_ = inbalanced(node->left);
         if (balance_ > 0) 
         {
