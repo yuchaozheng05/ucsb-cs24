@@ -193,6 +193,11 @@ std::string Tree::lookup(Node* node, size_t index, size_t& currentindex)const
 }
 void Tree::printhelp(Node* node)const
 {
+    if(count()==1)
+    {
+        std::cout<<node->value;
+        return;
+    }
     return;
 }
 void Tree::print()const
@@ -202,6 +207,7 @@ void Tree::print()const
     {
         std::cout<<"-";
     }
+    printhelp(temp);
     std::cout<<std::endl;
 }
 void Tree::remove(size_t index)
