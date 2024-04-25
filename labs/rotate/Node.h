@@ -5,6 +5,13 @@
 
 struct Node {
   // TODO!
+  std::string value;
+  Node* left;
+  Node* right;
+  int weight;
+  Node(const std::string& value);
+ 
+
 };
 
 #endif
