@@ -202,9 +202,7 @@ void Tree::printhelp(Node* node)const
 }
 void Tree::print()const
 {
-    std::cout<<"(";
     printhelp(root);
-    std::cout<<")";
     std::cout<<"\n";
 }
 void Tree::remove(size_t index)
