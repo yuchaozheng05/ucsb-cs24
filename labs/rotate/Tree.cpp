@@ -203,7 +203,6 @@ void Tree::printhelp(Node* node)const
 void Tree::print()const
 {
     printhelp(root);
-    std::cout<<"\n";
 }
 void Tree::remove(size_t index)
 {
