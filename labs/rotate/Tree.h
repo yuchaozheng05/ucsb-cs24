@@ -3,19 +3,31 @@
 
 #include "Node.h"
 
+
 class Tree {
   // Member Variables
 
   // Private Helper Functions
-  Node* head;
+  Node* root;
   void clear(Node*& node);
   size_t count(Node* node)const;
   bool contains(Node* node, const std::string& s)const;
-  // Node* insert(Node* node, const std::string& s);
-  //void print(Node* node)const;
-  //Node* remove(Node* node, size_t index, size_t currentindex, bool& done);
+  Node* insert(Node* node, const std::string& s);
+  void print(Node* node)const;
+  Node* remove(Node* node, size_t index, size_t currentindex, bool& done);
   int countweight(Node* node)const;
   size_t find(Node* node, const std::string&s, size_t index)const;
+
+  Node* reblanced(Node* node);
+  int inbalanced(Node* node);
+  Node* Left(Node* node);
+  Node* right(Node* node);
+  std::string lookup(Node*node, size_t index, size_t& currentindex)const;
+  void printhelp(Node* node)const;
+  void printleft(Node* node)const;
+  void printright(Node* node)const;
+
+
 
 
 
@@ -24,14 +36,15 @@ public:
   ~Tree();
 
   // Public Member Functions
+  void        inOrder()const;
   void        clear();
   size_t      count() const;
   bool        contains(const std::string& s) const;
   size_t      find(const std::string& s) const;
-  //void        insert(const std::string& s);
-  //std::string lookup(size_t index) const;
-  //void        print() const;
-  //void        remove(size_t index);
+  void        insert(const std::string& s);
+  std::string lookup(size_t index) const;
+  void        print() const;
+  void        remove(size_t index);
 };
 
 #endif

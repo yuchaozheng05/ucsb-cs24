@@ -5,5 +5,6 @@ Node::Node(const std::string& val){
     value = val;
     left=nullptr;
     right=nullptr;
+    next = nullptr;
     weight =1;
 }

@@ -5,14 +5,13 @@ CXX      = g++
 
 all: test
 
-test: test.o Tree.o
+test: test.o Tree.o Node.o
 	${CXX} $(CXXFLAGS) -o $@ $+
-
 
 test.o: test.cpp Tree.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
-Tree.o: Tree.cpp Tree.h Node.o
+Tree.o: Tree.cpp Tree.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 Node.o: Node.cpp Node.h

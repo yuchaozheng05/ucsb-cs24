@@ -6,8 +6,14 @@
 
 int main() {
   Tree tree;
-
   // Do tree things!
+  tree.insert("a");
+  tree.insert("b");
+  tree.insert("c");
+  tree.insert("d");
+  tree.insert("e");
+  tree.insert("f");
 
+  tree.print();
   return 0;
 }
