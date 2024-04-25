@@ -105,15 +105,17 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         return new Node(s);
     }
-    if(s < node->value)
+    else if(s < node->value)
     {
         node->left = insert(node->left, s);
+        return reblanced(node);
     }
-    if(s > node->value)
+    else if(s > node->value)
     {
         node->right = insert(node->right,s);
+        return reblanced(node);
     }
-    return node;
+     return reblanced(node);
 }
 void Tree::insert(const std::string& s)
 {
