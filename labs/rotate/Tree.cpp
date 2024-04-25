@@ -113,7 +113,7 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         node->right = insert(node->right,s);
     }
-    return reblanced(node);
+    return node;
 }
 void Tree::insert(const std::string& s)
 {
