@@ -24,8 +24,7 @@ class Tree {
   Node* right(Node* node);
   std::string lookup(Node*node, size_t index, size_t& currentindex)const;
   void printhelp(Node* node)const;
-  void printleft(Node* node)const;
-  void printright(Node* node)const;
+
 
 
 

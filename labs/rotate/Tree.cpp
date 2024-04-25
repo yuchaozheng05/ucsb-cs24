@@ -191,40 +191,14 @@ std::string Tree::lookup(Node* node, size_t index, size_t& currentindex)const
     currentindex++;
     return lookup(node->right, index, currentindex);
 }
-void Tree::printleft(Node* node)const
-{
-    if(node == nullptr)
-    {
-        return;
-    }
-    printleft(node->left);
-    std::cout << " " << node->value << " ";
-}
-void Tree::printright(Node* node)const
-{
-    if(node==nullptr)
-    {
-        return;
-    }
-    std::cout << " " << node->value << " ";
-    printright(node->right);
-}
 void Tree::printhelp(Node* node)const
 {
     if(node == nullptr)
     {
         std::cout<<"-";
-        return;
+        exit(0);
     }
-    std::cout<<"(";
-    printleft(node->left);
-    std::cout<<")";
-    std::cout<<" "<<node->value<<" ";
-    std::cout<<"(-";
-    printright(node->right);
-    std::cout<<")";
-
-
+    
 }
 void Tree::print()const
 {
