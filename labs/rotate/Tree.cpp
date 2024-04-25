@@ -103,7 +103,6 @@ Node* Tree::insert(Node* node, const std::string& s)
 {
     if(node == nullptr)
     {
-       
         return new Node(s);
     }
     if(s < node->value)
@@ -191,26 +190,59 @@ std::string Tree::lookup(Node* node, size_t index, size_t& currentindex)const
     currentindex++;
     return lookup(node->right, index, currentindex);
 }
-void Tree::printhelp(Node* node)const
+std::string Tree::printhelp(Node* node)const
 {
-    if(count()==1)
+    if(node==nullptr)
     {
-        std::cout<<node->value;
-        return;
+        return "-";
     }
-    return;
+    if(!node->left && !node->right)
+    {
+        return node->value;
+    }
+    return "("+printhelp(node->left) +" "+ node->value +" "+ printhelp(node->right)+")";
+
 }
 void Tree::print()const
 {
     Node* temp = root;
-    if(temp == nullptr)
-    {
-        std::cout<<"-";
-    }
-    printhelp(temp);
+    std::cout<<printhelp(temp);
     std::cout<<std::endl;
+}
+Node* Tree::removehelp(Node* node, size_t index)
+{
+    if((node->left == nullptr)&& node->right == nullptr)
+    {
+        Node*temp = node;
+        delete temp;
+        return node;
+    }
+    return nullptr;
 }
 void Tree::remove(size_t index)
 {
-    lookup(index);
+    Node* temp = root;
+    size_t num = count();
+    if(index>=num)
+    {
+        throw std::out_of_range("index out of range");
+    }
+    removehelp(temp, index);
+}
+std::string Tree::findsmallest(Node* node)
+{
+    if(node==NULL)
+    {
+        return " ";
+    }
+    else
+    {
+        if(node->left != NULL)
+        {
+            return findsmallest(node->left);
+        }
+        else{
+            return node->value;
+        }
+    }
 }
