@@ -13,7 +13,7 @@ class Tree {
   size_t count(Node* node)const;
   bool contains(Node* node, const std::string& s)const;
   Node* insert(Node* node, const std::string& s);
-  void print(Node* node)const;
+  std::string print(Node* node)const;
   Node* remove(Node* node, size_t index, size_t currentindex, bool& done);
   int countweight(Node* node)const;
   size_t find(Node* node, const std::string&s, size_t index)const;
@@ -23,7 +23,9 @@ class Tree {
   Node* Left(Node* node);
   Node* right(Node* node);
   std::string lookup(Node*node, size_t index, size_t& currentindex)const;
-  void printhelp(Node* node)const;
+  std::string printhelp(Node* node)const;
+  Node* removehelp(Node* node, size_t index);
+  std::string findsmallest(Node* node);
 
 
 
