@@ -108,12 +108,10 @@ Node* Tree::insert(Node* node, const std::string& s)
     else if(s < node->value)
     {
         node->left = insert(node->left, s);
-        return reblanced(node);
     }
     else if(s > node->value)
     {
         node->right = insert(node->right,s);
-        return reblanced(node);
     }
      return reblanced(node);
 }
@@ -129,29 +127,21 @@ int Tree::inbalanced(Node* node)
 Node* Tree::reblanced(Node* node)
 {
     int balance = inbalanced(node);
-        if (std::abs(balance) > 1) { // Check if rebalancing is needed
-            // Right heavy case
-            if (balance < -1) {
-                // Right-Left case
-                if (inbalanced(node->right) > 0) {
-                    node->right = right(node->right);
-                }
-                // Right-Right case
-                return Left(node);
-            }
-            // Left heavy case
-            if (balance > 1) {
-                // Left-Right case
-                if (inbalanced(node->left) < 0) {
-                    node->left = Left(node->left);
-                }
-                // Left-Left case
-                return right(node);
+    if (balance > 1) {
+            int leftBalance = inbalanced(node->left);
+            if (leftBalance < 0) {
+                node->left = Left(node->left);
             }
         }
-        return node; // No rotation needed
+        if (balance < -1) {
+            int rightBalance = inbalanced(node->right);
+            if (rightBalance > 0) {
+                node->right = right(node->right);
+            }
+        }
+        return node;
 }
-Node* Tree::right(Node* temp)
+Node* Tree::right(Node* temp)//if left heavy
 {
     Node* a = temp->left;
     Node* second= a->right;
@@ -159,7 +149,7 @@ Node* Tree::right(Node* temp)
     temp->left = second;
     return a;
 }
-Node* Tree::Left(Node* temp)
+Node* Tree::Left(Node* temp)//if right heavy
 {
     Node* a = temp->right;
     Node* second= a->left;
