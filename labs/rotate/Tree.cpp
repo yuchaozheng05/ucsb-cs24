@@ -123,42 +123,48 @@ void Tree::insert(const std::string& s)
 }
 int Tree::inbalanced(Node* node)
 {
-    return countweight(node->right) - countweight(node->left);
+    int unbalance =  countweight(node->left) - countweight(node->right);
+    return unbalance;
 }
 Node* Tree::reblanced(Node* node)
 {
     int balance = inbalanced(node);
-    if (balance >=2) {
-        int balance_ = inbalanced(node->right);
-        if (balance_ >=2) 
-        {
-            node->right = right(node->right);
+        if (std::abs(balance) > 1) { // Check if rebalancing is needed
+            // Right heavy case
+            if (balance < -1) {
+                // Right-Left case
+                if (inbalanced(node->right) > 0) {
+                    node->right = right(node->right);
+                }
+                // Right-Right case
+                return Left(node);
+            }
+            // Left heavy case
+            if (balance > 1) {
+                // Left-Right case
+                if (inbalanced(node->left) < 0) {
+                    node->left = Left(node->left);
+                }
+                // Left-Left case
+                return right(node);
+            }
         }
-        return Left(node);
-    }
-    if (balance <= -2) {
-        int balance_ = inbalanced(node->left);
-        if (balance_ <= -2) 
-        {
-            node->left = Left(node->left);
-        }
-        return right(node);
-    }
-    return node;
-    
-}
-Node* Tree::Left(Node* temp)
-{
-    Node* a = temp->right;
-    temp->right = a->left;
-    a->left = temp;
-    return a;
+        return node; // No rotation needed
 }
 Node* Tree::right(Node* temp)
 {
     Node* a = temp->left;
-    temp->left = a->right;
+    Node* second= a->right;
     a->right = temp;
+    temp->left = second;
+    return a;
+}
+Node* Tree::Left(Node* temp)
+{
+    Node* a = temp->right;
+    Node* second= a->left;
+    a->left = temp;
+    temp->right = second;
     return a;
 }
 std::string Tree:: lookup(size_t index)const{
