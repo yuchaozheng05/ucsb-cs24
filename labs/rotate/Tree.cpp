@@ -113,7 +113,7 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         node->right = insert(node->right,s);
     }
-     return reblanced(node);
+    return reblanced(node);
 }
 void Tree::insert(const std::string& s)
 {
@@ -127,19 +127,26 @@ int Tree::inbalanced(Node* node)
 Node* Tree::reblanced(Node* node)
 {
     int balance = inbalanced(node);
-    if (balance > 1) {
-            int leftBalance = inbalanced(node->left);
-            if (leftBalance < 0) {
-                node->left = Left(node->left);
-            }
-        }
-        if (balance < -1) {
-            int rightBalance = inbalanced(node->right);
-            if (rightBalance > 0) {
+    if(balance == 0)
+    {
+        return node;
+    }
+    if (std::abs(balance) > 1) { // Check if rebalancing is needed
+        if (balance < -1) {//right heavy
+            if (inbalanced(node->right) > 0) {//Right-Left
                 node->right = right(node->right);
             }
+            return Left(node);//Right-Right
+            }
+            if (balance > 1) //Left heavy
+            {
+                if (inbalanced(node->left) < 0) {//Left-Right
+                    node->left = Left(node->left);
+                }
+                return right(node);// Left-Left case
+            }
         }
-        return node;
+        return node; // No rotation needed
 }
 Node* Tree::right(Node* temp)//if left heavy
 {
