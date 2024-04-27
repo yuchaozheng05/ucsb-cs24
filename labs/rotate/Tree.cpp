@@ -68,7 +68,7 @@ int Tree::countweight(Node* node)const
 }
 void Tree::updateweight(Node* node)const
 {
-    node->weight =  countweight(node->left) + countweight(node->right);
+    node->weight = 1+countweight(node->left) + countweight(node->right);
 }
 size_t Tree::find(Node* node, const std::string&s, size_t index)const{
     if(node == nullptr)
@@ -150,10 +150,19 @@ Node* Tree::reblanced(Node* node)
     {
         return rotateRight(node);
     }
-    if (balance < -1 && inbalanced(node->right) < 0) 
+    else if (balance < -1 && inbalanced(node->right) < 0) 
     {
         return rotateLeft(node);
     }
+    else if (balance > 1 && inbalanced(node->left) < 0) {
+        node->left = rotateLeft(node->left); 
+        return rotateRight(node); 
+    }
+    else if (balance < -1 && inbalanced(node->right) > 0) {
+        node->right = rotateRight(node->right); 
+        return rotateLeft(node); 
+    }
+    
     return node;
 }
 Node* Tree::rotateRight(Node* temp)//if left heavy
