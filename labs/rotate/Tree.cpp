@@ -69,7 +69,7 @@ int Tree::countweight(Node* node)const
 }
 void Tree::updateweight(Node* node)const
 {
-    node->weight = 1+countweight(node->left) + countweight(node->right);
+    node->weight = countweight(node);
 }
 size_t Tree::find(Node* node, const std::string&s, size_t index)const{
     if(node == nullptr)
@@ -142,35 +142,36 @@ int Tree::inbalanced(Node* node)
 }
 Node* Tree::reblanced(Node* node)
 {
-
-   int balance = inbalanced(node);
-
-   if(balance > 1 && inbalanced(node->left)>0)
-   {
-       return rotateRight(node);
-   }
-   if (balance < -1 && inbalanced(node->right) < 0) 
-   {
-       return rotateLeft(node);
-   }
-   return node;
+  int balance = inbalanced(node);
+  updateweight(node);
+  if(balance > 1 && inbalanced(node->left)>0)
+  {
+      return rotateRight(node);
+  }
+  if (balance < -1 && inbalanced(node->right) < 0) 
+  {
+      return rotateLeft(node);
+  }
+  return node;
 }
-
-//ool Tree::isrotate(Node* node)
+//
+//bool Tree::isrotate(Node* node)
+//{
 //
 //   if (node == nullptr){
 //       return false;
 //   }
 //
 //   int balance = inbalanced(node);
-//   if (balance > 1) {  // Left heavy
+//   if (balance > 1 && inbalanced(node->left)>0) {  // Left heavy
 //       Node* temp = rotateRight(node);  // Simulate right rotation
 //       updateweight(temp);  // Update weight after simulation
 //       int rotbalance = inbalanced(temp);
 //       if (std::abs(rotbalance) < std::abs(balance)) {
 //           return true;
 //       }
-//   } else if (balance < -1) {  // Right heavy
+//   } 
+//    if (balance < -1 && inbalanced(node->right)<0) {  // Right heavy
 //       Node* temp = rotateLeft(node);  // Simulate left rotation
 //       updateweight(temp);  // Update weight after simulation
 //       int rotbalance = inbalanced(temp);
@@ -179,25 +180,34 @@ Node* Tree::reblanced(Node* node)
 //       }
 //   }
 //   return false;
+//}
 //
-//ode* Tree::reblanced(Node* node)
-//
+//Node* Tree::reblanced(Node* node)
+//{
 //   if (node == nullptr) 
 //   {
 //       return nullptr;
 //   }
 //   updateweight(node);  // Make sure weights are correct before checking balance
 //   int balance = inbalanced(node);
+//   if(balance == 0)
+//   {
+//    return node;
+//   }
 //   if (isrotate(node)) {  // If rotation can reduce imbalance
-//       if (balance > 1) {
+//       if (balance > 1) //left heavy
+//       {
 //           return rotateRight(node);  // Rotate right if left-heavy
-//       } else if (balance < -1) {
+//       } 
+//       if (balance < -1) //right heavy
+//       {
 //           return rotateLeft(node);  // Rotate left if right-heavy
 //       }
 //   }
 //
 //   return node; 
-//
+//}
+
 Node* Tree::rotateRight(Node* temp)//if left heavy
 {
     if(temp == nullptr || temp->left == nullptr)
@@ -276,41 +286,33 @@ void Tree::print()const
     std::cout<<printhelp(temp);
     std::cout<<std::endl;
 }
-Node* Tree::removehelp(Node* node, size_t index)
+Node* Tree::removehelp(Node* node, size_t& index, size_t target)
 {
-    if((node->left == nullptr)&& node->right == nullptr)
-    {
-        Node*temp = node;
-        delete temp;
-        return node;
+     if (node == nullptr) {
+        throw std::out_of_range("Index out of range");
     }
-    return nullptr;
+    return node;
 }
 void Tree::remove(size_t index)
 {
-    Node* temp = root;
-    size_t num = count();
-    if(index>=num)
-    {
-        throw std::out_of_range("index out of range");
-    }
-    removehelp(temp, index);
+    size_t index_ = 0;
+    root = removehelp(root, index_, index);
+
 }
-std::string Tree::findsmallest(Node* node)
+Node* Tree::findsmallest(Node* node)
 {
-    if(node==NULL)
-    {
-        return " ";
+    Node* curr = node;
+    while (curr && curr->left != nullptr) {
+        curr = curr->left;
     }
-    else
+    return curr;
+}
+void Tree::update(Node* node)
+{
+    if(node != nullptr)
     {
-        if(node->left != NULL)
-        {
-            return findsmallest(node->left);
-        }
-        else{
-            return node->value;
-        }
+        updateweight(node);
+        node = reblanced(node);
     }
 }
 
