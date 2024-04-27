@@ -286,17 +286,45 @@ void Tree::print()const
     std::cout<<printhelp(temp);
     std::cout<<std::endl;
 }
-Node* Tree::removehelp(Node* node, size_t& index, size_t target)
+Node* Tree::removehelp(Node* node, std::string s)
 {
      if (node == nullptr) {
         throw std::out_of_range("Index out of range");
     }
-    return node;
+    else if(s < node->value)
+    {
+        node->left = removehelp(node->left, s);
+    }
+    else if(s > node->value)
+    {
+        node->right = removehelp(node->right, s);
+    }
+    else{
+        if(node->left == nullptr)//if one child
+        {
+            Node* temp = node->right;
+            delete node;
+            return temp;
+        }
+        else if(node->right == nullptr)//if one child
+        {
+            Node* temp = node->left;
+            delete node;
+            return temp;
+        }
+        else//two child
+        {
+            Node* temp = findsmallest(node->right);
+            node->value = temp->value;
+            node->right = removehelp(node->right, temp->value);
+        }
+    }
+    return reblanced(node);
 }
 void Tree::remove(size_t index)
 {
-    size_t index_ = 0;
-    root = removehelp(root, index_, index);
+    std::string s = lookup(index);
+    root = removehelp(root, s);
 
 }
 Node* Tree::findsmallest(Node* node)
