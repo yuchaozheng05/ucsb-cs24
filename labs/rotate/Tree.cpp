@@ -124,7 +124,7 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         node->right = insert(node->right,s);
     }
-    updateweight(node);
+    //updateweight(node);
     return reblanced(node);
 }
 void Tree::insert(const std::string& s)
@@ -143,12 +143,12 @@ int Tree::inbalanced(Node* node)
 Node* Tree::reblanced(Node* node)
 {
   int balance = inbalanced(node);
-  updateweight(node);
+  //updateweight(node);
   if(balance > 1 && inbalanced(node->left)>0)
   {
       return rotateRight(node);
   }
-  if (balance < -1 && inbalanced(node->right) < 0) 
+  if (balance < -1 && inbalanced(node->right) <0  ) 
   {
       return rotateLeft(node);
   }
@@ -218,8 +218,8 @@ Node* Tree::rotateRight(Node* temp)//if left heavy
     Node* second= a->right;
     a->right = temp;
     temp->left = second;
-    updateweight(temp);
-    updateweight(a);
+    //updateweight(temp);
+    //updateweight(a);
     return a;
 }
 Node* Tree::rotateLeft(Node* temp)//if right heavy
@@ -232,8 +232,8 @@ Node* Tree::rotateLeft(Node* temp)//if right heavy
     Node* second= a->left;
     a->left = temp;
     temp->right = second;
-    updateweight(temp);
-    updateweight(a);
+    //updateweight(temp);
+    //updateweight(a);
     return a;
 }
 std::string Tree:: lookup(size_t index)const{
@@ -307,14 +307,7 @@ Node* Tree::findsmallest(Node* node)
     }
     return curr;
 }
-void Tree::update(Node* node)
-{
-    if(node != nullptr)
-    {
-        updateweight(node);
-        node = reblanced(node);
-    }
-}
+
 
 
 
