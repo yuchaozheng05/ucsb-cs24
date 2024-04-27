@@ -68,7 +68,7 @@ int Tree::countweight(Node* node)const
 }
 void Tree::updateweight(Node* node)const
 {
-    node->weight = 1 + countweight(node->left) + countweight(node->right);
+    node->weight =  countweight(node->left) + countweight(node->right);
 }
 size_t Tree::find(Node* node, const std::string&s, size_t index)const{
     if(node == nullptr)
