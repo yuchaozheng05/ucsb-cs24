@@ -24,7 +24,7 @@ class Tree {
   Node* rotateRight(Node* node);
   std::string lookup(Node*node, size_t index, size_t& currentindex)const;
   std::string printhelp(Node* node)const;
-  Node* removehelp(Node* node,size_t& target, size_t index);
+  Node* removehelp(Node* node, std::string s);
   Node* findsmallest(Node* node);
   void updateweight(Node* node)const;
   bool isrotate(Node* node);
