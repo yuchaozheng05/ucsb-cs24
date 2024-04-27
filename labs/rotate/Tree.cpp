@@ -81,7 +81,7 @@ size_t Tree::find(Node* node, const std::string&s, size_t index)const{
     }
     else if(s > node->value)
     {
-        size_t left;
+       size_t left;
         if(node->left != nullptr)
         {
             left = countweight(node->left);
@@ -90,18 +90,19 @@ size_t Tree::find(Node* node, const std::string&s, size_t index)const{
             left = 0;
         }
         index += left + 1;
-        return find(node->right, s, index);
+        return find(node->right, s, index); 
     }
     else
     {
+
         size_t result = find(node->left, s, index);
         if(result == __SIZE_MAX__)
         {
-            return index;;
+            size_t currentindex = index + countweight(node->left);
+            return currentindex;
         }
-        else{
-            return result;
-        }
+        return result;
+        
     }
 }
 size_t Tree::find(const std::string& s)const{
