@@ -66,6 +66,10 @@ int Tree::countweight(Node* node)const
     }
     return 1 + countweight(node->left) + countweight(node->right);
 }
+void Tree::updateweight(Node* node)const
+{
+    node->weight = 1 + countweight(node->left) + countweight(node->right);
+}
 size_t Tree::find(Node* node, const std::string&s, size_t index)const{
     if(node == nullptr)
     {
@@ -105,7 +109,7 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         return new Node(s);
     }
-    else if(s < node->value)
+    else if(s <= node->value)
     {
         node->left = insert(node->left, s);
     }
@@ -113,6 +117,7 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         node->right = insert(node->right,s);
     }
+    updateweight(node);
     return reblanced(node);
 }
 void Tree::insert(const std::string& s)
@@ -121,8 +126,12 @@ void Tree::insert(const std::string& s)
 }
 int Tree::inbalanced(Node* node)
 {
-    int unbalance =  countweight(node->left) - countweight(node->right);
-    return unbalance;
+    if(node == nullptr)
+    {
+        return 0;
+    }
+    int balance = countweight(node->left) - countweight(node->right);
+    return balance;
 }
 Node* Tree::reblanced(Node* node)
 {
@@ -131,37 +140,34 @@ Node* Tree::reblanced(Node* node)
     {
         return node;
     }
-    if (std::abs(balance) > 1) { // Check if rebalancing is needed
-        if (balance < -1) {//right heavy
-            if (inbalanced(node->right) > 0) {//Right-Left
-                node->right = right(node->right);
-            }
-            return Left(node);//Right-Right
-            }
-            if (balance > 1) //Left heavy
-            {
-                if (inbalanced(node->left) < 0) {//Left-Right
-                    node->left = Left(node->left);
-                }
-                return right(node);// Left-Left case
-            }
-        }
-        return node; // No rotation needed
+    if(balance > 1 && inbalanced(node->left)>0)
+    {
+        return rotateRight(node);
+    }
+    if (balance < -1 && inbalanced(node->right) < 0) 
+    {
+        return rotateLeft(node);
+    }
+    return node;
 }
-Node* Tree::right(Node* temp)//if left heavy
+Node* Tree::rotateRight(Node* temp)//if left heavy
 {
     Node* a = temp->left;
     Node* second= a->right;
     a->right = temp;
     temp->left = second;
+    updateweight(temp);
+    updateweight(a);
     return a;
 }
-Node* Tree::Left(Node* temp)//if right heavy
+Node* Tree::rotateLeft(Node* temp)//if right heavy
 {
     Node* a = temp->right;
     Node* second= a->left;
     a->left = temp;
     temp->right = second;
+    updateweight(temp);
+    updateweight(a);
     return a;
 }
 std::string Tree:: lookup(size_t index)const{
