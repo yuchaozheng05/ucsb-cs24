@@ -142,25 +142,14 @@ int Tree::inbalanced(Node* node)
 Node* Tree::reblanced(Node* node)
 {
     int balance = inbalanced(node);
-    if(balance == 0)
-    {
-        return node;
-    }
+
     if(balance > 1 && inbalanced(node->left)>0)
     {
         return rotateRight(node);
     }
-    else if (balance < -1 && inbalanced(node->right) < 0) 
+    if (balance < -1 && inbalanced(node->right) < 0) 
     {
         return rotateLeft(node);
-    }
-    else if (balance > 1 && inbalanced(node->left) < 0) {
-        node->left = rotateLeft(node->left); 
-        return rotateRight(node); 
-    }
-    else if (balance < -1 && inbalanced(node->right) > 0) {
-        node->right = rotateRight(node->right); 
-        return rotateLeft(node); 
     }
     
     return node;
