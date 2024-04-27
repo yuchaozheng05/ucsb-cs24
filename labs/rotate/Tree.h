@@ -20,14 +20,16 @@ class Tree {
 
   Node* reblanced(Node* node);
   int inbalanced(Node* node);
-  Node* Left(Node* node);
-  Node* right(Node* node);
+  Node* rotateLeft(Node* node);
+  Node* rotateRight(Node* node);
   std::string lookup(Node*node, size_t index, size_t& currentindex)const;
   std::string printhelp(Node* node)const;
   Node* removehelp(Node* node, size_t index);
   std::string findsmallest(Node* node);
+  void updateweight(Node* node)const;
 
 
+  
 
 
 
