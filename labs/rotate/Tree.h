@@ -27,8 +27,8 @@ class Tree {
   Node* removehelp(Node* node, std::string s);
   Node* findsmallest(Node* node);
   void updateweight(Node* node)const;
-  bool isrotate(Node* node);
-  void update(Node* node);
+  //bool isrotate(Node* node);
+  //void update(Node* node);
 
 
   
