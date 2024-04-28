@@ -170,8 +170,8 @@ Node* Tree::reblanced(Node* node)
         //}
         if(inbalanced(node->left)>0)
         {
-            Node*temp =  rotateRight(node);
-            return reblanced(temp);
+            node =  rotateRight(node);
+            node= reblanced(node);
         }
 
     }
@@ -184,8 +184,8 @@ Node* Tree::reblanced(Node* node)
         //}
         if(inbalanced(node->right)<0)
         {
-            Node* temp= rotateLeft(node);
-            return reblanced(temp);
+            node= rotateLeft(node);
+            node= reblanced(node);
         }
     }
     return node;
