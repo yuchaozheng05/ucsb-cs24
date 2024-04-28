@@ -116,7 +116,7 @@ Node* Tree::insert(Node* node, const std::string& s)
     {
         return new Node(s);
     }
-    if(s < node->value)
+    if(s <= node->value)
     {
         node->left = insert(node->left, s);
     }
