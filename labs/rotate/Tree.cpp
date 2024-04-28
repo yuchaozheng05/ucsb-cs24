@@ -140,20 +140,81 @@ int Tree::inbalanced(Node* node)
     int balance = countweight(node->left) - countweight(node->right);
     return balance;
 }
+//Node* Tree::reblanced(Node* node)
+//{
+//  int balance = inbalanced(node);
+//  //updateweight(node);
+//  if(balance > 1 && inbalanced(node->left)>0)
+//  {
+//      return rotateRight(node);
+//  }
+//  if (balance < -1 && inbalanced(node->right) <0  ) 
+//  {
+//      return rotateLeft(node);
+//  }
+//  return node;
+//}
+//
 Node* Tree::reblanced(Node* node)
 {
-  int balance = inbalanced(node);
-  //updateweight(node);
-  if(balance > 1 && inbalanced(node->left)>0)
-  {
-      return rotateRight(node);
-  }
-  if (balance < -1 && inbalanced(node->right) <0  ) 
-  {
-      return rotateLeft(node);
-  }
-  return node;
+    int balance = inbalanced(node);
+    if(balance >1)//Left heavy
+    {
+        if(inbalanced(node->left)>0)
+        {
+            return rotateRight(node);
+        }
+        if(inbalanced(node->left)<0)
+        {
+            return rotateLeft(node);
+        }
+    }
+    if(balance<-1)
+    {
+        if(inbalanced(node->right)<0)
+        {
+            return rotateLeft(node);
+        }
+        if(inbalanced(node->right)>0)
+        {
+            return rotateRight(node);
+        }
+    }
+    return node;
 }
+
+
+//Node* Tree::reblanced(Node* node) {
+//    if (!node) return nullptr;
+//
+//    updateweight(node);  // Update weight to ensure balance checks are accurate
+//    int balance = inbalanced(node);
+//
+//    // Left heavy situation
+//    if (balance > 1) {
+//        if (inbalanced(node->left) < 0) {
+//            // If left right case is causing the imbalance, rotate left child left
+//            node->left = rotateLeft(node->left);
+//        }
+//        // Perform a right rotation only if it improves overall balance
+//        if (abs(inbalanced(node->left)) < abs(balance)) {
+//            return rotateRight(node);
+//        }
+//    }
+//    // Right heavy situation
+//    else if (balance < -1) {
+//        if (inbalanced(node->right) > 0) {
+//            // If right left case is causing the imbalance, rotate right child right
+//            node->right = rotateRight(node->right);
+//        }
+//        // Perform a left rotation only if it improves overall balance
+//        if (abs(inbalanced(node->right)) < abs(balance)) {
+//            return rotateLeft(node);
+//        }
+//    }
+//    return node;  // Return the node if no rotation is performed
+//}
+
 //
 //bool Tree::isrotate(Node* node)
 //{
