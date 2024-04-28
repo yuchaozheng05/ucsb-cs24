@@ -148,7 +148,7 @@ Node* Tree::reblanced(Node* node)
   {
       return rotateRight(node);
   }
-  if (balance < -1 && inbalanced(node->right) <=0  ) 
+  if (balance < -1 && inbalanced(node->right) <0  ) 
   {
       return rotateLeft(node);
   }
