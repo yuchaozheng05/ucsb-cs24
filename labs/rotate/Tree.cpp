@@ -161,6 +161,7 @@ int Tree::inbalanced(Node* node)
 Node* Tree::reblanced(Node* node)
 {
     int balance = inbalanced(node);
+    
     if(balance >1)//Left heavy
     {
         //int rotbalance = inbalanced(rotateRight(temp));
@@ -168,7 +169,7 @@ Node* Tree::reblanced(Node* node)
         //{
         //    return node;
         //}
-        while(inbalanced(node->left)>0)
+        if(inbalanced(node->left)>0)
         {
             return rotateRight(node);
         }
@@ -181,11 +182,12 @@ Node* Tree::reblanced(Node* node)
         //{
         //    return node;
         //}
-        while(inbalanced(node->right)<0)
+        if(inbalanced(node->right)<0)
         {
             return rotateLeft(node);
         }
     }
+    
     return node;
 }
 
