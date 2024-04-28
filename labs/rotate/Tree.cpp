@@ -140,48 +140,48 @@ int Tree::inbalanced(Node* node)
     int balance = countweight(node->left) - countweight(node->right);
     return balance;
 }
-//Node* Tree::reblanced(Node* node)
-//{
-//  int balance = inbalanced(node);
-//  //updateweight(node);
-//  if(balance > 1 && inbalanced(node->left)>0)
-//  {
-//      return rotateRight(node);
-//  }
-//  if (balance < -1 && inbalanced(node->right) <0  ) 
-//  {
-//      return rotateLeft(node);
-//  }
-//  return node;
-//}
-//
 Node* Tree::reblanced(Node* node)
 {
-    int balance = inbalanced(node);
-    if(balance >1)//Left heavy
-    {
-        if(inbalanced(node->left)>0)
-        {
-            return rotateRight(node);
-        }
-        if(inbalanced(node->left)<0)
-        {
-            return rotateLeft(node);
-        }
-    }
-    if(balance<-1)
-    {
-        if(inbalanced(node->right)<0)
-        {
-            return rotateLeft(node);
-        }
-        if(inbalanced(node->right)>0)
-        {
-            return rotateRight(node);
-        }
-    }
-    return node;
+  int balance = inbalanced(node);
+  //updateweight(node);
+  if(balance > 1 && inbalanced(node->left)>0)
+  {
+      return rotateRight(node);
+  }
+  if (balance < -1 && inbalanced(node->right) <0  ) 
+  {
+      return rotateLeft(node);
+  }
+  return node;
 }
+//
+//Node* Tree::reblanced(Node* node)
+//{
+//    int balance = inbalanced(node);
+//    if(balance >1)//Left heavy
+//    {
+//        if(inbalanced(node->left)>0)
+//        {
+//            return rotateRight(node);
+//        }
+//        if(inbalanced(node->left)<0)
+//        {
+//            return rotateLeft(node);
+//        }
+//    }
+//    if(balance<-1)
+//    {
+//        if(inbalanced(node->right)<0)
+//        {
+//            return rotateLeft(node);
+//        }
+//        if(inbalanced(node->right)>0)
+//        {
+//            return rotateRight(node);
+//        }
+//    }
+//    return node;
+//}
 
 
 //Node* Tree::reblanced(Node* node) {
