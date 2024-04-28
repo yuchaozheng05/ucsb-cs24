@@ -168,10 +168,9 @@ Node* Tree::reblanced(Node* node)
         //{
         //    return node;
         //}
-        if(inbalanced(node->left)>0)
+        while(inbalanced(node->left)>0)
         {
-            node =  rotateRight(node);
-            node= reblanced(node);
+            return rotateRight(node);
         }
 
     }
@@ -182,10 +181,9 @@ Node* Tree::reblanced(Node* node)
         //{
         //    return node;
         //}
-        if(inbalanced(node->right)<0)
+        while(inbalanced(node->right)<0)
         {
-            node= rotateLeft(node);
-            node= reblanced(node);
+            return rotateLeft(node);
         }
     }
     return node;
