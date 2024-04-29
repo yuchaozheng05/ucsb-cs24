@@ -119,13 +119,18 @@ Node* Tree::insert(Node* node, const std::string& s)
     if(s <= node->value)
     {
         node->left = insert(node->left, s);
+        updateweight(node);
+        return reblanced(node);
     }
     else 
     {
         node->right = insert(node->right,s);
+        updateweight(node);
+        return reblanced(node);
     }
-    //updateweight(node);
-    return reblanced(node);
+    updateweight(node);
+    //return reblanced(node);
+    return node;
 }
 void Tree::insert(const std::string& s)
 {
@@ -275,7 +280,7 @@ bool Tree::isrotate(Node* node)
    }
    if (balance > 1) {  // Left heavy
        int rotbalance = countweight(node->right) + 1 + countweight(node->left->right);
-       if (std::abs(rotbalance) <= std::abs(balance)) {
+       if (std::abs(rotbalance) < std::abs(balance)) {
            return true;
        }
    } 
@@ -283,7 +288,7 @@ bool Tree::isrotate(Node* node)
        
        int rotbalance = countweight(node->left) + 1 + countweight(node->right->left);
        
-       if (std::abs(rotbalance) <= std::abs(balance)) {
+       if (std::abs(rotbalance) < std::abs(balance)) {
            return true;
        }
    }
