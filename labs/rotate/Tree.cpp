@@ -265,18 +265,17 @@ std::string Tree::lookup(Node* node, size_t index, size_t& currentindex)const
     currentindex++;
     return lookup(node->right, index, currentindex);
 }
-std::string Tree::printhelp(Node* node)const
-{
-    if(node==nullptr)
-    {
-        return "-";
+
+std::string Tree::printhelp(Node* node) const {
+    if (node == nullptr) {
+        return "";  
     }
-    if(!node->left && !node->right)
-    {
+    if (!node->left && !node->right) {
         return node->value;
     }
-    return "("+printhelp(node->left) +" "+ node->value +" "+ printhelp(node->right)+")";
-
+    std::string leftPart = printhelp(node->left);   
+    std::string rightPart = printhelp(node->right); 
+    return "(" + (leftPart.empty() ? "-" : leftPart) + " " + node->value + " " + (rightPart.empty() ? "-" : rightPart) + ")";
 }
 void Tree::print()const
 {
