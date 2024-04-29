@@ -268,7 +268,7 @@ std::string Tree::lookup(Node* node, size_t index, size_t& currentindex)const
 
 std::string Tree::printhelp(Node* node) const {
     if (node == nullptr) {
-        return "";  
+        return "-";  
     }
     if (!node->left && !node->right) {
         return node->value;
