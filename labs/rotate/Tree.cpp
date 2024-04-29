@@ -273,9 +273,24 @@ std::string Tree::printhelp(Node* node) const {
     if (!node->left && !node->right) {
         return node->value;
     }
-    std::string leftPart = printhelp(node->left);   
-    std::string rightPart = printhelp(node->right); 
-    return "(" + (leftPart.empty() ? "-" : leftPart) + " " + node->value + " " + (rightPart.empty() ? "-" : rightPart) + ")";
+    std::string leftPart;
+    if(node->left == nullptr)
+    {
+        leftPart ="-";
+    }   
+    else
+    {
+        leftPart=printhelp(node->left);
+    }
+    std::string rightPart; 
+    if(node->right == nullptr)
+    {
+        rightPart="-";
+    }
+    else{
+        rightPart=printhelp(node->right);
+    }
+    return "(" + leftPart + " " + node->value + " " + rightPart + ")";
 }
 void Tree::print()const
 {
