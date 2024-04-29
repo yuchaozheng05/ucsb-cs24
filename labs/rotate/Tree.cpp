@@ -274,14 +274,16 @@ bool Tree::isrotate(Node* node)
        return true;
    }
    if (balance > 1) {  // Left heavy
-       int rotbalance = countweight(node->right) + 0 + countweight(node->left->right);
-       if (std::abs(rotbalance) < std::abs(balance)) {
+       int rotbalance = countweight(node->right) + 1 + countweight(node->left->right);
+       if (std::abs(rotbalance) <= std::abs(balance)) {
            return true;
        }
    } 
     if (balance < -1) {  // Right heavy
-       int rotbalance = countweight(node->left) + 0 + countweight(node->right->left);
-       if (std::abs(rotbalance) < std::abs(balance)) {
+       
+       int rotbalance = countweight(node->left) + 1 + countweight(node->right->left);
+       
+       if (std::abs(rotbalance) <= std::abs(balance)) {
            return true;
        }
    }
