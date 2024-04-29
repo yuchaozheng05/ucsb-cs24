@@ -29,6 +29,7 @@ class Tree {
   void updateweight(Node* node)const;
   bool isrotate(Node* node);
   void update(Node* node);
+  
 
 
   
