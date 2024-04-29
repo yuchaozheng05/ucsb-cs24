@@ -158,38 +158,46 @@ int Tree::inbalanced(Node* node)
 //  return node;
 //}
 
-Node* Tree::reblanced(Node* node)
-{
-    int balance = inbalanced(node);
-    
-    if(balance >1)//Left heavy
-    {
-        //int rotbalance = inbalanced(rotateRight(temp));
-        //if(std::abs(balance) >= std::abs(rotbalance))
-        //{
-        //    return node;
-        //}
-        if(inbalanced(node->left)>0)
-        {
-            return rotateRight(node);
-        }
 
-    }
-    if(balance < -1)//Right heavy;
-    {
-        //int rotbalance = inbalanced(rotateLeft(temp));
-        //if(std::abs(balance) >= std::abs(rotbalance))
-        //{
-        //    return node;
-        //}
-        if(inbalanced(node->right)<0)
-        {
-            return rotateLeft(node);
-        }
-    }
-    
-    return node;
-}
+//Node* Tree::reblanced(Node* node)
+//{
+//    int balance = inbalanced(node);
+//    if(node==nullptr)
+//    {
+//        return node;
+//    }
+//    
+//    if(balance >1)//Left heavy
+//    {
+//        //int rotbalance = inbalanced(rotateRight(temp));
+//        //if(std::abs(balance) >= std::abs(rotbalance))
+//        //{
+//        //    return node;
+//        //}
+//        if(inbalanced(node->left)>0)
+//        {
+//            node->right = (rotateRight(node));
+//            return reblanced(node->left);
+//        }
+//    }
+//    if(balance < -1)//Right heavy;
+//    {
+//        //int rotbalance = inbalanced(rotateLeft(temp));
+//        //if(std::abs(balance) >= std::abs(rotbalance))
+//        //{
+//        //    return node;
+//        //}
+//        if(inbalanced(node->right)<0)
+//        {
+//            node->left = rotateLeft(node);
+//            return reblanced(node->right);
+//        }
+//    }
+//    
+//    return node;
+//}
+
+
 
 //
 //Node* Tree::reblanced(Node* node)
@@ -253,58 +261,54 @@ Node* Tree::reblanced(Node* node)
 //}
 
 //
-//bool Tree::isrotate(Node* node)
-//{
+bool Tree::isrotate(Node* node)
+{
+
+   if (node == nullptr){
+       return false;
+   }
+
+   int balance = inbalanced(node);
+   if (balance > 1) {  // Left heavy
+       int rotbalance = countweight(node->right) + 1 + countweight(node->left->right);
+       if (std::abs(rotbalance) < std::abs(balance)) {
+           return true;
+       }
+   } 
+    if (balance < -1) {  // Right heavy
+       int rotbalance = countweight(node->left) + 1 + countweight(node->right->left);
+       if (std::abs(rotbalance) < std::abs(balance)) {
+           return true;
+       }
+   }
+   return false;
+}
 //
-//   if (node == nullptr){
-//       return false;
-//   }
-//
-//   int balance = inbalanced(node);
-//   if (balance > 1 && inbalanced(node->left)>0) {  // Left heavy
-//       Node* temp = rotateRight(node);  // Simulate right rotation
-//       updateweight(temp);  // Update weight after simulation
-//       int rotbalance = inbalanced(temp);
-//       if (std::abs(rotbalance) < std::abs(balance)) {
-//           return true;
-//       }
-//   } 
-//    if (balance < -1 && inbalanced(node->right)<0) {  // Right heavy
-//       Node* temp = rotateLeft(node);  // Simulate left rotation
-//       updateweight(temp);  // Update weight after simulation
-//       int rotbalance = inbalanced(temp);
-//       if (std::abs(rotbalance) < std::abs(balance)) {
-//           return true;
-//       }
-//   }
-//   return false;
-//}
-//
-//Node* Tree::reblanced(Node* node)
-//{
-//   if (node == nullptr) 
-//   {
-//       return nullptr;
-//   }
-//   updateweight(node);  // Make sure weights are correct before checking balance
-//   int balance = inbalanced(node);
-//   if(balance == 0)
-//   {
-//    return node;
-//   }
-//   if (isrotate(node)) {  // If rotation can reduce imbalance
-//       if (balance > 1) //left heavy
-//       {
-//           return rotateRight(node);  // Rotate right if left-heavy
-//       } 
-//       if (balance < -1) //right heavy
-//       {
-//           return rotateLeft(node);  // Rotate left if right-heavy
-//       }
-//   }
-//
-//   return node; 
-//}
+Node* Tree::reblanced(Node* node)
+{
+   if (node == nullptr) 
+   {
+       return nullptr;
+   }
+   updateweight(node);  // Make sure weights are correct before checking balance
+   int balance = inbalanced(node);
+   if(balance == 0)
+   {
+    return node;
+   }
+   if (isrotate(node)) {  // If rotation can reduce imbalance
+       if (balance > 1) //left heavy
+       {
+           return rotateRight(node);  // Rotate right if left-heavy
+       } 
+       if (balance < -1) //right heavy
+       {
+           return rotateLeft(node);  // Rotate left if right-heavy
+       }
+   }
+
+   return node; 
+}
 
 Node* Tree::rotateRight(Node* temp)//if left heavy
 {
@@ -316,8 +320,8 @@ Node* Tree::rotateRight(Node* temp)//if left heavy
     Node* second= a->right;
     a->right = temp;
     temp->left = second;
-    //updateweight(temp);
-    //updateweight(a);
+    updateweight(temp);
+    updateweight(a);
     return a;
 }
 Node* Tree::rotateLeft(Node* temp)//if right heavy
@@ -330,8 +334,8 @@ Node* Tree::rotateLeft(Node* temp)//if right heavy
     Node* second= a->left;
     a->left = temp;
     temp->right = second;
-    //updateweight(temp);
-    //updateweight(a);
+    updateweight(temp);
+    updateweight(a);
     return a;
 }
 std::string Tree:: lookup(size_t index)const{
