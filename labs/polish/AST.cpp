@@ -55,7 +55,8 @@ AST* AST::parse(const std::string& expression) {
         if(isnumber(token))
         {
             //std::cout<<"is number !!! ";
-            stack.push(new Number(std::stod(token)));
+            AST* node = new Number(std::stod(token));
+            stack.push(node);
         }
         if(token == "+")
         {
@@ -88,5 +89,6 @@ AST* AST::parse(const std::string& expression) {
         }
 
     }
-    return 0;
+    //return 0;
+    return stack.pop();
 }
