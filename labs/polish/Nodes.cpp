@@ -46,7 +46,7 @@ Opertor::~Opertor()
 std::string Opertor::prefix()const
 {
     std::string result;
-    if (!left && !right) {
+    if (left && !right) {
         if (oper == '~') {
             result += oper;
             result += " ";
