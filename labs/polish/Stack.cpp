@@ -14,7 +14,10 @@ Stack::Node::Node(AST* d, Node* n)
 }
 Stack::~Stack()
 {
-    delete topvalue;
+    while(!isEmpty())
+    {
+        delete pop();
+    }
 }
 void Stack::push(AST* value)
 {
@@ -24,14 +27,11 @@ void Stack::push(AST* value)
 }
 AST* Stack::pop()
 {
-    //if(isEmpty())
-    //{
-    //    throw std::runtime_error("Not enough operands.");
-    //}
-    Node* top = topvalue;
-    if (top==nullptr) { 
+    if(topvalue == nullptr)
+    {
         throw std::runtime_error("Not enough operands.");
     }
+    Node* top = topvalue;
     AST* value = top->data;
     topvalue = top->next;
     delete top;
