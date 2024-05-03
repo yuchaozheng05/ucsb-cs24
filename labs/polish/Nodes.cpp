@@ -48,9 +48,10 @@ std::string Opertor::prefix()const
   //std::string result;
   if(oper != '~')
   {
-    if(!left || !right)
-  {
-    throw std::runtime_error("Missing operator");
+      if(!left || !right)
+    {
+      throw std::runtime_error("Missing operator");
+     }
   }
   if(oper =='~')
   {
@@ -58,7 +59,6 @@ std::string Opertor::prefix()const
     {
     throw std::runtime_error("Missing operator");
     }
-  }
   }
   return oper + " " + left->prefix() + " " + right->prefix();
   //return result;
@@ -70,9 +70,10 @@ std::string Opertor::postfix()const
   // std::string result;
    if(oper != '~')
   {
-    if(!left || !right)
-  {
-    throw std::runtime_error("Missing operator");
+       if(!left || !right)
+      {
+            throw std::runtime_error("Missing operator");
+      }
   }
   if(oper =='~')
   {
