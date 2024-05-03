@@ -1,4 +1,5 @@
 #include "Stack.h"
+#include <sstream>
 
 // Implement your Stack member functions here.
 Stack::Stack()
@@ -13,7 +14,10 @@ Stack::Node::Node(AST* d, Node* n)
 }
 Stack::~Stack()
 {
-    delete topvalue;
+    while(!isEmpty())
+    {
+        delete pop();
+    }
 }
 void Stack::push(AST* value)
 {
@@ -23,7 +27,14 @@ void Stack::push(AST* value)
 }
 AST* Stack::pop()
 {
+    if(isEmpty())
+    {
+        throw std::runtime_error("no value");
+    }
     Node* top = topvalue;
+    if (!top) { 
+        throw std::runtime_error("Top node is null");
+    }
     AST* value = top->data;
     topvalue = top->next;
     delete top;
