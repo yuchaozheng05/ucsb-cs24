@@ -86,7 +86,7 @@ double Opertor::value()const
     {
       throw std::runtime_error("Division by zero");
     }   
-     return leftvalue / rightvalue;
+     return double(leftvalue / rightvalue);
   }
   else if (oper == '%')
   {
