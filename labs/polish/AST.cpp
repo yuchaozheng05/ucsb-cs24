@@ -50,6 +50,9 @@ AST* AST::parse(const std::string& expression) {
     std::string token;
     std::istringstream stream(expression);
     Stack stack;
+    if (!(stream >> token)) {
+        throw std::runtime_error("Not enough operands.");
+    }
     while(stream >> token) {
         //size_t length = token.size();
         if(isnumber(token))
