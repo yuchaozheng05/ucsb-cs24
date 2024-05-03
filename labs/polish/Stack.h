@@ -12,12 +12,14 @@ private:
         Node(AST* value, Node* nextone);
     };
     Node* topvalue;
+    int count;
 public:
    Stack();
    ~Stack();
    void push(AST* value);
    AST* pop();
    AST* top()const;
+   int size();
    
 };
 #endif

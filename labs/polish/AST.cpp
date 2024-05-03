@@ -60,35 +60,59 @@ AST* AST::parse(const std::string& expression) {
         }
         else if(token == "+")
         {
+            if(stack.size()<2)
+            {
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('+', left, right ));
         }
         else if(token == "-")
         {
+            if(stack.size()<2)
+            {
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('-', left, right ));
         }
         else if(token == "*")
         {
+            if(stack.size()<2)
+            {
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('*', left, right ));
         }
         else if(token == "/")
         {
+            if(stack.size()<2)
+            {
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('/', left, right ));
         }
         else if(token =="~")
         {
+            if(stack.top()==nullptr)
+            {
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* left = stack.pop();
             stack.push(new Opertor('~',left,nullptr));
         }
         else if(token == "%")
         {
+            if(stack.size()<2)
+            {
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('%', left, right ));
@@ -99,5 +123,13 @@ AST* AST::parse(const std::string& expression) {
 
     }
     //return 0;
+    if(stack.top()==nullptr)
+    {
+        throw std::runtime_error("No input.");
+    }
+    if(stack.size()>1)
+    {
+        throw std::runtime_error("Too many operands.");
+    }
     return stack.pop();
 }

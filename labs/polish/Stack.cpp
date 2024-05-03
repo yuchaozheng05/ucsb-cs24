@@ -4,6 +4,7 @@
 Stack::Stack()
 {
     topvalue = nullptr;
+    count =0;
 }
 Stack::Node::Node(AST* d, Node* n)
 {
@@ -18,6 +19,7 @@ void Stack::push(AST* value)
 {
     Node* temp = new Node(value, topvalue);
     topvalue = temp;
+    count++;
 }
 AST* Stack::pop()
 {
@@ -25,12 +27,17 @@ AST* Stack::pop()
     AST* value = top->data;
     topvalue = top->next;
     delete top;
+    count --;
     return value;
 
 }
 AST* Stack::top()const
 {
     return topvalue->data;
+}
+int Stack::size()
+{
+    return count;
 }
 
 
