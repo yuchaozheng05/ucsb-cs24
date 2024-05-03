@@ -29,7 +29,7 @@ AST* Stack::pop()
 {
     if(isEmpty())
     {
-        throw std::runtime_error("no value");
+        throw std::runtime_error("Not enough operands.");
     }
     Node* top = topvalue;
     if (!top) { 
