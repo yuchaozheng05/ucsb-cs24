@@ -27,10 +27,10 @@ void Stack::push(AST* value)
 }
 AST* Stack::pop()
 {
-    if(topvalue == nullptr)
-    {
-        throw std::runtime_error("Not enough operands.");
-    }
+   // if(topvalue == nullptr)
+   // {
+   //     throw std::runtime_error("Not enough operands.");
+   // }
     Node* top = topvalue;
     AST* value = top->data;
     topvalue = top->next;
