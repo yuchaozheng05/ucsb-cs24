@@ -59,9 +59,9 @@ AST* AST::parse(const std::string& expression) {
             stack.push(node);
         }
         else if(token == "+") {
-            //if(stack.size() < 2) { // Check if there are enough operands
-            //    throw std::runtime_error("Not enough operands.");
-            //}
+            if(stack.size() < 2) { // Check if there are enough operands
+                throw std::runtime_error("Not enough operands.");
+            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor(token[0], left, right )); // Pass operator char directly
