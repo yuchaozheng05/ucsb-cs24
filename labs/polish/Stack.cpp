@@ -14,10 +14,7 @@ Stack::Node::Node(AST* d, Node* n)
 }
 Stack::~Stack()
 {
-    while(!isEmpty())
-    {
-        delete pop();
-    }
+    delete topvalue;
 }
 void Stack::push(AST* value)
 {
