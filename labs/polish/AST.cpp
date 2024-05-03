@@ -58,41 +58,47 @@ AST* AST::parse(const std::string& expression) {
             AST* node = new Number(std::stod(token));
             stack.push(node);
         }
+        else if(token == "+")
+        {
+            
+            AST* right = stack.pop();
+            AST* left = stack.pop();
+            stack.push(new Opertor('+', left, right ));
+        }
+        else if(token == "-")
+        {
+           
+            AST* right = stack.pop();
+            AST* left = stack.pop();
+            stack.push(new Opertor('-', left, right ));
+        }
+        else if(token == "*")
+        {
+            
+            AST* right = stack.pop();
+            AST* left = stack.pop();
+            stack.push(new Opertor('*', left, right ));
+        }
+        else if(token == "/")
+        {
+            
+            AST* right = stack.pop();
+            AST* left = stack.pop();
+            stack.push(new Opertor('/', left, right ));
+        }
+        else if(token =="~")
+        {
+            
+            AST* left = stack.pop();
+            stack.push(new Opertor('~',left,nullptr));
+        }
+        else if(token == "%")
+        {     
+            AST* right = stack.pop();
+            AST* left = stack.pop();
+            stack.push(new Opertor('%', left, right ));
+        }
         else{
-            int neededOperands = (token == "~") ? 1 : 2;
-            if (stack.size() < neededOperands) {
-                throw std::runtime_error("Not enough operands.");
-            }
-        }
-        AST* right = stack.pop();
-        AST* left = stack.pop();
-
-        if (token == "+") 
-        {
-            stack.push(new Opertor('+', left, right));
-        }
-        else if (token == "-")
-        { 
-            stack.push(new Opertor('-', left, right));
-        }
-        else if (token == "*") 
-        {
-            stack.push(new Opertor('*', left, right));
-        }
-        else if (token == "/") 
-        {
-            stack.push(new Opertor('/', left, right));
-        }
-        else if (token == "%") 
-        {
-            stack.push(new Opertor('%', left, right));
-        }
-        else if (token == "~") 
-        {
-            stack.push(new Opertor('~', left, nullptr));
-        }
-        else 
-        {
             throw std::runtime_error("Invalid token: " + token);
         }
 
