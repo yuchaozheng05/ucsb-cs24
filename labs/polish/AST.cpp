@@ -52,6 +52,10 @@ AST* AST::parse(const std::string& expression) {
     Stack stack;
     while(stream >> token) {
         //size_t length = token.size();
+        if(!(stream>>token))
+        {
+            throw std::runtime_error("No enough operands.");
+        }
         if(isnumber(token))
         {
             //std::cout<<"is number !!! ";
@@ -60,59 +64,35 @@ AST* AST::parse(const std::string& expression) {
         }
         else if(token == "+")
         {
-            if(stack.size()<2)
-            {
-                throw std::runtime_error("Not enough operands.");
-            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('+', left, right ));
         }
         else if(token == "-")
         {
-            if(stack.size()<2)
-            {
-                throw std::runtime_error("Not enough operands.");
-            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('-', left, right ));
         }
         else if(token == "*")
         {
-            if(stack.size()<2)
-            {
-                throw std::runtime_error("Not enough operands.");
-            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('*', left, right ));
         }
         else if(token == "/")
         {
-            if(stack.size()<2)
-            {
-                throw std::runtime_error("Not enough operands.");
-            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('/', left, right ));
         }
         else if(token =="~")
         {
-            if(stack.isEmpty())
-            {
-                throw std::runtime_error("Not enough operands.");
-            }
             AST* left = stack.pop();
             stack.push(new Opertor('~',left,nullptr));
         }
         else if(token == "%")
         {
-            if(stack.size()<2)
-            {
-                throw std::runtime_error("Not enough operands.");
-            }
             AST* right = stack.pop();
             AST* left = stack.pop();
             stack.push(new Opertor('%', left, right ));
