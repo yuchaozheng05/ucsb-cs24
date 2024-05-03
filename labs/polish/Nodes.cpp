@@ -46,6 +46,18 @@ Opertor::~Opertor()
 std::string Opertor::prefix()const
 {
     std::string result;
+    if (!left && !right) {
+        if (oper == '~') {
+            result += oper;
+            result += " ";
+            result += left->prefix();
+            return result;
+        }
+        throw std::runtime_error("Missing operands");
+    } 
+    else if (!left || !right) {
+        throw std::runtime_error("Missing operand");
+    }
     result += oper;
     result += " ";
     result += left->prefix();
