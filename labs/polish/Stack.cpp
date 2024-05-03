@@ -1,5 +1,5 @@
 #include "Stack.h"
-//#include <sstream>
+#include <sstream>
 
 // Implement your Stack member functions here.
 Stack::Stack()
@@ -27,10 +27,10 @@ void Stack::push(AST* value)
 }
 AST* Stack::pop()
 {
-    //if(isEmpty())
-    //{
-    //    throw std::runtime_error("Not enough operands.");
-    //}
+    if(isEmpty())
+    {
+        throw std::runtime_error("Not enough operands.");
+    }
     Node* top = topvalue;
     //if (!top) { 
     //    throw std::runtime_error("Not enough operands.");
