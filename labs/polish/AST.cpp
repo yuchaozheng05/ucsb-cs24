@@ -58,45 +58,14 @@ AST* AST::parse(const std::string& expression) {
             AST* node = new Number(std::stod(token));
             stack.push(node);
         }
-        else if(token == "+")
-        {
+        else if(token == "+" || token == "-" || token == "*" || token == "/" || token == "%" || token == "~") {
+            if(stack.size() < 2) { // Check if there are enough operands
+                throw std::runtime_error("Not enough operands.");
+            }
             
             AST* right = stack.pop();
             AST* left = stack.pop();
-            stack.push(new Opertor('+', left, right ));
-        }
-        else if(token == "-")
-        {
-           
-            AST* right = stack.pop();
-            AST* left = stack.pop();
-            stack.push(new Opertor('-', left, right ));
-        }
-        else if(token == "*")
-        {
-            
-            AST* right = stack.pop();
-            AST* left = stack.pop();
-            stack.push(new Opertor('*', left, right ));
-        }
-        else if(token == "/")
-        {
-            
-            AST* right = stack.pop();
-            AST* left = stack.pop();
-            stack.push(new Opertor('/', left, right ));
-        }
-        else if(token =="~")
-        {
-            
-            AST* left = stack.pop();
-            stack.push(new Opertor('~',left,nullptr));
-        }
-        else if(token == "%")
-        {     
-            AST* right = stack.pop();
-            AST* left = stack.pop();
-            stack.push(new Opertor('%', left, right ));
+            stack.push(new Opertor(token[0], left, right )); // Pass operator char directly
         }
         else{
             throw std::runtime_error("Invalid token: " + token);
