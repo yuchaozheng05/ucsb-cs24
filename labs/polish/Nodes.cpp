@@ -57,6 +57,7 @@ std::string Opertor::prefix()const
 
 std::string Opertor::postfix()const
 {
+    std::string result;
     if(left && !right)
     {
        if(oper == '~')
@@ -68,7 +69,12 @@ std::string Opertor::postfix()const
     else if (!left || !right) {
         throw std::runtime_error("Missing operator");
     }
-    return left->prefix() + " " + right->prefix() + " " + oper;
+    result += left->postfix();
+    result += " ";
+    result += right->postfix();
+    result += " ";
+    result += oper;
+    return result;
 }
 
 double Opertor::value()const
