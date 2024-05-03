@@ -1,5 +1,5 @@
 #include "Nodes.h"
-
+#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -10,7 +10,6 @@ std::string format(double number) {
   return stream.str();
 }
 
-
 // Implement your AST subclasses' member functions here.
 Number::Number(double number)
 {
@@ -19,12 +18,12 @@ Number::Number(double number)
 
 std::string Number::prefix()const
 {
-  return std::to_string(num);
+  return format(num);
 }
 
 std::string Number::postfix()const
 {
-  return std::to_string(num);
+  return format(num);
 }
 
 double Number::value()const
