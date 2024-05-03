@@ -109,15 +109,10 @@ AST* AST::parse(const std::string& expression) {
     {
         throw std::runtime_error("No input.");
     }
-    if(stack.size()!=0)
+     if(stack.size()>1)
     {
-          if(stack.size()>1)
-           {
-             throw std::runtime_error("Too many operands.");
-           }
-           else{
-            throw std::runtime_error("Not enough operators.");
-           }
+      throw std::runtime_error("Too many operands.");
     }
+         
     return stack.pop();
 }
