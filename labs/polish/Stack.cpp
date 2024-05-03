@@ -1,5 +1,5 @@
 #include "Stack.h"
-#include <sstream>
+//#include <sstream>
 
 // Implement your Stack member functions here.
 Stack::Stack()

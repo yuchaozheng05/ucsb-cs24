@@ -58,7 +58,12 @@ AST* AST::parse(const std::string& expression) {
             AST* node = new Number(std::stod(token));
             stack.push(node);
         }
-        else if(token == "+")
+        else{
+            int neededOperands = (token == "~") ? 1 : 2;
+            if (stack.size() < neededOperands) {
+                throw std::runtime_error("Not enough operands.");
+        }
+        if(token == "+")
         {
             
             AST* right = stack.pop();
