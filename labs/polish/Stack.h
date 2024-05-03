@@ -18,8 +18,9 @@ public:
    ~Stack();
    void push(AST* value);
    AST* pop();
-   AST* top()const;
-   int size();
+   //AST* top()const;
+   int size()const;
+   bool isEmpty()const;
    
 };
 #endif

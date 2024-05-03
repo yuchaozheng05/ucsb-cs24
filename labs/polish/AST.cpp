@@ -100,7 +100,7 @@ AST* AST::parse(const std::string& expression) {
         }
         else if(token =="~")
         {
-            if(stack.top()==nullptr)
+            if(stack.isEmpty())
             {
                 throw std::runtime_error("Not enough operands.");
             }
@@ -123,7 +123,7 @@ AST* AST::parse(const std::string& expression) {
 
     }
     //return 0;
-    if(stack.top()==nullptr)
+    if(stack.isEmpty())
     {
         throw std::runtime_error("No input.");
     }

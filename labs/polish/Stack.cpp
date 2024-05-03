@@ -31,13 +31,18 @@ AST* Stack::pop()
     return value;
 
 }
-AST* Stack::top()const
-{
-    return topvalue->data;
-}
-int Stack::size()
+
+int Stack::size()const
 {
     return count;
+}
+bool Stack::isEmpty()const
+{
+    if(topvalue == nullptr)
+    {
+        return true;
+    }
+    return false;
 }
 
 
