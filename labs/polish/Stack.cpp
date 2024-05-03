@@ -12,10 +12,7 @@ Stack::Node::Node(AST* d, Node* n)
 }
 Stack::~Stack()
 {
-    while(topvalue)
-    {
-        pop();
-    }
+    delete topvalue;
 }
 void Stack::push(AST* value)
 {
