@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <cmath>
 
 // This creates the number format the autograder expects:
 std::string format(double number) {
@@ -124,7 +125,8 @@ double Opertor::value()const
     {
       throw std::runtime_error("Division by zero.");
     }
-    return leftvalue - (rightvalue * int(leftvalue/rightvalue));
+    //return leftvalue - (rightvalue * int(leftvalue/rightvalue));
+    return fmod(leftvalue, rightvalue);
   }
   else
   {
