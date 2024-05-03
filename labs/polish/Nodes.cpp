@@ -46,10 +46,10 @@ Opertor::~Opertor()
 std::string Opertor::prefix()const
 {
   //std::string result;
-  if(!left || !right)
-  {
-    throw std::runtime_error("Missing operator");
-  }
+  //if(!left || !right)
+  //{
+  //  throw std::runtime_error("Missing operator");
+  //}
   return oper + " " + left->prefix() + " " + right->prefix();
   //return result;
 
@@ -58,9 +58,9 @@ std::string Opertor::prefix()const
 std::string Opertor::postfix()const
 {
   // std::string result;
-  if (!left || !right) {
-        throw std::runtime_error("Missing operator.");
-    }
+  //if (!left || !right) {
+  //      throw std::runtime_error("Missing operator.");
+  //  }
   return left->postfix() + " " + right->postfix() + " " + oper;
   // return result;
 }
