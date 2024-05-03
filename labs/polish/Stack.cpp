@@ -33,7 +33,7 @@ AST* Stack::pop()
     //}
     Node* top = topvalue;
     if (!top) { 
-        throw std::runtime_error("Not enough operands");
+        throw std::runtime_error("Not enough operands.");
     }
     AST* value = top->data;
     topvalue = top->next;
