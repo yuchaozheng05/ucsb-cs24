@@ -62,6 +62,7 @@ AST* AST::parse(const std::string& expression) {
             int neededOperands = (token == "~") ? 1 : 2;
             if (stack.size() < neededOperands) {
                 throw std::runtime_error("Not enough operands.");
+            }
         }
         if(token == "+")
         {
