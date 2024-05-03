@@ -4,14 +4,6 @@
 #include <sstream>
 #include <iostream>
 
-AST* parse_prefix(std::istream& tokens){
-    std::string token;
-    if(!(tokens >> token))
-    {
-        throw std::runtime_error("Not enough operands.");
-    }
-}
-
 bool isnumber(const std::string& input) {
     size_t index =0;
     bool hasdigit=false;
