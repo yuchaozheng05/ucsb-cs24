@@ -80,14 +80,14 @@ std::set<Person*> GenePool::everyone()const
 Person* GenePool::find(const std::string& name)const
 {
     auto person = people.find(name);
-    if(person == people.end())
+    if(person != people.end())
     {
         //addPerson(name, Person*person);
-        throw std::runtime_error("can't find person");
-        //return nullptr;
+        //throw std::runtime_error("can't find person");
+        return person->second;
     }
     else
     {
-        return person->second;
+        return nullptr;
     }
 }
