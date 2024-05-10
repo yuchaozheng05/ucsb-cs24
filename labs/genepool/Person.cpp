@@ -7,8 +7,13 @@ Person::Person(std::string& name_person, Gender gender_person, Person* mother, P
     this->gender_ = gender_person;
     this->mother_ = mother;
     this->father_ = father;
-    father->child.insert(this);
-    mother->child.insert(this);
+    if(father)
+    {
+        father->child.insert(this);
+    }
+    if(mother){
+        mother_->child.insert(this);
+    }
 }
 
 Person::~Person(){}
