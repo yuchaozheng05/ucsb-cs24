@@ -271,13 +271,13 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             std::set<Person*>mother_child = mother_->children();
             for(Person* silb: mother_child)
             {
-                if(silb!=this)
-                {
-                    if(smod == SMod::FULL || smod == SMod::HALF)
-                    {
+                  if(silb!=this)
+                  {
+                //    if(smod == SMod::FULL || smod == SMod::HALF)
+                //    {
                         sibling.insert(silb);
-                    }
-                }
+                //    }
+                  }
             }
         }
     }
@@ -290,10 +290,10 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             {
                 if(silb!=this)
                 {
-                    if(smod == SMod::FULL || smod == SMod::HALF)
-                    {
+                    //if(smod == SMod::FULL || smod == SMod::HALF)
+                    //{
                         sibling.insert(silb);
-                    }
+                    //}
                 }
             }
         }
