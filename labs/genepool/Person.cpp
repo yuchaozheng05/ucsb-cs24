@@ -320,7 +320,7 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
 std::set<Person*> Person::brothers(PMod pmod, SMod smod)
 {
     std::set<Person*> bro;
-    std::set<Person*>slib = this->siblings(PMod::ANY, SMod::ANY);
+    std::set<Person*>slib = this->siblings(pmod, smod);
     for(Person* slibing: slib)
     {
         if(slibing)
