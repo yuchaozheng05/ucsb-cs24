@@ -394,7 +394,7 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod)
     {
         if(mother_!=nullptr)
         {
-            std::set<Person*> mother_sibl = mother_->siblings(pmod, smod);
+            std::set<Person*> mother_sibl = mother_->siblings(PMod::ANY, smod);
             for(Person* sibl: mother_sibl)
             {
                 if(sibl)
@@ -411,7 +411,7 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod)
     {
         if(father_!=nullptr)
         {
-            std::set<Person*> father_sibl = father_->siblings(pmod, smod);
+            std::set<Person*> father_sibl = father_->siblings(PMod::ANY, smod);
             for(Person* sibl: father_sibl)
             {
                 if(sibl)
