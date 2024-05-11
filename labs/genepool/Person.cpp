@@ -273,10 +273,14 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             {
                   if(silb!=this)
                   {
-                //    if(smod == SMod::FULL || smod == SMod::HALF)
-                //    {
+                      if(smod == SMod::FULL)
+                      {
                         sibling.insert(silb);
-                //    }
+                      }
+                      if(smod == SMod::HALF)
+                      {
+                        sibling.insert(silb);
+                      }
                   }
             }
         }
@@ -290,10 +294,14 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             {
                 if(silb!=this)
                 {
-                    //if(smod == SMod::FULL || smod == SMod::HALF)
-                    //{
+                      if(smod == SMod::FULL)
+                      {
                         sibling.insert(silb);
-                    //}
+                      }
+                      if(smod == SMod::HALF)
+                      {
+                        sibling.insert(silb);
+                      }
                 }
             }
         }
