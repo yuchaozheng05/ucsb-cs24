@@ -434,7 +434,7 @@ std::set<Person*> Person::uncles(PMod pmod, SMod smod)
     {
         if(mother_!=nullptr)
         {
-            std::set<Person*> mother_sibl = mother_->siblings(pmod, smod);
+            std::set<Person*> mother_sibl = mother_->siblings(PMod::ANY, smod);
             for(Person* sibl: mother_sibl)
             {
                 if(sibl)
