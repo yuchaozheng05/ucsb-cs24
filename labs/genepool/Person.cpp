@@ -273,14 +273,18 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             {
                   if(silb!=this)
                   {
-                     if(smod == SMod::FULL || smod == SMod::ANY)
-                     {
-                        sibling.insert(silb);
-                     }
-                     else if(smod == SMod::HALF || smod == SMod::ANY)
-                     {
-                        sibling.insert(silb);
-                     }
+                    bool isfull = (father_ != nullptr && silb->father() == father_);
+                  if (smod == SMod::FULL && isfull) 
+                  {
+                    sibling.insert(silb);
+                  } 
+                  else if (smod == SMod::HALF && !isfull) 
+                  {
+                    sibling.insert(silb);
+                  } 
+                  else if (smod == SMod::ANY) {
+                    sibling.insert(silb);
+                }
                   }
             }
         }
@@ -294,14 +298,18 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             {
                 if(silb!=this)
                   {
-                     if(smod == SMod::FULL || smod == SMod::ANY)
-                     {
-                        sibling.insert(silb);
-                     }
-                     else if(smod == SMod::HALF || smod == SMod::ANY)
-                     {
-                        sibling.insert(silb);
-                     }
+                    bool isfull = (mother_ != nullptr && silb->mother() == mother_);
+                  if (smod == SMod::FULL && isfull) 
+                  {
+                    sibling.insert(silb);
+                  } 
+                  else if (smod == SMod::HALF && !isfull) 
+                  {
+                    sibling.insert(silb);
+                  } 
+                  else if (smod == SMod::ANY) {
+                    sibling.insert(silb);
+                }
                   }
             }
         }
