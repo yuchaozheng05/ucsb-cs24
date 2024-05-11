@@ -337,7 +337,7 @@ std::set<Person*> Person::brothers(PMod pmod, SMod smod)
 std::set<Person*> Person::sisters(PMod pmod, SMod smod)
 {
     std::set<Person*> sis;
-    std::set<Person*>slib = this->siblings(PMod::ANY, SMod::ANY);
+    std::set<Person*>slib = this->siblings(pmod, smod);
     for(Person* slibing: slib)
     {
         if(slibing)
@@ -354,7 +354,7 @@ std::set<Person*> Person::sisters(PMod pmod, SMod smod)
 std::set<Person*> Person::nieces(PMod pmod, SMod smod)
 {
     std::set<Person*> niece;
-    std::set<Person*> silbing = this->siblings(PMod::ANY, SMod::ANY);
+    std::set<Person*> silbing = this->siblings(pmod, smod);
     for(Person* silb: silbing)
     {
         std::set<Person*>child = silb->children();
@@ -372,7 +372,7 @@ std::set<Person*> Person::nieces(PMod pmod, SMod smod)
 std::set<Person*> Person::nephews(PMod pmod, SMod smod)
 {
     std::set<Person*> nephews;
-    std::set<Person*> silbing = this->siblings(PMod::ANY, SMod::ANY);
+    std::set<Person*> silbing = this->siblings(pmod, smod);
     for(Person* silb: silbing)
     {
         std::set<Person*>child = silb->children();
@@ -394,7 +394,7 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod)
     {
         if(mother_!=nullptr)
         {
-            std::set<Person*> mother_sibl = mother_->siblings(PMod::ANY, SMod::ANY);
+            std::set<Person*> mother_sibl = mother_->siblings(pmod, smod);
             for(Person* sibl: mother_sibl)
             {
                 if(sibl)
@@ -411,7 +411,7 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod)
     {
         if(father_!=nullptr)
         {
-            std::set<Person*> father_sibl = father_->siblings(PMod::ANY, SMod::ANY);
+            std::set<Person*> father_sibl = father_->siblings(pmod, smod);
             for(Person* sibl: father_sibl)
             {
                 if(sibl)
@@ -434,7 +434,7 @@ std::set<Person*> Person::uncles(PMod pmod, SMod smod)
     {
         if(mother_!=nullptr)
         {
-            std::set<Person*> mother_sibl = mother_->siblings(PMod::ANY, SMod::ANY);
+            std::set<Person*> mother_sibl = mother_->siblings(pmod, smod);
             for(Person* sibl: mother_sibl)
             {
                 if(sibl)
@@ -451,7 +451,7 @@ std::set<Person*> Person::uncles(PMod pmod, SMod smod)
     {
         if(father_!=nullptr)
         {
-            std::set<Person*> father_sibl = father_->siblings(PMod::ANY, SMod::ANY);
+            std::set<Person*> father_sibl = father_->siblings(pmod, smod);
             for(Person* sibl: father_sibl)
             {
                 if(sibl)
