@@ -470,8 +470,8 @@ std::set<Person*> Person::uncles(PMod pmod, SMod smod)
 std::set<Person*> Person::cousins(PMod pmod, SMod smod)
 {
     std::set<Person*>cousin;
-    std::set<Person*>aunt_ = this->aunts(PMod::ANY, SMod::ANY);
-    std::set<Person*>uncle_ = this->uncles(PMod::ANY, SMod::ANY);
+    std::set<Person*>aunt_ = this->aunts(pmod, smod);
+    std::set<Person*>uncle_ = this->uncles(pmod, smod);
     for(Person* aunt_child: aunt_)
     {
         std::set<Person*>child = aunt_child->children();
