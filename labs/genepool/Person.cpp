@@ -273,7 +273,14 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             {
                   if(silb!=this)
                   {
-                    sibling.insert(silb);
+                     if(smod == SMod::FULL || smod == SMod::ANY)
+                     {
+                        sibling.insert(silb);
+                     }
+                     else if(smod == SMod::HALF || smod == SMod::ANY)
+                     {
+                        sibling.insert(silb);
+                     }
                   }
             }
         }
@@ -286,59 +293,17 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod)
             for(Person* silb: father_child)
             {
                 if(silb!=this)
-                {
-                    sibling.insert(silb);
-                }
-            }
-        }
-    }
-    if(smod == SMod::FULL || smod == SMod::ANY)
-    {
-        if(mother_ != nullptr && father_ != nullptr)
-        {
-            std::set<Person*>father_child = father_->children();
-            for(Person* silb: father_child)
-            {
-                if(silb!=this)
-                {
-                    sibling.insert(silb);
-                }
-            }
-            std::set<Person*>mother_child = mother_->children();
-            for(Person* silb: mother_child)
-            {
-                  if(silb!=this)
                   {
-                    sibling.insert(silb);
+                     if(smod == SMod::FULL || smod == SMod::ANY)
+                     {
+                        sibling.insert(silb);
+                     }
+                     else if(smod == SMod::HALF || smod == SMod::ANY)
+                     {
+                        sibling.insert(silb);
+                     }
                   }
             }
-        }
-    }
-    if(smod == SMod::HALF || smod == SMod::ANY)
-    {
-        if(mother_ != nullptr)
-        {
-            std::set<Person*>mother_child = mother_->children();
-            for(Person* silb: mother_child)
-            {
-                  if(silb!=this)
-                  {
-                    sibling.insert(silb);
-                  }
-            }
-        }
-        else{
-            if(father_!=nullptr)
-        {
-            std::set<Person*>father_child = father_->children();
-            for(Person* silb: father_child)
-            {
-                if(silb!=this)
-                {
-                    sibling.insert(silb);
-                }
-            }
-        }
         }
     }
     return sibling;
