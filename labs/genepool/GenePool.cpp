@@ -11,16 +11,15 @@ GenePool::GenePool(std::istream& stream)
     Person* father_;
     while(getline(stream, line))
     {
-        if(line.empty() || line[0]=='#' )
+        if(line.empty() || line[0]=='#')
         {
             continue;
         }
         std::istringstream data(line);
-        std::string name;
-        data>>name;
-        std::string gender_p;
-        data>>gender_p;
-        if(gender_p == "male")
+        std::string name, gender_, mother, father;
+        std::getline(data, name, '\t');
+        std::getline(data, gender_, '\t');
+        if(gender_ == "male")
         {
             gender = Gender::MALE;
         }
@@ -28,26 +27,21 @@ GenePool::GenePool(std::istream& stream)
         {
             gender = Gender::FEMALE;
         }
-        std::string mother;
-        data>>mother;
-        if(mother != "???")
+        std::getline(data, mother, '\t');
+        if(mother!="???")
         {
-            //person->setMother(find(mother));
-            mother_ = find(mother);
+            mother_ = people[mother];
         }
-        if(mother == "???")
-        {
+        else{
             mother_ = nullptr;
         }
-        std::string father;
-        data>>father;
-        if(father =="???")
+        std::getline(data, father, '\t');
+        if(father!="???")
         {
-            father_=nullptr;
+            father_ = people[father];
         }
-        if(father != "???")
-        {
-            father_=find(father);
+        else{
+            father_ = nullptr;
         }
         Person* person = new Person(name, gender, mother_, father_);
         addPerson(name, person);
