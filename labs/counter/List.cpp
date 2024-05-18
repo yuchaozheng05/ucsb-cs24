@@ -55,26 +55,26 @@ List::Node* List::find(const std::string &key)const
     return nullptr;
 }
 
-void List::remove(Node* node)
+void List::remove(const std::string& key, int value)
 {
-    if(node == nullptr)
-    {
-        return;
-    }
-    if(node->prev != nullptr)
+   Node* node = find(key);
+   if (node == nullptr) 
+   {
+      return;
+   }
+
+    if (node->prev != nullptr) 
     {
         node->prev->next = node->next;
-
-    }
-    else
-    {
+    } 
+    else {
         head = node->next;
     }
-    if(node -> next != nullptr)
-    {
-        node -> next -> prev = node->prev;
-    }
-    else{
+
+    if (node->next != nullptr) {
+        node->next->prev = node->prev;
+    } 
+    else {
         tail = node->prev;
     }
     delete node;

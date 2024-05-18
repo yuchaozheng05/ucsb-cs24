@@ -42,11 +42,6 @@ void Counter:: dec(const std::string& key, int by)
     {
         node->value -= by;
         total_ -= by;
-        if(node->value <= 0)
-        {
-            total_ -= node->value;
-            removeNode(node);
-        }
     }
 }
 
@@ -54,8 +49,7 @@ void Counter::del(const std::string& key) {
     List::Node* node = list.find(key);
     if (node != nullptr) {
         total_ -= node->value;
-        removeNode(node);
-        //count_--;
+        removeNode(key, node->value);
     }
 }
 
@@ -75,9 +69,9 @@ void Counter::insertNode(const std::string& key, int value)
     count_++;
 }
 
-void Counter::removeNode(List::Node* node)
+void Counter::removeNode(const std::string& key, int value)
 {
-    list.remove(node);
+    list.remove(key, value);
     count_--;
 }
 
