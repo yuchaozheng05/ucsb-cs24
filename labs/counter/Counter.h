@@ -1,30 +1,31 @@
 #ifndef COUNTER_H
 #define COUNTER_H
 
+
 #include <cstddef>
 #include <string>
 #include "List.h"
-//#include "Iterator.h"
+#include "Iterator.h"
 #include "Index.h"
 
 // This is the Counter class you need to implement.
 // It includes the Counter::Iterator as a nested class.
 
 class Counter {
-public:
-  class Iterator {
-    // Member Variables
-    List::Node* current;
-
-  public:
-    Iterator(List::Node* node);
-    const std::string& key() const;
-    int value() const;
-
-    void operator ++ ();
-    bool operator == (const Iterator& other) const;
-    bool operator != (const Iterator& other) const;
-  };
+//public:
+//  class Iterator {
+//    // Member Variables
+//    List::Node* current;
+//
+//  public:
+//    Iterator(List::Node* node);
+//    const std::string& key() const;
+//    int value() const;
+//
+//    void operator ++ ();
+//    bool operator == (const Iterator& other) const;
+//    bool operator != (const Iterator& other) const;
+//  };
 
 private:
   // Member Variables
@@ -37,6 +38,8 @@ private:
   void insertNode(const std::string& key, int value);
   void removeNode(List::Node* node);
 
+public:
+  using Iterator = ::Iterator;
 public:
   Counter();
   ~Counter();

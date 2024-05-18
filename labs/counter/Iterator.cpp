@@ -1,22 +1,23 @@
-#include "Counter.h"
+//#include "Counter.h"
+#include "Iterator.h"
 
 // Counter::Iterator Member Functions
-Counter::Iterator::Iterator(List::Node* node)
+Iterator::Iterator(List::Node* node)
 {
     current = node;
 }
 
-const std::string& Counter::Iterator::key()const
+const std::string& ::Iterator::key()const
 {
     return current->key;
 }
 
-int Counter::Iterator::value()const
+int Iterator::value()const
 {
     return current->value;
 }
 
-void Counter::Iterator::operator++()
+void Iterator::operator++()
 {
     if(current != nullptr)
     {
@@ -24,7 +25,7 @@ void Counter::Iterator::operator++()
     }
 }
 
-bool Counter::Iterator::operator == (const Iterator& other)const
+bool Iterator::operator == (const Iterator& other)const
 {
     if(current == other.current)
     {
@@ -33,7 +34,7 @@ bool Counter::Iterator::operator == (const Iterator& other)const
     return false;
 }
 
-bool Counter::Iterator::operator != (const Iterator& other)const
+bool Iterator::operator != (const Iterator& other)const
 {
     if(current != other.current)
     {

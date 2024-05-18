@@ -23,13 +23,16 @@ main.o: main.cpp Counter.h
 word-count.o: word-count.cpp Counter.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
-Counter.o: Counter.cpp Counter.h List.h Index.h
+Counter.o: Counter.cpp Counter.h 
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 Index.o: Index.cpp Index.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 List.o: List.cpp List.h
+	${CXX} $(CXXFLAGS) -c -o $@ $<
+
+Iterator.o: Iterator.cpp Iterator.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 clean:

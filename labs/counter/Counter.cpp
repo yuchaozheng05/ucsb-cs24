@@ -1,4 +1,6 @@
 #include "Counter.h"
+#include "Iterator.h"
+
 Counter::Counter()
 {
     count_ = 0;
