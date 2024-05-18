@@ -41,8 +41,11 @@ void Counter:: dec(const std::string& key, int by)
     if (node != nullptr) 
     {
         node->value -= by;
-        total_ -= by;
     }
+    else{
+        insertNode(key, by);
+    }
+    total_ -=by;
 }
 
 void Counter::del(const std::string& key) {
