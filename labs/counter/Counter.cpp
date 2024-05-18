@@ -42,6 +42,10 @@ void Counter:: dec(const std::string& key, int by)
     {
         node->value -= by;
     } 
+    else
+    {
+        removeNode(node);
+    }
     total_ -= by;
 }
 
