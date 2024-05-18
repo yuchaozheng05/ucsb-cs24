@@ -3,6 +3,9 @@
 
 #include <cstddef>
 #include <string>
+#include "List.h"
+//#include "Iterator.h"
+#include "Index.h"
 
 // This is the Counter class you need to implement.
 // It includes the Counter::Iterator as a nested class.
@@ -11,8 +14,10 @@ class Counter {
 public:
   class Iterator {
     // Member Variables
+    List::Node* current;
 
   public:
+    Iterator(List::Node* node);
     const std::string& key() const;
     int value() const;
 
@@ -23,9 +28,14 @@ public:
 
 private:
   // Member Variables
+  List list;
+  size_t count_;
+  int total_;
 
 private:
   // Helper Functions
+  void insertNode(const std::string& key, int value);
+  void removeNode(List::Node* node);
 
 public:
   Counter();
