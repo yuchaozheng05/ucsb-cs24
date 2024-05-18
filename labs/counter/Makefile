@@ -20,16 +20,10 @@ char-count.o: char-count.cpp Counter.h
 main.o: main.cpp Counter.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
-AST.o: AST.cpp AST.h Nodes.h
-	${CXX} $(CXXFLAGS) -c -o $@ $<
-
 word-count.o: word-count.cpp Counter.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
-Counter.o: Counter.cpp Counter.h
-	${CXX} $(CXXFLAGS) -c -o $@ $<
-
-Iterator.o: Iterator.cpp Counter.h
+Counter.o: Counter.cpp Counter.h List.h Index.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 Index.o: Index.cpp Index.h
