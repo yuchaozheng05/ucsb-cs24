@@ -89,11 +89,6 @@ void Counter::set(const std::string& key, int count)
         total_ += (count - node->value);
         node->value = count;
     }
-    if(node->value <=0)
-    {
-        total_ -= node->value;
-        removeNode(node);
-    }
     else{
         insertNode(key, count);
         total_+=count;
