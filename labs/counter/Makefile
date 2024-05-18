@@ -29,7 +29,7 @@ word-count.o: word-count.cpp Counter.h
 Counter.o: Counter.cpp Counter.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
-Interator.o: Inerator.cpp Counter.h
+Iterator.o: Iterator.cpp Counter.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 Index.o: Index.cpp Index.h
@@ -39,4 +39,4 @@ List.o: List.cpp List.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f main char-count word-count main.o char-count.o word-count.o Counter.o Index.o List.o Interator.o
+	rm -f main char-count word-count main.o char-count.o word-count.o Counter.o Index.o List.o Iterator.o
