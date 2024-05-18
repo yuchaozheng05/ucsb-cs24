@@ -44,6 +44,7 @@ void Counter:: dec(const std::string& key, int by)
         total_ -= by;
         if(node->value <= 0)
         {
+            total_ -= node->value;
             removeNode(node);
         }
     }
@@ -87,6 +88,11 @@ void Counter::set(const std::string& key, int count)
     {
         total_ += (count - node->value);
         node->value = count;
+    }
+    if(node->value <=0)
+    {
+        total_ -= node->value;
+        removeNode(node);
     }
     else{
         insertNode(key, count);
