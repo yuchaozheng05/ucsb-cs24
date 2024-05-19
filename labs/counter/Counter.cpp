@@ -44,8 +44,8 @@ void Counter:: dec(const std::string& key, int by)
         total_ -= by;
     }
     else{
-        insertNode(key, by);
-        total_ += by;
+        insertNode(key, -by);
+        total_ -= by;
     }
 }
 
