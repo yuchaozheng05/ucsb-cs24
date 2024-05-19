@@ -23,7 +23,7 @@ int Counter::total()const{
 
 void Counter:: inc(const std::string& key, int by)
 {
-    List::Node* node = list.find(key);
+    List::Node* node = index.find(key);
     if (node != nullptr)
     {
         node->value += by;
@@ -37,7 +37,7 @@ void Counter:: inc(const std::string& key, int by)
 
 void Counter:: dec(const std::string& key, int by)
 {
-    List::Node* node = list.find(key);
+    List::Node* node = index.find(key);
     if (node != nullptr) 
     {
         node->value -= by;
@@ -50,7 +50,7 @@ void Counter:: dec(const std::string& key, int by)
 }
 
 void Counter::del(const std::string& key) {
-    List::Node* node = list.find(key);
+    List::Node* node = index.find(key);
     if (node != nullptr) {
         total_ -= node->value;
         removeNode(key, node->value);
@@ -59,7 +59,7 @@ void Counter::del(const std::string& key) {
 
 int Counter::get(const std::string& key)const
 {
-    List::Node* node = list.find(key);
+    List::Node* node = index.find(key);
     if(node != nullptr)
     {
         return node->value;
@@ -70,18 +70,20 @@ int Counter::get(const std::string& key)const
 void Counter::insertNode(const std::string& key, int value)
 {
     list.addtail(key, value);
+    //index.insert(key value);
     count_++;
 }
 
 void Counter::removeNode(const std::string& key, int value)
 {
     list.remove(key, value);
+    //index.remove(node->value);
     count_--;
 }
 
 void Counter::set(const std::string& key, int count)
 {
-    List::Node* node = list.find(key);
+    List::Node* node = index.find(key);
     if(node != nullptr)
     {
         total_ += (count - node->value);

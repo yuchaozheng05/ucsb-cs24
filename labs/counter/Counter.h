@@ -18,6 +18,7 @@ private:
   List list;
   size_t count_;
   int total_;
+  Index index;
 
 private:
   // Helper Functions
