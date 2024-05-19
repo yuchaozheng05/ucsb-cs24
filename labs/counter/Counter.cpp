@@ -1,6 +1,6 @@
 #include "Counter.h"
 #include "Iterator.h"
-
+#include "Index.h"
 Counter::Counter()
 {
     count_ = 0;
@@ -70,14 +70,14 @@ int Counter::get(const std::string& key)const
 void Counter::insertNode(const std::string& key, int value)
 {
     list.addtail(key, value);
-    //index.insert(key value);
+    index.insert(key, value);
     count_++;
 }
 
 void Counter::removeNode(const std::string& key, int value)
 {
     list.remove(key, value);
-    //index.remove(node->value);
+    index.remove(key);
     count_--;
 }
 
