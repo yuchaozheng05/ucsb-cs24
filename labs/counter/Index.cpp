@@ -6,6 +6,7 @@ Index::HashTable::HashTable(std::string k, int v)
     key =k;
     value = v;
     node = new List::Node(k,v);
+    next = nullptr;
 }
 
 Index::HashTable::~HashTable()
@@ -25,7 +26,14 @@ Index::Index(size_t capacity_)
 
 Index::~Index() {
     for (size_t i = 0; i < capacity; ++i) {
-        delete table[i];
+        HashTable* e = table[i];
+        while(e != nullptr)
+        {
+            HashTable* next = e->next;
+            delete e;
+            e=next;
+        }
+
     }
     delete[] table;
 }
@@ -40,46 +48,125 @@ size_t Index::hash(const std::string& key)const
     return hashvalue % capacity;
 }
 
-size_t Index::findtable(const std::string& key)const
-{
-    size_t start = hash(key);
-    while(table[start] != nullptr && table[start]->key != key)
-    {
-        start = (start+1)%capacity;
+//size_t Index::findtable(const std::string& key)const
+//{
+//    size_t start = hash(key);
+//    while(table[start] != nullptr && table[start]->key != key)
+//    {
+//        start = (start+1)%capacity;
+//    }
+//    return start;
+//}
+
+//void Index::insert(const std::string& key, int value)
+//{
+//    size_t start = findtable(key);
+//    if(table[start]!=nullptr && table[start]->key == key)
+//    {
+//        table[start]->value = value;
+//        table[start]->node->value = value;
+//    }
+//    else
+//    {
+//        table[start] = new HashTable(key, value);
+//    }
+//}
+//
+//List::Node* Index::find(const std::string& key) const {
+//    size_t start = findtable(key);
+//    if (table[start] != nullptr && table[start]->key == key) {
+//        return table[start]->node;
+//    }
+//    return nullptr;
+//}
+//
+//void Index::remove(const std::string& key) {
+//    size_t start = findtable(key);
+//    if (table[start] != nullptr && table[start]->key == key) {
+//        delete table[start];
+//        table[start] = nullptr;
+//    }
+//}
+//
+//void Index::rehash(size_t newCapacity) {
+//    HashTable** oldTable = table;
+//    size_t oldCapacity = capacity;
+//
+//    capacity = newCapacity;
+//    table = new HashTable*[capacity];
+//    for (size_t i = 0; i < capacity; ++i) {
+//        table[i] = nullptr;
+//    }
+//
+//    for (size_t i = 0; i < oldCapacity; ++i) {
+//        if (oldTable[i] != nullptr) {
+//            insert(oldTable[i]->key, oldTable[i]->value);
+//            delete oldTable[i];
+//        }
+//    }
+//
+//    delete[] oldTable;
+//}
+
+void Index::insert(const std::string& key, int value) {
+    size_t idx = hash(key);
+    HashTable* entry = table[idx];
+    HashTable* prev = nullptr;
+
+    while (entry != nullptr && entry->key != key) {
+        prev = entry;
+        entry = entry->next;
     }
-    return start;
+
+    if (entry != nullptr && entry->key == key) {
+        entry->value = value;
+        entry->node->value = value;
+    } else {
+        HashTable* newEntry = new HashTable(key, value);
+        if (prev == nullptr) {
+            table[idx] = newEntry;
+        } else {
+            prev->next = newEntry;
+        }
+    }
 }
 
-void Index::insert(const std::string& key, int value)
-{
-    size_t start = findtable(key);
-    if(table[start]!=nullptr && table[start]->key == key)
-    {
-        table[start]->value = value;
-        table[start]->node->value = value;
-    }
-    else
-    {
-        table[start] = new HashTable(key, value);
-    }
-}
-
+// Find node by key
 List::Node* Index::find(const std::string& key) const {
-    size_t start = findtable(key);
-    if (table[start] != nullptr && table[start]->key == key) {
-        return table[start]->node;
+    size_t idx = hash(key);
+    HashTable* entry = table[idx];
+
+    while (entry != nullptr) {
+        if (entry->key == key) {
+            return entry->node;
+        }
+        entry = entry->next;
     }
     return nullptr;
 }
 
+// Remove key-node pair
 void Index::remove(const std::string& key) {
-    size_t start = findtable(key);
-    if (table[start] != nullptr && table[start]->key == key) {
-        delete table[start];
-        table[start] = nullptr;
+    size_t idx = hash(key);
+    HashTable* entry = table[idx];
+    HashTable* prev = nullptr;
+
+    while (entry != nullptr && entry->key != key) {
+        prev = entry;
+        entry = entry->next;
+    }
+
+    if (entry != nullptr && entry->key == key) {
+        if (prev == nullptr) {
+            table[idx] = entry->next;
+        } else {
+            prev->next = entry->next;
+        }
+        delete entry;
     }
 }
 
+// Rehash to a new capacity
 void Index::rehash(size_t newCapacity) {
     HashTable** oldTable = table;
     size_t oldCapacity = capacity;
@@ -91,11 +178,13 @@ void Index::rehash(size_t newCapacity) {
     }
 
     for (size_t i = 0; i < oldCapacity; ++i) {
-        if (oldTable[i] != nullptr) {
-            insert(oldTable[i]->key, oldTable[i]->value);
-            delete oldTable[i];
+        HashTable* entry = oldTable[i];
+        while (entry != nullptr) {
+            insert(entry->key, entry->value);
+            HashTable* next = entry->next;
+            delete entry;
+            entry = next;
         }
     }
-
     delete[] oldTable;
 }
