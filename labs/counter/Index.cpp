@@ -2,22 +2,20 @@
 #include "Index.h"
 
 // Index Member Functions
-Index::HashTable::HashTable(std::string k, int v)
+Index::HashTable::HashTable(const std::string& k, List::Node* n)
 {
     key =k;
-    value = v;
-    node = new List::Node(k,v);
+    node = n;
     next = nullptr;
 }
 
 Index::HashTable::~HashTable()
 {
-    delete node;
+    //delete node;
 }
 
-Index::Index(size_t capacity_)
+Index::Index(size_t capacity_):capacity(capacity_), size(0)
 {
-    capacity = capacity_;
     table = new HashTable*[capacity];
     for(size_t i =0; i<capacity; i++)
     {
@@ -49,27 +47,16 @@ size_t Index::hash(const std::string& key)const
     return hashvalue % capacity;
 }
 
-void Index::insert(const std::string& key, int value) {
+void Index::insert(const std::string& key, List::Node* node) {
+    if (size >= capacity / 2) {
+        rehash(capacity * 2);
+    }
+
     size_t idx = hash(key);
-    HashTable* entry = table[idx];
-    HashTable* prev = nullptr;
-
-    while (entry != nullptr && entry->key != key) {
-        prev = entry;
-        entry = entry->next;
-    }
-
-    if (entry != nullptr && entry->key == key) {
-        entry->value = value;
-        entry->node->value = value;
-    } else {
-        HashTable* newEntry = new HashTable(key, value);
-        if (prev == nullptr) {
-            table[idx] = newEntry;
-        } else {
-            prev->next = newEntry;
-        }
-    }
+    HashTable* newEntry = new HashTable(key, node);
+    newEntry->next = table[idx];
+    table[idx] = newEntry;
+    ++size;
 }
 
 // Find node by key
@@ -97,13 +84,14 @@ void Index::remove(const std::string& key) {
         entry = entry->next;
     }
 
-    if (entry != nullptr && entry->key == key) {
+    if (entry != nullptr) {
         if (prev == nullptr) {
             table[idx] = entry->next;
         } else {
             prev->next = entry->next;
         }
         delete entry;
+        --size;
     }
 }
 
@@ -121,7 +109,7 @@ void Index::rehash(size_t newCapacity) {
     for (size_t i = 0; i < oldCapacity; ++i) {
         HashTable* entry = oldTable[i];
         while (entry != nullptr) {
-            insert(entry->key, entry->value);
+            insert(entry->key, entry->node);
             HashTable* next = entry->next;
             delete entry;
             entry = next;
