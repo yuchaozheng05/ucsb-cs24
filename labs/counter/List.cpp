@@ -55,7 +55,7 @@ List::Node* List::find(const std::string &key)const
     return nullptr;
 }
 
-void List::remove(const std::string& key, int value)
+void List::remove(const std::string& key)
 {
    Node* node = find(key);
    if (node == nullptr) 

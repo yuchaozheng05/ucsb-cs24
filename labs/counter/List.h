@@ -16,7 +16,7 @@ class List{
       ~List();
       void addtail(const std::string& key, int value);
       Node* find(const std::string& key)const;
-      void remove(const std::string& key, int value);
+      void remove(const std::string& key);
       Node* gethead()const;
       Node* gettail()const;
       
