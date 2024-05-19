@@ -37,14 +37,13 @@ size_t Index::hash(const std::string& key)const
     {
         hashvalue = c + (hashvalue << 6) + (hashvalue << 16) - hashvalue;
     }
-    return hashvalue % capacity;
+    return hashvalue;
 }
 
 size_t Index::findtable(const std::string& key)const
 {
     size_t start = hash(key);
-    std::string a = table[start]->key;
-    while(table[start] != nullptr && a != key)
+    while(table[start] != nullptr && table[start]->key != key)
     {
         start = (start+1)%capacity;
     }
