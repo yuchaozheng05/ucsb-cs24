@@ -11,14 +11,13 @@ class Index{
           std::string key;
           int value;
           List::Node* node;
-          HashTable* next;
-          HashTable(const std::string k, int v);
+          HashTable(std::string k, int v);
           ~HashTable();
        };
        HashTable** table;
        size_t capacity;
        size_t hash(const std::string& key)const;
-       //size_t findtable(const std::string& key)const;
+       size_t findtable(const std::string& key)const;
     public:
         Index(size_t capacity_ = 200);
         ~Index();
