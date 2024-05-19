@@ -23,7 +23,7 @@ private:
 private:
   // Helper Functions
   void insertNode(const std::string& key, int value);
-  void removeNode(const std::string& key, int value);
+  void removeNode(List::Node* node);
 
 public:
   using Iterator = ::Iterator;

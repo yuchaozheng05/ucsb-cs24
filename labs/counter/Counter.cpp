@@ -53,7 +53,7 @@ void Counter::del(const std::string& key) {
     List::Node* node = index.find(key);
     if (node != nullptr) {
         total_ -= node->value;
-        removeNode(key, node->value);
+        removeNode(node);
     }
 }
 
@@ -74,24 +74,24 @@ void Counter::insertNode(const std::string& key, int value)
     count_++;
 }
 
-void Counter::removeNode(const std::string& key, int value)
+void Counter::removeNode(List::Node* node)
 {
-    list.remove(key);
-    index.remove(key);
+    list.remove(node);
+    index.remove(node->key);
     count_--;
 }
 
-void Counter::set(const std::string& key, int count)
+void Counter::set(const std::string& key, int value)
 {
     List::Node* node = index.find(key);
     if(node != nullptr)
     {
-        total_ += (count - node->value);
-        node->value = count;
+        total_ += (value - node->value);
+        node->value = value;
     }
     else{
-        insertNode(key, count);
-        total_+=count;
+        insertNode(key, value);
+        total_+=value;
     }
 }
 
