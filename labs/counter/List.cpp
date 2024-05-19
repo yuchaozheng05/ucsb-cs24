@@ -26,7 +26,7 @@ List::~List()
     }
 }
 
-void List::addtail(const std::string &key, int value)
+List::Node* List::addtail(const std::string &key, int value)
 {
     Node* newnode = new Node(key, value);
     if(head == nullptr)
@@ -40,6 +40,7 @@ void List::addtail(const std::string &key, int value)
         tail->next = newnode;
         tail = newnode;
     }
+    return newnode;
 }
 
 List::Node* List::find(const std::string &key)const

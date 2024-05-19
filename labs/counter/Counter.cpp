@@ -69,8 +69,8 @@ int Counter::get(const std::string& key)const
 
 void Counter::insertNode(const std::string& key, int value)
 {
-    list.addtail(key, value);
-    index.insert(key, value);
+    List::Node* newnode = list.addtail(key, value);
+    index.insert(key, newnode);
     count_++;
 }
 
