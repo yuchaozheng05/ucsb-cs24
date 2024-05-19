@@ -13,9 +13,9 @@ Index::HashTable::~HashTable()
     delete node;
 }
 
-Index::Index(size_t capacity)
+Index::Index(size_t capacity_)
 {
-    capacity = capacity;
+    capacity = capacity_;
     table = new HashTable*[capacity];
     for(size_t i =0; i<capacity; i++)
     {
@@ -37,7 +37,7 @@ size_t Index::hash(const std::string& key)const
     {
         hashvalue = c + (hashvalue << 6) + (hashvalue << 16) - hashvalue;
     }
-    return hashvalue;
+    return hashvalue % capacity;
 }
 
 size_t Index::findtable(const std::string& key)const

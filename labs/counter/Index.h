@@ -19,7 +19,7 @@ class Index{
        size_t hash(const std::string& key)const;
        size_t findtable(const std::string& key)const;
     public:
-        Index(size_t capacity = 200);
+        Index(size_t capacity_ = 200);
         ~Index();
         void insert(const std::string& key, int value);
         void remove(const std::string& key);
