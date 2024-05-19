@@ -1,3 +1,4 @@
+
 #ifndef LIST_H
 #define LIST_H
 #include <iostream>
@@ -16,7 +17,7 @@ class List{
       ~List();
       void addtail(const std::string& key, int value);
       Node* find(const std::string& key)const;
-      void remove(Node* node);
+      void remove(const std::string& key, int value);
       Node* gethead()const;
       Node* gettail()const;
       

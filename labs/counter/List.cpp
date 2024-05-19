@@ -1,3 +1,4 @@
+
 #include "List.h"
 #include <iostream>
 // List Member Functions
@@ -55,9 +56,9 @@ List::Node* List::find(const std::string &key)const
     return nullptr;
 }
 
-void List::remove(Node* node)
+void List::remove(const std::string& key, int value)
 {
-   //Node* node = find(key);
+   Node* node = find(key);
    if (node == nullptr) 
    {
       return;
