@@ -77,7 +77,7 @@ void Counter::insertNode(const std::string& key, int value)
 void Counter::removeNode(const std::string& key, int value)
 {
     list.remove(key, value);
-    index.remove(key);
+    index.remove(key, value);
     count_--;
 }
 
