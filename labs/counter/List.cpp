@@ -64,22 +64,27 @@ void List::remove(const std::string& key, int value)
    {
       return;
    }
-
-    if (node->prev != nullptr) 
-    {
-        node->prev->next = node->next;
-    } 
-    else {
-        head = node->next;
-    }
-
-    if (node->next != nullptr) {
-        node->next->prev = node->prev;
-    } 
-    else {
-        tail = node->prev;
-    }
-    delete node;
+   if(node == head)
+   {
+     head = head->next;
+   //  if(head != nullptr)
+   //  {
+   //     head->prev = nullptr;
+   //  }
+   //  if(head == nullptr)
+   //  {
+   //     tail = nullptr;
+   //  }
+   }
+   else if(node == tail)
+   {
+     tail = tail->prev;    
+   }
+   else{
+    node->prev->next= node->next;
+    node->next->prev = node->prev;
+   }
+   delete node;
 }
 
 List:: Node* List::gethead()const
