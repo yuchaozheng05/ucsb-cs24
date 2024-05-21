@@ -105,8 +105,9 @@ void Index::remove(const std::string& key) {
 void Index::rehash(size_t newCapacity) {
     HashTable** oldTable = table;
     size_t oldCapacity = capacity;
-    table = new HashTable*[newCapacity];
-    for (size_t i = 0; i < newCapacity; ++i) {
+    capacity = newCapacity;
+    table = new HashTable*[capacity];
+    for (size_t i = 0; i < capacity; ++i) {
         table[i] = nullptr;
     }
 
