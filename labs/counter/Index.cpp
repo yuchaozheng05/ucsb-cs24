@@ -1,7 +1,7 @@
 
 #include "Index.h"
 
-// Index Member Functions
+
 Index::HashTable::HashTable(const std::string& k, List::Node* n)
 {
     key =k;
@@ -25,12 +25,12 @@ Index::Index(size_t capacity_):capacity(capacity_), size(0)
 
 Index::~Index() {
     for (size_t i = 0; i < capacity; ++i) {
-        HashTable* e = table[i];
-        while(e != nullptr)
+        HashTable* current = table[i];
+        while(current != nullptr)
         {
-            HashTable* next = e->next;
-            delete e;
-            e=next;
+            HashTable* next = current->next;
+            delete current;
+            current=next;
         }
 
     }
@@ -53,13 +53,19 @@ void Index::insert(const std::string& key, List::Node* node) {
     }
 
     size_t idx = hash(key);
-    HashTable* newEntry = new HashTable(key, node);
-    newEntry->next = table[idx];
-    table[idx] = newEntry;
-    ++size;
+    HashTable* newtable = new HashTable(key, node);
+    if(table[idx]==nullptr)
+    {
+        table[idx] = newtable;
+    }
+    else
+    {
+        newtable->next = table[idx];
+        table[idx] = newtable;
+    }
+    size++;
 }
 
-// Find node by key
 List::Node* Index::find(const std::string& key) const {
     size_t idx = hash(key);
     HashTable* entry = table[idx];
@@ -73,7 +79,7 @@ List::Node* Index::find(const std::string& key) const {
     return nullptr;
 }
 
-// Remove key-node pair
+
 void Index::remove(const std::string& key) {
     size_t idx = hash(key);
     HashTable* entry = table[idx];
@@ -87,22 +93,20 @@ void Index::remove(const std::string& key) {
     if (entry != nullptr) {
         if (prev == nullptr) {
             table[idx] = entry->next;
-        } else {
+        } 
+        else {
             prev->next = entry->next;
         }
         delete entry;
-        --size;
+        size--;
     }
 }
 
-// Rehash to a new capacity
 void Index::rehash(size_t newCapacity) {
     HashTable** oldTable = table;
     size_t oldCapacity = capacity;
-
-    capacity = newCapacity;
-    table = new HashTable*[capacity];
-    for (size_t i = 0; i < capacity; ++i) {
+    table = new HashTable*[newCapacity];
+    for (size_t i = 0; i < newCapacity; ++i) {
         table[i] = nullptr;
     }
 
