@@ -79,6 +79,15 @@ void List::remove(const std::string& key, int value)
    else if(node == tail)
    {
      tail = tail->prev;    
+     if(tail != nullptr)
+     {
+        tail->next = nullptr;
+
+     }
+     if(tail == nullptr)
+     {
+        head= nullptr;
+     }
    }
    else{
     node->prev->next= node->next;
