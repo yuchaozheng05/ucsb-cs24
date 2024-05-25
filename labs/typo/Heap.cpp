@@ -49,8 +49,8 @@ Heap::Entry Heap::pop()
         throw std::underflow_error("no item");
     }
     Entry lowest = mData[0];
-    mData[0] = mData[mCount--];
-    mCount--;
+    mData[0] = mData[mCount-1];
+    //mCount--;
     size_t index = 0;
     while(true)
     {
