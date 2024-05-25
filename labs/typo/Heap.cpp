@@ -50,7 +50,7 @@ Heap::Entry Heap::pop()
     }
     Entry lowest = mData[0];
     mData[0] = mData[mCount-1];
-    //mCount--;
+    mCount--;
     size_t index = 0;
     while(true)
     {
