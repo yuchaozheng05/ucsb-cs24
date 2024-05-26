@@ -7,9 +7,9 @@ WordList::WordList(std::istream& stream)
     while(stream >> word)
     {
         bool is_lower = true;
-        for(char char_:word)
+        for(size_t i =0; i<word.size(); i++)
         {
-            if(!islower(char_))
+            if(!islower(word[i]))
             {
                 is_lower = false;
                 break;
@@ -45,7 +45,7 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
         float score_ = (score/points.size());
         if(score_>=cutoff)
         {
-            if(heap.count()<=maxcount)
+            if(heap.count()<maxcount)
             {
                 heap.push(word,score_);
             }
