@@ -42,7 +42,7 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
             float distant = std::sqrt(x*x + y*y);
             score += 1.0 / (10.0 * distant * distant +1.0);
         }
-        float score_ = score/points.size();
+        float score_ = (score/points.size())/2.0;
         if(score_>=cutoff)
         {
             if(heap.count()<maxcount)
