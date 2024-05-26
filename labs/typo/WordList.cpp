@@ -27,7 +27,7 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
    Heap heap(maxcount);
    for(const std::string& word: mWords)
    {
-    if(word.length() == mWords.size())
+    if(word.length() == points.size())
     {
         std::vector<Point> loc;
         for(char c:word)
