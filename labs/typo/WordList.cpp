@@ -29,51 +29,33 @@ WordList::WordList(std::istream& stream)
 Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float cutoff) const
 {
    Heap heap(maxcount);
-   for(const std::string& word: mWords)
-   {
-    if(word.length() == points.size())
-    {
-        std::vector<Point> loc;
-        for(char c:word)
-        {
-            loc.push_back(QWERTY[c-'a']);
-        }
-        float score = 0.0;
-        for(size_t i =0; i<points.size();i++)
-        {
-            float x = points[i].x - loc[i].x;
-            float y = points[i].y - loc[i].y;
-            float distant = std::sqrt(x*x + y*y);
-            score += 1.0 / (10.0 * distant * distant +1.0);
-        }
-        float score_ = (score/points.size());
-        if(score_>=cutoff)
-        {
-            if(heap.count()<maxcount)
-            {
-                heap.push(word,score_);
+      for (const std::string& word : mWords) {
+        if (word.length() == points.size()) {
+            std::vector<Point> loc;
+            for (char c : word) {
+                loc.push_back(QWERTY[c - 'a']);
             }
-            else if(score_>heap.top().score)
-            {     
-              heap.pushpop(word,score_);
+
+            // Calculate score directly here
+            float totalScore = 0.0;
+            for (size_t i = 0; i < points.size(); i++) {
+                float dx = points[i].x - loc[i].x;
+                float dy = points[i].y - loc[i].y;
+                float distance = std::sqrt(dx * dx + dy * dy);
+                totalScore += 1.0 / (10.0 * distance * distance + 1.0);
             }
-           
+            float averageScore = totalScore / points.size();
+
+            if (averageScore >= cutoff) {
+                if (heap.count() < maxcount) {
+                    heap.push(word, averageScore);
+                } 
+                else if (averageScore > heap.top().score) {
+                    heap.pushpop(word, averageScore);
+                }
+            }
         }
     }
-   }
-      std::vector<Heap::Entry> entries;
-    while (heap.count() > 0) {
-        entries.push_back(heap.pop());
-    }
-
-    // Sort entries by score in ascending order for correct output
-    sort(entries.begin(), entries.end(), [](const Heap::Entry& a, const Heap::Entry& b) {
-        return a.score < b.score;
-    });
-
-    // Output entries in the correct format
-    for (const auto& entry : entries) {
-        std::cout << " - " << entry.score << ": " << entry.value << '\n';
-    }
+ 
    return heap;
 }
