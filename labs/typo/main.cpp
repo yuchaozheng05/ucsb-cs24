@@ -77,8 +77,8 @@ int main(int argc, char** argv) {
                 return a.score > b.score;
             });
 
-            for(auto itr = entries.rbegin(); itr != entries.rend(); ++itr) {
-                std::cout << " - " << itr->score << ": " << itr->value << '\n';
+            for(const auto& entry: entries) {
+                std::cout << " - " << entry.score << ": " << entry.value << '\n';
             }
             if(entries.size() == 0) {
                 std::cout << " (no results)\n";
