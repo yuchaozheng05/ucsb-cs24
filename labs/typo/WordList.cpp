@@ -1,6 +1,10 @@
 #include "WordList.h"
 #include <cmath>
 #include <cctype>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
 WordList::WordList(std::istream& stream)
 {
     std::string word;
@@ -57,5 +61,19 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
         }
     }
    }
+      std::vector<Heap::Entry> entries;
+    while (heap.count() > 0) {
+        entries.push_back(heap.pop());
+    }
+
+    // Sort entries by score in ascending order for correct output
+    sort(entries.begin(), entries.end(), [](const Heap::Entry& a, const Heap::Entry& b) {
+        return a.score < b.score;
+    });
+
+    // Output entries in the correct format
+    for (const auto& entry : entries) {
+        std::cout << " - " << entry.score << ": " << entry.value << '\n';
+    }
    return heap;
 }
