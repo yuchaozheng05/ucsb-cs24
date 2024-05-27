@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <algorithm>
 
 // This file provides an interactive loop.
 // It's much easier to use in conjunction with helper.py.
@@ -71,6 +73,9 @@ int main(int argc, char** argv) {
             while(heap.count() > 0) {
                 entries.push_back(heap.pop());
             }
+            sort(entries.begin(), entries.end(), [](const Heap::Entry& a, const Heap::Entry& b) {
+                return a.score > b.score;
+            });
 
             for(auto itr = entries.rbegin(); itr != entries.rend(); ++itr) {
                 std::cout << " - " << itr->score << ": " << itr->value << '\n';
