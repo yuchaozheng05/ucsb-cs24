@@ -73,12 +73,9 @@ int main(int argc, char** argv) {
             while(heap.count() > 0) {
                 entries.push_back(heap.pop());
             }
-            sort(entries.begin(), entries.end(), [](const Heap::Entry& a, const Heap::Entry& b) {
-                return a.score > b.score;
-            });
 
-            for(const auto& entry: entries) {
-                std::cout << " - " << entry.score << ": " << entry.value << '\n';
+            for(auto itr = entries.rbegin(); itr != entries.rend(); ++itr) {
+                std::cout << " - " << itr->score << ": " << itr->value << '\n';
             }
             if(entries.size() == 0) {
                 std::cout << " (no results)\n";
@@ -90,7 +87,6 @@ int main(int argc, char** argv) {
 
         std::cout << "> ";
     }
-
     delete wordlist;
     return 0;
 }
