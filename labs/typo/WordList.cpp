@@ -8,7 +8,8 @@
 WordList::WordList(std::istream& stream)
 {
     std::string word;
-    while(stream >> word)
+    //while(stream >> word)
+    while(std::getline(stream, word))
     {
         bool is_lower = true;
         for(size_t i =0; i<word.size(); i++)
