@@ -32,6 +32,7 @@ public:
 
   Route route(Point src, Point dst);
   Route route_bfs(Point src, Point dst);
+  
 };
 
 #endif
