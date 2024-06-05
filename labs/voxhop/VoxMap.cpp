@@ -53,7 +53,7 @@ bool VoxMap::is_valid_point(const Point& point) const {
 bool VoxMap::is_walkable(const Point& point) const {
   return is_valid_point(point) &&
          !map[point.z][point.y][point.x] &&
-         (point.z == 0 || map[point.z - 1][point.y][point.x]);
+         (point.z < 0 && map[point.z - 1][point.y][point.x]);
 }
 
 Point VoxMap::fall(Point point) const {
@@ -69,7 +69,11 @@ Point VoxMap::jump(Point point) const {
     //}
     //return point;
     if (point.z + 1 < height && !map[point.z + 1][point.y][point.x]) {
-        return Point(point.x, point.y, point.z + 1);
+        if (point.z + 2 < height && !map[point.z + 2][point.y][point.x]) {
+            return Point(point.x, point.y, point.z + 1);  
+        } else if (point.z + 2 >= height) {  
+            return Point(point.x, point.y, point.z + 1);
+        }
     }
     return point;  
 
