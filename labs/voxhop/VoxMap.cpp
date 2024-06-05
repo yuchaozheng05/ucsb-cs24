@@ -44,6 +44,7 @@ VoxMap::VoxMap(std::istream& stream) {
 
 VoxMap::~VoxMap() {}
 
+
 bool VoxMap::is_valid_point(const Point& point) const {
   return point.x >= 0 && point.x < width &&
          point.y >= 0 && point.y < depth &&
@@ -65,32 +66,10 @@ Point VoxMap::fall(Point point) const {
 
 
 Point VoxMap::jump(Point point) const {
-    //if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
-    //point.z++;
-    //}
-    //return point;
     if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
-        if (point.z + 2 < height && is_valid_point({point.x, point.y, point.z + 2})&& !map[point.z + 2][point.y][point.x]) {
-        return Point(point.x, point.y, point.z + 1);  // Perform jump
-    } 
-    else {
-        // Direct jump not possible, check lateral movements.
-        std::vector<Point> lateralMoves = {
-            {point.x + 1, point.y, point.z},  // Right
-            {point.x - 1, point.y, point.z}   // Left
-        };
-        for (const auto& next : lateralMoves) {
-            if (is_valid_point(next) && !map[next.z][next.y][next.x] &&  // Check lateral move is valid
-                next.z + 1 < height && !map[next.z + 1][next.y][next.x]) {  // Check upward move from the lateral position
-                if (next.z + 2 < height && !map[next.z + 2][next.y][next.x]) {  // Check head space after lateral jump
-                    return Point(next.x, next.y, next.z + 1);
-                }
-            }
-        }
+    point.z++;
     }
-}
-return point; 
-
+return point;
 }
 
 Route VoxMap::route(Point src, Point dst) {
