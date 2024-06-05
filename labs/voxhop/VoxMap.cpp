@@ -153,6 +153,6 @@ Route VoxMap::route_bfs(Point src, Point dst) {
       else if (at.y == prev.y - 1) route.push_back(Move::NORTH);
   }
   std::reverse(route.begin(), route.end());
-  std::cout << "Route found: " << route << std::endl;
+  //std::cout << "Route found: " << route << std::endl;
   return route;
 }
