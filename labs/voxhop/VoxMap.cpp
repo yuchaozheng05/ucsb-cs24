@@ -66,16 +66,16 @@ Point VoxMap::fall(Point point) const {
 
 
 Point VoxMap::jump(Point point) const {
-    //if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
-    //point.z++;
-    //}
-    //return point;
-    if (point.z + 1 < height && !map[point.z + 1][point.y][point.x]) {
-        if (point.z + 2 < height && !map[point.z + 2][point.y][point.x]) {
-            return Point(point.x, point.y, point.z + 1);  // Ensure space to jump and headspace
-        }
+    if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
+    point.z++;
     }
     return point;
+    //if (point.z + 1 < height && !map[point.z + 1][point.y][point.x]) {
+    //    if (point.z + 2 < height && !map[point.z + 2][point.y][point.x]) {
+    //        return Point(point.x, point.y, point.z + 1);  // Ensure space to jump and headspace
+    //    }
+    //}
+    //return point;
 }
 
 Route VoxMap::route(Point src, Point dst) {
