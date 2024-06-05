@@ -71,7 +71,7 @@ Point VoxMap::fall(Point point) const {
     while (point.z > 0 && !map[point.z][point.y][point.x]) {
         point.z--;
     }
-    //point.z ++;
+    point.z ++;
     return point;
 }
 
