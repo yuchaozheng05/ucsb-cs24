@@ -1,4 +1,3 @@
-
 #include "VoxMap.h"
 #include "Errors.h"
 #include <bitset>
@@ -54,7 +53,7 @@ bool VoxMap::is_valid_point(const Point& point) const {
 bool VoxMap::is_walkable(const Point& point) const {
   return is_valid_point(point) &&
          !map[point.z][point.y][point.x] &&
-         (point.z > 0 && map[point.z - 1][point.y][point.x]);
+         point.z > 0 && map[point.z - 1][point.y][point.x];
 }
 
 Point VoxMap::fall(Point point) const {
@@ -65,16 +64,13 @@ Point VoxMap::fall(Point point) const {
 }
 
 Point VoxMap::jump(Point point) const {
-    if (point.z < height-1 && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
+    if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
         point.z++;
     }
     return point;
 }
 
 Route VoxMap::route(Point src, Point dst) {
-    if (!is_walkable(src) || !is_walkable(dst)) {
-        throw InvalidPoint(src);
-    }
     return route_bfs(src, dst);
 }
 
@@ -128,10 +124,10 @@ Route VoxMap::route_bfs(Point src, Point dst) {
   Route route;
   for (Point at = dst; at != src; at = came_from[at]) {
       Point prev = came_from[at];
-      if (prev.x < at.x) route.push_back(Move::EAST);
-      else if (prev.x > at.x) route.push_back(Move::WEST);
-      else if (prev.y < at.y) route.push_back(Move::SOUTH);
-      else if (prev.y > at.y) route.push_back(Move::NORTH);
+      if (at.x == prev.x + 1) route.push_back(Move::EAST);
+      else if (at.x == prev.x - 1) route.push_back(Move::WEST);
+      else if (at.y == prev.y + 1) route.push_back(Move::SOUTH);
+      else if (at.y == prev.y - 1) route.push_back(Move::NORTH);
   }
   std::reverse(route.begin(), route.end());
   //std::cout << "Route found: " << route << std::endl;
