@@ -81,10 +81,10 @@ Point VoxMap::jump(Point point) const {
 Route VoxMap::route(Point src, Point dst) {
     //return route_bfs(src, dst);
     Route found_route = route_bfs(src, dst);
-    if (found_route.empty()) {
-        std::cout << "No route from (" << src.x << ", " << src.y << ", " << src.z 
-                  << ") to (" << dst.x << ", " << dst.y << ", " << dst.z << ").\n";
-    }
+    //if (found_route.empty()) {
+    //    std::cout << "No route from (" << src.x << ", " << src.y << ", " << src.z 
+    //              << ") to (" << dst.x << ", " << dst.y << ", " << dst.z << ").\n";
+    //}
     return found_route;
 }
 
