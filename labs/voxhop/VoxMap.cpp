@@ -68,9 +68,10 @@ bool VoxMap::is_walkable(const Point& point) const {
 }
 
 Point VoxMap::fall(Point point) const {
-    while (point.z > 0 && !map[point.z - 1][point.y][point.x]) {
+    while (point.z > 0 && !map[point.z][point.y][point.x]) {
         point.z--;
     }
+    point.z ++;
     return point;
 }
 
