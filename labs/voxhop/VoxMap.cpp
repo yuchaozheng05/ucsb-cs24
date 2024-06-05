@@ -74,10 +74,11 @@ Point VoxMap::fall(Point point) const {
     return point;
 }
 
-Point VoxMap::jump(Point point) const {
-    if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
+Point VoxMap::jump(Point current, Point point) const {
+    if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[current.z + 1][current.y][current.x]) {
     point.z++;
     }
+  
     return point;
     //if (point.z + 1 < height && !map[point.z + 1][point.y][point.x]) {
     //    if (point.z + 2 < height && !map[point.z + 2][point.y][point.x]) {
@@ -128,7 +129,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
               came_from[next_fall] = current;
           }
 
-          Point next_jump = jump(next);
+          Point next_jump = jump(current, next);
           if (is_walkable(next_jump) && came_from.find(next_jump) == came_from.end()) {
               //std::cout << "Adding jumpable neighbor: " << next_jump << std::endl;
               q.push(next_jump);
