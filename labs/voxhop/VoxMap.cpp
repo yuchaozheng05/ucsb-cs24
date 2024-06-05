@@ -63,20 +63,21 @@ Point VoxMap::fall(Point point) const {
     return point;
 }
 
+
 Point VoxMap::jump(Point point) const {
-    if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
-    point.z++;
-    }
-    return point;
-    //if (point.z + 1 < height && !map[point.z + 1][point.y][point.x]) {
-    //    if (point.z + 2 < height && !map[point.z + 2][point.y][point.x]) {
-    //        return Point(point.x, point.y, point.z + 1);  // Perform jump
-    //    } 
-    //    else if (point.z + 2 >= height) {  // If there's no block above because it's out of bounds, allow jump
-    //        return Point(point.x, point.y, point.z + 1);
-    //    }
+    //if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
+    //point.z++;
     //}
-    //return point;  
+    //return point;
+    if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
+        if (point.z + 2 < height && is_valid_point({point.x, point.y, point.z + 2})&& !map[point.z + 2][point.y][point.x]) {
+        return Point(point.x, point.y, point.z + 1);  // Perform jump
+    } 
+    else if (point.z + 2 >= height) {  
+        return Point(point.x, point.y, point.z + 1);
+    }
+}
+return point; 
 
 }
 
