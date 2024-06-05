@@ -1,3 +1,4 @@
+
 #include "VoxMap.h"
 #include "Errors.h"
 #include <bitset>
@@ -44,17 +45,23 @@ VoxMap::VoxMap(std::istream& stream) {
 
 VoxMap::~VoxMap() {}
 
-
 bool VoxMap::is_valid_point(const Point& point) const {
-  return point.x >= 0 && point.x < width &&
-         point.y >= 0 && point.y < depth &&
-         point.z >= 0 && point.z < height;
+   if(point.x<0 || point.y<0 ||point.z <=0 ||point.x>=width || point.y>=depth || point.z>=height)
+  if(map[point.z][point.y][point.x] == true)
+  {
+    return false;
+  }
+ if(map[point.z-1][point.y][point.x] == true)
+  {
+    return true;
+  }
+  return false;
 }
 
 bool VoxMap::is_walkable(const Point& point) const {
   return is_valid_point(point) &&
          !map[point.z][point.y][point.x] &&
-         (point.z >0 && map[point.z - 1][point.y][point.x]);
+         (point.z > 0 && map[point.z - 1][point.y][point.x]);
 }
 
 Point VoxMap::fall(Point point) const {
@@ -64,7 +71,6 @@ Point VoxMap::fall(Point point) const {
     return point;
 }
 
-
 Point VoxMap::jump(Point point) const {
     if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[point.z + 1][point.y][point.x]) {
     point.z++;
@@ -72,20 +78,18 @@ Point VoxMap::jump(Point point) const {
     return point;
     //if (point.z + 1 < height && !map[point.z + 1][point.y][point.x]) {
     //    if (point.z + 2 < height && !map[point.z + 2][point.y][point.x]) {
-    //        return Point(point.x, point.y, point.z + 1);  // Ensure space to jump and headspace
+    //        return Point(point.x, point.y, point.z + 1);  // Perform jump
+    //    } 
+    //    else if (point.z + 2 >= height) {  // If there's no block above because it's out of bounds, allow jump
+    //        return Point(point.x, point.y, point.z + 1);
     //    }
     //}
-    //return point;
+    //return point;  
+
 }
 
 Route VoxMap::route(Point src, Point dst) {
-    //return route_bfs(src, dst);
-    Route found_route = route_bfs(src, dst);
-    //if (found_route.empty()) {
-    //    std::cout << "No route from (" << src.x << ", " << src.y << ", " << src.z 
-    //              << ") to (" << dst.x << ", " << dst.y << ", " << dst.z << ").\n";
-    //}
-    return found_route;
+    return route_bfs(src, dst);
 }
 
 Route VoxMap::route_bfs(Point src, Point dst) {
@@ -147,4 +151,3 @@ Route VoxMap::route_bfs(Point src, Point dst) {
   //std::cout << "Route found: " << route << std::endl;
   return route;
 }
-
