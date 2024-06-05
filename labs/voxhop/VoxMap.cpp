@@ -46,7 +46,7 @@ VoxMap::VoxMap(std::istream& stream) {
 VoxMap::~VoxMap() {}
 
 bool VoxMap::is_valid_point(const Point& point) const {
- if(point.x<0 || point.y<0 ||point.z <0 ||point.x>=width || point.y>=depth || point.z>=height)
+ if(point.x<0 || point.y<0 ||point.z <=0 ||point.x>=width || point.y>=depth || point.z>=height)
  {
     return false;
  }
@@ -153,6 +153,6 @@ Route VoxMap::route_bfs(Point src, Point dst) {
       else if (at.y == prev.y - 1) route.push_back(Move::NORTH);
   }
   std::reverse(route.begin(), route.end());
-  //std::cout << "Route found: " << route << std::endl;
+  std::cout << "Route found: " << route << std::endl;
   return route;
 }
