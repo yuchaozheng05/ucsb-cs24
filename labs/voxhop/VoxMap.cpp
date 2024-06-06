@@ -105,7 +105,7 @@ bool VoxMap::can_move_to(const Point& current, const Point& next) {
     }
     else {
         // Check for horizontal movement only
-        if (abs(current.x - next.x) + abs(current.y - next.y) != 1) {
+        if (abs(current.x - next.x) + abs(current.y - next.y) > 1) {
             //std::cout << "Move rejected: Diagonal or non-adjacent horizontal move attempted." << std::endl;
             return false;
         }
@@ -148,7 +148,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
             //std::cout << "Adding neighbor: " << next_fall << std::endl;
             q.push(next_fall);
             came_from[next_fall] = current;
-             std::cout << "Moving to " << next << std::endl;
+             //std::cout << "Moving to " << next << std::endl;
         }
 
         // Check for jumping to the next valid point
@@ -157,7 +157,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
             //std::cout << "Adding jumpable neighbor: " << next_jump << std::endl;
             q.push(next_jump);
             came_from[next_jump] = current;
-             std::cout << "Moving to " << next << std::endl;
+             //std::cout << "Moving to " << next << std::endl;
         }
     }
   }
