@@ -114,8 +114,35 @@ bool VoxMap::can_move_horizontally(const Point& current, const Point& next) {
     }
     // Ensure horizontal move does not involve vertical changes
     if (current.y != next.y) {
-        std::cout << "Move rejected: Horizontal move cannot change elevation from " << current.z << " to " << next.z << std::endl;
-        return false;
+        if (next.y > current.y) { // Attempting to jump
+            // Check if the point above current is free to allow a jump
+            if (current.y + 1 >= depth || map[current.z][current.y+1][current.x]) {
+                //std::cout << "Move rejected: Cannot jump due to block above at " << Point{current.x, current.y, current.z + 1} << std::endl;
+                return false;
+            }
+        } 
+        else if (next.y < current.y) { // Falling
+            // Ensure the point below next is solid for a safe landing if it's not the current position
+            if (next.y - 1 >= 0 && !map[next.z][next.y-1][next.x]) {
+                //std::cout << "Move rejected: No solid ground below at " << Point{next.x, next.y, next.z - 1} << std::endl;
+                return false;
+            }
+        }
+    }
+    if (current.x != next.x) {
+        if (next.x > current.x) { // Attempting to jump
+            // Check if the point above current is free to allow a jump
+            if (current.x + 1 >= width || map[current.z][current.y][current.x+1]) {
+                //std::cout << "Move rejected: Cannot jump due to block above at " << Point{current.x, current.y, current.z + 1} << std::endl;
+                return false;
+            }
+        } else if (next.x < current.x) { // Falling
+            // Ensure the point below next is solid for a safe landing if it's not the current position
+            if (next.x - 1 >= 0 && !map[next.z][next.y][next.x-1]) {
+                //std::cout << "Move rejected: No solid ground below at " << Point{next.x, next.y, next.z - 1} << std::endl;
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -151,8 +178,8 @@ Route VoxMap::route_bfs(Point src, Point dst) {
 
         // Check for falling to the next valid point
         Point next_fall = fall(next);
-        if(true){
-        //if (can_move_horizontally(current, next_fall) && can_move_to(current, next_fall) && is_walkable(next_fall) && came_from.find(next_fall) == came_from.end()) {
+        //if(true){
+        if (can_move_horizontally(current, next_fall) && can_move_to(current, next_fall) && is_walkable(next_fall) && came_from.find(next_fall) == came_from.end()) {
             //std::cout << "Adding neighbor: " << next_fall << std::endl;
             q.push(next_fall);
             came_from[next_fall] = current;
@@ -160,8 +187,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
 
         // Check for jumping to the next valid point
         Point next_jump = jump(next);
-        if(true){
-        //if (can_move_horizontally(current, next_fall) && can_move_to(current, next_jump) && is_walkable(next_jump) && came_from.find(next_jump) == came_from.end()) {
+        if (can_move_horizontally(current, next_fall) && can_move_to(current, next_jump) && is_walkable(next_jump) && came_from.find(next_jump) == came_from.end()) {
             //std::cout << "Adding jumpable neighbor: " << next_jump << std::endl;
             q.push(next_jump);
             came_from[next_jump] = current;
