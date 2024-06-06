@@ -1,3 +1,4 @@
+
 #include "VoxMap.h"
 #include "Errors.h"
 #include <bitset>
@@ -46,28 +47,22 @@ VoxMap::VoxMap(std::istream& stream) {
 VoxMap::~VoxMap() {}
 
 bool VoxMap::is_valid_point(const Point& point) const {
-   return point.x >= 0 && point.x < width &&
+  return point.x >= 0 && point.x < width &&
          point.y >= 0 && point.y < depth &&
          point.z >= 0 && point.z < height;
 }
 
 bool VoxMap::is_walkable(const Point& point) const {
-//  return is_valid_point(point) &&
-//         !map[point.z][point.y][point.x] &&
-//         point.z > 0 && map[point.z - 1][point.y][point.x];
-    if (!is_valid_point(point)) {
-        return false;
-    }
-    if (map[point.z][point.y][point.x]) {
-        return false;
-    }
-    return point.z == 0 || map[point.z - 1][point.y][point.x];
+  return is_valid_point(point) &&
+         !map[point.z][point.y][point.x] &&
+         point.z > 0 && map[point.z - 1][point.y][point.x];
 }
 
 Point VoxMap::fall(Point point) const {
-    while (point.z > 0 && !map[point.z - 1][point.y][point.x]) {
+    while (point.z > 0 && !map[point.z][point.y][point.x]) {
         point.z--;
     }
+    point.z++;
     return point;
 }
 
@@ -80,7 +75,7 @@ Point VoxMap::jump(Point point) const {
 
 bool VoxMap::can_move_to(const Point& current, const Point& next) {
     if (!is_valid_point(next)) {
-        //std::cout << "Move rejected: Out of bounds " << next << std::endl;
+        std::cout << "Move rejected: Out of bounds " << next << std::endl;
         return false;
     }
     if (map[next.z][next.y][next.x]) { // Check if the next point is a wall
@@ -141,7 +136,6 @@ Route VoxMap::route_bfs(Point src, Point dst) {
             //std::cout << "Adding neighbor: " << next_fall << std::endl;
             q.push(next_fall);
             came_from[next_fall] = current;
-             //std::cout << "Moving to " << next << std::endl;
         }
 
         // Check for jumping to the next valid point
@@ -150,7 +144,6 @@ Route VoxMap::route_bfs(Point src, Point dst) {
             //std::cout << "Adding jumpable neighbor: " << next_jump << std::endl;
             q.push(next_jump);
             came_from[next_jump] = current;
-             //std::cout << "Moving to " << next << std::endl;
         }
     }
   }

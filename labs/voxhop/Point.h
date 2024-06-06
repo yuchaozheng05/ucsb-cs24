@@ -1,3 +1,4 @@
+
 #ifndef POINT_H
 #define POINT_H
 
@@ -28,5 +29,8 @@ inline bool operator<(const Point& lhs, const Point& rhs) {
 
 std::istream& operator >> (std::istream& stream, Point& point);
 std::ostream& operator << (std::ostream& stream, const Point& point);
+
+
+
 
 #endif
