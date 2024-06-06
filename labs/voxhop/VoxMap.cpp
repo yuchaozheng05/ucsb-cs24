@@ -53,13 +53,9 @@ bool VoxMap::is_valid_point(const Point& point) const {
 }
 
 bool VoxMap::is_walkable(const Point& point) const {
-  //return is_valid_point(point) &&
-  //       !map[point.z][point.y][point.x] &&
-  //       point.z > 0 && map[point.z - 1][point.y][point.x];
-   if (!is_valid_point(point) || map[point.z][point.y][point.x]) {
-        return false;  // Return false if out of bounds or the voxel is occupied.
-    }
-    return point.z == 0 || map[point.z - 1][point.y][point.x]; 
+  return is_valid_point(point) &&
+         !map[point.z][point.y][point.x] &&
+         point.z > 0 && map[point.z - 1][point.y][point.x];
 }
 
 Point VoxMap::fall(Point point) const {
@@ -154,7 +150,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
   if (!is_walkable(src)) throw InvalidPoint(src);
   if (!is_walkable(dst)) throw InvalidPoint(dst);
 
-  std::queue<Point> q;
+  std::queue<Point> q; 
   std::map<Point, Point> came_from;
   q.push(fall(src));
   came_from[fall(src)] = src;
