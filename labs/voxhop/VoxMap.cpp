@@ -67,17 +67,20 @@ bool VoxMap::is_walkable(const Point& point) const {
          (point.z > 0 && map[point.z - 1][point.y][point.x]);
 }
 
-Point VoxMap::fall(Point point) const {
-    while (point.z > 0 && !map[point.z][point.y][point.x]) {
-        point.z--;
+Point VoxMap::fall(Point& point) const {
+    int resultZ = point.z;
+    while (resultZ > 0 && !map[resultZ][point.y][point.x]) {
+        std::cout<<resultZ<<std::endl;
+        resultZ--;
+        std::cout<<"after"<<resultZ<<std::endl;
     }
-    point.z++;
-    return point;
+    resultZ++;
+    return Point(point.x, point.y, resultZ);
 
 }
 
 
-Point VoxMap::jump(Point current, Point point) const {
+Point VoxMap::jump(Point current, Point& point) const {
     if (point.z + 1 < height && is_valid_point({point.x, point.y, point.z + 1}) && !map[current.z + 1][current.y][current.x]) {
     point.z++;
     }
@@ -116,6 +119,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
           if (!is_valid_point(next)) continue;
 
           Point next_fall = fall(next);
+          std::cout<<"this = "<<next<<"next = "<<next_fall<<std::endl;
           if ( came_from.find(next_fall) == came_from.end()) {
               //std::cout << "Adding neighbor: " << next_fall << std::endl;
               q.push(next_fall);
@@ -128,9 +132,9 @@ Route VoxMap::route_bfs(Point src, Point dst) {
               q.push(next_jump);
               came_from[next_jump] = current;
           }
+                    // same level is woking, insert into the map
       }
   }
-
   if (came_from.find(dst) == came_from.end()) {
       //std::cout << "No route found from " << src << " to " << dst << std::endl;
       throw NoRoute(src, dst);
@@ -145,7 +149,6 @@ Route VoxMap::route_bfs(Point src, Point dst) {
       else if (at.y == prev.y - 1) route.push_back(Move::NORTH);
   }
   std::reverse(route.begin(), route.end());
-  //std::cout << "Route found: " << route << std::endl;
   return route;
 }
 

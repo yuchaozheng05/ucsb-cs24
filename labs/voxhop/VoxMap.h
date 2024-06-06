@@ -17,13 +17,13 @@ class VoxMap {
   int depth;
   int height;
   
-  std::vector<std::vector<std::vector<bool>>> map;
+  std::vector<std::vector<std::vector<bool>>> map; //true = ; false = 
 
   // Helper Functions
   bool is_valid_point(const Point& point) const;
   bool is_walkable(const Point& point) const;
-  Point fall(Point point) const;
-  Point jump(Point current, Point point) const;
+  Point fall(Point& point) const;
+  Point jump(Point current, Point& point) const;
   //Point jump(Point point) const;
 public:
   VoxMap(std::istream& stream);
