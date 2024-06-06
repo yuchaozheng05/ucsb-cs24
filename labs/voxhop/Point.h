@@ -3,7 +3,7 @@
 #define POINT_H
 
 #include <iostream>
-
+#include <functional>
 struct Point {
   int x;
   int y;
