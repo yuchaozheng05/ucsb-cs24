@@ -179,7 +179,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
         // Check for falling to the next valid point
         Point next_fall = fall(next);
         //if(true){
-        if (can_move_horizontally(current, next_fall) && can_move_to(current, next_fall) && is_walkable(next_fall) && came_from.find(next_fall) == came_from.end()) {
+        if (can_move_to(current, next_fall) && is_walkable(next_fall) && came_from.find(next_fall) == came_from.end()) {
             //std::cout << "Adding neighbor: " << next_fall << std::endl;
             q.push(next_fall);
             came_from[next_fall] = current;
@@ -187,7 +187,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
 
         // Check for jumping to the next valid point
         Point next_jump = jump(next);
-        if (can_move_horizontally(current, next_fall) && can_move_to(current, next_jump) && is_walkable(next_jump) && came_from.find(next_jump) == came_from.end()) {
+        if (can_move_to(current, next_jump) && is_walkable(next_jump) && came_from.find(next_jump) == came_from.end()) {
             //std::cout << "Adding jumpable neighbor: " << next_jump << std::endl;
             q.push(next_jump);
             came_from[next_jump] = current;
