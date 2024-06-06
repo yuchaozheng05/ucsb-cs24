@@ -103,13 +103,6 @@ bool VoxMap::can_move_to(const Point& current, const Point& next) {
             }
         }
     }
-    else {
-        // Check for horizontal movement only
-        if (abs(current.x - next.x) + abs(current.y - next.y) > 1) {
-            //std::cout << "Move rejected: Diagonal or non-adjacent horizontal move attempted." << std::endl;
-            return false;
-        }
-    }
     return true;
 }
 Route VoxMap::route(Point src, Point dst) {
