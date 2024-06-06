@@ -1,4 +1,3 @@
-
 #ifndef VOXMAP_H
 #define VOXMAP_H
 
@@ -17,21 +16,23 @@ class VoxMap {
   int depth;
   int height;
   
-  std::vector<std::vector<std::vector<bool>>> map; //true = ; false = 
+  std::vector<std::vector<std::vector<bool>>> map;
 
   // Helper Functions
   bool is_valid_point(const Point& point) const;
   bool is_walkable(const Point& point) const;
-  Point fall(Point& point) const;
-  Point jump(Point current, Point& point) const;
-  //Point jump(Point point) const;
+  Point fall(Point point) const;
+  Point jump(Point point) const;
+  bool can_move_to(const Point& current, const Point& next);
+  Move determine_move(const Point& from, const Point& to) const;
+
+
 public:
   VoxMap(std::istream& stream);
   ~VoxMap();
 
   Route route(Point src, Point dst);
   Route route_bfs(Point src, Point dst);
-  
 };
 
 #endif
