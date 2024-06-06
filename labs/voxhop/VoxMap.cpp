@@ -75,7 +75,7 @@ Point VoxMap::jump(Point point) const {
 
 bool VoxMap::can_move_to(const Point& current, const Point& next) {
     if (!is_valid_point(next)) {
-        std::cout << "Move rejected: Out of bounds " << next << std::endl;
+        //std::cout << "Move rejected: Out of bounds " << next << std::endl;
         return false;
     }
     if (map[next.z][next.y][next.x]) { // Check if the next point is a wall
