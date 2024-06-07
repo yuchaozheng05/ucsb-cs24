@@ -109,9 +109,9 @@ Route VoxMap::route_bfs(Point src, Point dst) {
   if (!is_walkable(dst)) throw InvalidPoint(dst);
 
   std::queue<Point> q;
-  std::map<Point, Point> came_from;
-  q.push(fall(src));
-  came_from[fall(src)] = src;
+  std::unordered_map<Point, Point, PointHash> came_from;
+  q.push((src));
+  came_from[src] = src;
 
   while (!q.empty()) {
     Point current = q.front();
