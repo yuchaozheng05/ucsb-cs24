@@ -1,4 +1,3 @@
-
 #include "VoxMap.h"
 #include "Errors.h"
 #include <bitset>
@@ -109,7 +108,7 @@ Route VoxMap::route_bfs(Point src, Point dst) {
   if (!is_walkable(dst)) throw InvalidPoint(dst);
 
   std::queue<Point> q;
-  std::unordered_map<Point, Point> came_from;
+  std::map<Point, Point> came_from;
   q.push(fall(src));
   came_from[fall(src)] = src;
 

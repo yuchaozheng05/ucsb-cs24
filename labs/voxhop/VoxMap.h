@@ -24,7 +24,7 @@ class VoxMap {
   Point fall(Point point) const;
   Point jump(Point point) const;
   bool can_move_to(const Point& current, const Point& next);
-  Move determine_move(const Point& from, const Point& to) const;
+  //Move determine_move(const Point& from, const Point& to) const;
   //bool can_move_horizontally(const Point& current, const Point& next);
 
 public:
