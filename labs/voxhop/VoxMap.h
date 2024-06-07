@@ -13,10 +13,15 @@
 
 struct PointHash {
     size_t operator()(const Point& p) const {
-        size_t hash = 1331; // A large prime number as base
-        hash = hash * 31 + std::hash<int>()(p.x); // 31 is a small prime number
-        hash = hash * 31 + std::hash<int>()(p.y);
-        hash = hash * 31 + std::hash<int>()(p.z);
+        const size_t prime_base = 1331;  
+        const size_t prime1 = 31;        
+        const size_t prime2 = 53;        
+        const size_t prime3 = 97;        
+
+        size_t hash = prime_base;
+        hash = hash * prime1 + std::hash<int>()(p.x);
+        hash = hash * prime2 + std::hash<int>()(p.y);
+        hash = hash * prime3 + std::hash<int>()(p.z);
         return hash;
     }
 };
