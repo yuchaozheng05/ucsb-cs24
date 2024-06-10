@@ -11,18 +11,29 @@
 #include "Route.h"
 #include <functional>
 
+//struct PointHash {
+//    size_t operator()(const Point& p) const {
+//        const size_t prime_base = 1331;  
+//        const size_t prime1 = 31;        
+//        const size_t prime2 = 53;        
+//        const size_t prime3 = 97;        
+//
+//        size_t hash = prime_base;
+//        hash = hash * prime1 + std::hash<int>()(p.x);
+//        hash = hash * prime2 + std::hash<int>()(p.y);
+//        hash = hash * prime3 + std::hash<int>()(p.z);
+//        return hash;
+//    }
+//};
 struct PointHash {
     size_t operator()(const Point& p) const {
-        const size_t prime_base = 1331;  
-        const size_t prime1 = 31;        
-        const size_t prime2 = 53;        
-        const size_t prime3 = 97;        
+        std::hash<int> hasher;  // Instantiate once and use it for all integer hashings
+        size_t x_hash = hasher(p.x);
+        size_t y_hash = hasher(p.y);
+        size_t z_hash = hasher(p.z);
 
-        size_t hash = prime_base;
-        hash = hash * prime1 + std::hash<int>()(p.x);
-        hash = hash * prime2 + std::hash<int>()(p.y);
-        hash = hash * prime3 + std::hash<int>()(p.z);
-        return hash;
+        // Combine hashes using a fast and effective bitwise method
+        return x_hash ^ (y_hash << 1) ^ (z_hash << 2);
     }
 };
 
