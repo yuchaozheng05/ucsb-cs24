@@ -32,7 +32,7 @@ struct PointHash {
         size_t x_hash = hash_fn(p.x);
         size_t y_hash = hash_fn(p.y);
         size_t z_hash = hash_fn(p.z);
-        return ((x_hash << 4) | (x_hash >> 28)) ^ ((y_hash << 16) | (y_hash >> 16)) ^ ((z_hash << 24) | (z_hash >> 8));   
+        return (x_hash << 1) ^ (y_hash << 2) ^ (z_hash << 3);
     }
 };
 class VoxMap {
