@@ -11,18 +11,28 @@
 #include "Route.h"
 #include <functional>
 
+//struct PointHash {
+//    size_t operator()(const Point& p) const {
+//        const size_t prime_base = 1331;  
+//        const size_t prime1 = 31;        
+//        const size_t prime2 = 53;        
+//        const size_t prime3 = 97;        
+//
+//        size_t hash = prime_base;
+//        hash = hash * prime1 + std::hash<int>()(p.x);
+//        hash = hash * prime2 + std::hash<int>()(p.y);
+//        hash = hash * prime3 + std::hash<int>()(p.z);
+//        return hash;
+//    }
+//};
 struct PointHash {
     size_t operator()(const Point& p) const {
-        const size_t prime_base = 1331;  
-        const size_t prime1 = 31;        
-        const size_t prime2 = 53;        
-        const size_t prime3 = 97;        
+        static std::hash<int> hash_fn;  
 
-        size_t hash = prime_base;
-        hash = hash * prime1 + std::hash<int>()(p.x);
-        hash = hash * prime2 + std::hash<int>()(p.y);
-        hash = hash * prime3 + std::hash<int>()(p.z);
-        return hash;
+        size_t x_hash = hash_fn(p.x);
+        size_t y_hash = hash_fn(p.y);
+        size_t z_hash = hash_fn(p.z);
+        return ((x_hash << 4) | (x_hash >> 28)) ^ ((y_hash << 16) | (y_hash >> 16)) ^ ((z_hash << 24) | (z_hash >> 8));   
     }
 };
 class VoxMap {
